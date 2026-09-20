@@ -1,0 +1,17 @@
+{
+  "name": "recipe-book",
+  "version": "1.0.0",
+  "description": "Local recipe book: capture recipes from the web via a Chrome extension, auto-inline ingredient measurements into the instructions, and export shopping lists to Google Keep.",
+  "private": true,
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.127.0",
+    "dotenv": "^18.0.1",
+    "express": "^5.2.1"
+  }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Recipe — My Recipe Book</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="site-header slim">
+  <a class="back-link" href="index.html">&larr; My Recipe Book</a>
+</header>
+<main id="recipe" class="recipe-detail">
+  <div class="recipe-top">
+    <img id="hero-image" alt="" hidden />
+    <div class="recipe-heading">
+      <h1 id="title"></h1>
+      <a id="source-link" class="source-link" target="_blank" rel="noopener" hidden></a>
+    </div>
+  </div>
+  <p id="rewrite-warning" class="warning" hidden></p>
+  <div class="recipe-columns">
+    <section class="ingredients-panel">
+      <div class="panel-header">
+        <h2>Ingredients</h2>
+      </div>
+      <ul id="ingredients"></ul>
+      <button id="keep-btn" class="btn btn-primary btn-block">Copy &amp; Open Google Keep</button>
+    </section>
+    <section class="instructions-panel">
+      <h2>Instructions</h2>
+      <ol id="instructions"></ol>
+    </section>
+  </div>
+  <button id="delete-btn" class="btn btn-danger">Remove recipe</button>
+</main>
+<script src="app.js"></script>
+<script src="recipe.js"></script>
+</body>
+</html>
