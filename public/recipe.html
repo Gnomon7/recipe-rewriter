@@ -24,6 +24,18 @@
       <div class="panel-header">
         <h2>Ingredients</h2>
       </div>
+      <div class="control-row">
+        <div id="system-controls" class="scale-controls" role="group" aria-label="Measurement system">
+          <button type="button" class="scale-btn" data-system="us">US</button>
+          <button type="button" class="scale-btn" data-system="metric">Metric</button>
+        </div>
+        <div id="scale-controls" class="scale-controls" role="group" aria-label="Scale recipe">
+          <button type="button" class="scale-btn" data-multiplier="1">1x</button>
+          <button type="button" class="scale-btn" data-multiplier="2">2x</button>
+          <button type="button" class="scale-btn" data-multiplier="3">3x</button>
+          <button type="button" class="scale-btn" data-multiplier="4">4x</button>
+        </div>
+      </div>
       <ul id="ingredients"></ul>
       <button id="keep-btn" class="btn btn-primary btn-block">Copy &amp; Open Google Keep</button>
     </section>
@@ -35,6 +47,7 @@
   <button id="delete-btn" class="btn btn-danger">Remove recipe</button>
 </main>
 <script src="app.js"></script>
+<script src="units.js"></script>
 <script src="recipe.js"></script>
 </body>
 </html>

@@ -174,8 +174,49 @@ main {
   top: 1.5rem;
 }
 
-.panel-header { margin-bottom: 0.75rem; }
+.panel-header {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
 .panel-header h2 { font-size: 1.2rem; }
+
+.control-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.scale-controls {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.scale-btn {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-soft);
+  border-radius: 8px;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.scale-btn:hover { border-color: var(--terracotta); color: var(--terracotta-dark); }
+
+.scale-btn.active {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #fff;
+}
 
 #ingredients {
   list-style: none;
