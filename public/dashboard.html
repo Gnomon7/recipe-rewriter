@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — My Recipe Book</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<script>window.RECIPE_BOOK_STATIC = false;</script>
+<header class="site-header slim">
+  <a class="back-link" href="index.html">&larr; My Recipe Book</a>
+</header>
+<main class="dashboard-page">
+  <h1>Dashboard</h1>
+  <p class="tagline" style="margin: 0.4rem 0 1.5rem;">A look at your recipe collection. Click anything below to jump to those recipes.</p>
+
+  <div id="stats-row" class="stats-row"></div>
+
+  <p id="empty-state" class="empty-state" hidden>
+    No recipes yet — add some from the book, then come back here.
+  </p>
+
+  <div id="charts" hidden>
+    <section class="chart-panel">
+      <h2>Recipes added over time</h2>
+      <p class="chart-subtitle">By month. Click a bar to see that month's recipes.</p>
+      <div id="time-chart" class="chart-svg-wrap"></div>
+    </section>
+
+    <section class="chart-panel">
+      <h2>Meal types</h2>
+      <p class="chart-subtitle">Click a bar to filter the book by that meal type.</p>
+      <div id="mealtype-chart" class="chart-svg-wrap"></div>
+    </section>
+
+    <section class="chart-panel">
+      <h2>Protein sources</h2>
+      <p class="chart-subtitle">Click a slice to filter the book by that ingredient.</p>
+      <div id="protein-chart" class="chart-svg-wrap"></div>
+    </section>
+  </div>
+</main>
+<div id="chart-tooltip" class="chart-tooltip" hidden></div>
+<script src="app.js"></script>
+<script src="stats.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>
