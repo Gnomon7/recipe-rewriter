@@ -84,10 +84,48 @@ function renderRandomMealTypeOptions() {
     + mealTags.map((t) => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
 }
 
+// Keeps the meal-type dropdown showing whatever tag is currently active (if
+// it's one of the meal-type options), or "Any meal type" otherwise -- the
+// dropdown and the tag-filter pills are two views onto the same activeTag.
+function syncMealTypeSelect() {
+  const select = document.getElementById('random-meal-type');
+  const match = Array.from(select.options).find(
+    (o) => o.value && activeTag && o.value.toLowerCase() === activeTag.toLowerCase()
+  );
+  select.value = match ? match.value : '';
+}
+
+// Sets the shared tag filter from either the tag-pill bar or the meal-type
+// dropdown, and keeps both controls in sync with the result.
+function setActiveTag(tag) {
+  activeTag = tag || null;
+  renderTagFilter();
+  syncMealTypeSelect();
+  renderGrid();
+}
+
+// The recipes currently matching both the tag filter and the search box
+// (unsorted) -- shared by the grid and the Random button, so "random" means
+// "random among what I'm currently looking at."
+function getFilteredRecipes() {
+  const byTag = activeTag ? allRecipes.filter((r) => hasTag(r, activeTag)) : allRecipes.slice();
+  return byTag.filter((r) => matchesSearch(r, searchQuery));
+}
+
+// Searches across everything meaningful about a recipe -- title, tags,
+// ingredients, instructions, and source -- not just ingredients, so typing
+// a tag ("4th of july"), a recipe name, or a technique all find something.
 function matchesSearch(recipe, query) {
   if (!query) return true;
   const q = query.toLowerCase();
-  return (recipe.ingredients || []).some((i) => i.toLowerCase().includes(q));
+  const haystack = [
+    recipe.title,
+    ...(recipe.tags || []),
+    ...(recipe.ingredients || []),
+    ...(recipe.instructionsOriginal || []),
+    recipe.sourceUrl,
+  ];
+  return haystack.some((field) => typeof field === 'string' && field.toLowerCase().includes(q));
 }
 
 function sortRecipes(recipes, mode) {
@@ -130,6 +168,7 @@ async function loadRecipes() {
     dashboard.hidden = false;
     renderStats();
     renderRandomMealTypeOptions();
+    syncMealTypeSelect();
     renderTagFilter();
     renderGrid();
   } catch (err) {
@@ -157,18 +196,14 @@ function renderTagFilter() {
   bar.querySelectorAll('.tag-pill').forEach((btn) => {
     btn.addEventListener('click', () => {
       const tag = btn.dataset.tag;
-      activeTag = activeTag && activeTag.toLowerCase() === tag.toLowerCase() ? null : tag;
-      renderTagFilter();
-      renderGrid();
+      setActiveTag(activeTag && activeTag.toLowerCase() === tag.toLowerCase() ? null : tag);
     });
   });
 }
 
 function renderGrid() {
   const grid = document.getElementById('recipe-grid');
-  let filtered = activeTag ? allRecipes.filter((r) => hasTag(r, activeTag)) : allRecipes.slice();
-  filtered = filtered.filter((r) => matchesSearch(r, searchQuery));
-  filtered = sortRecipes(filtered, sortMode);
+  const filtered = sortRecipes(getFilteredRecipes(), sortMode);
 
   if (!filtered.length) {
     const bits = [];
@@ -246,11 +281,14 @@ document.getElementById('sort-select').addEventListener('change', (e) => {
   renderGrid();
 });
 
+document.getElementById('random-meal-type').addEventListener('change', (e) => {
+  setActiveTag(e.target.value || null);
+});
+
 document.getElementById('random-btn').addEventListener('click', () => {
-  const mealType = document.getElementById('random-meal-type').value;
-  const pool = mealType ? allRecipes.filter((r) => hasTag(r, mealType)) : allRecipes;
+  const pool = getFilteredRecipes();
   if (!pool.length) {
-    alert('No recipes match that meal type yet.');
+    alert('No recipes match the current filters.');
     return;
   }
   const pick = pool[Math.floor(Math.random() * pool.length)];
