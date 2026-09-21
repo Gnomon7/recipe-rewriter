@@ -58,6 +58,22 @@ a { color: var(--accent-dark); }
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
+
+/* Only ever visible on the local app (see .env-local below) -- the
+   published static site strips the "env-local" body class entirely, so
+   this stays display:none there regardless. */
+.env-badge {
+  display: none;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+}
+.env-local .env-badge { display: inline-block; }
 .site-header .tagline { color: var(--ink-soft); margin-top: 0.4rem; }
 
 .header-actions {
@@ -687,4 +703,24 @@ main {
 .chart-empty {
   color: var(--ink-soft);
   font-size: 0.9rem;
+}
+
+/* The local app is the editable "admin" copy (add/delete recipes, mark as
+   made for real, publish) -- a deliberately different grey/blue look from
+   the published green site, so it's obvious at a glance which one you're
+   looking at. Same specificity as :root and the dark-mode block above
+   (both (0,1,0)) but declared last, so it wins the cascade regardless of
+   system theme -- this is a fixed admin skin, not something that should
+   follow prefers-color-scheme. The "env-local" class only exists in
+   public/ -- scripts/publish.js strips it from the exported HTML, so the
+   static site never sees these rules. */
+.env-local {
+  --cream: #e9ebed;
+  --card: #ffffff;
+  --ink: #2b2f33;
+  --ink-soft: #5c6570;
+  --accent: #4a90d9;
+  --accent-dark: #2f6cb0;
+  --line: #d8dbde;
+  --shadow: 0 6px 18px rgba(43, 47, 51, 0.1);
 }
