@@ -29,6 +29,9 @@ function rimraf(dir) {
   fs.rmSync(dir, { recursive: true, force: true });
 }
 
+// Regenerates docs/ from the current recipe data. Returns the recipe count
+// so callers (the CLI run below, or the in-app "Refresh Live Site" button's
+// server route) can report what happened without re-reading the directory.
 function publish() {
   const recipes = loadRecipes();
 
@@ -49,8 +52,13 @@ function publish() {
   // Prevents GitHub Pages' default Jekyll processing from touching the site.
   fs.writeFileSync(path.join(DOCS_DIR, '.nojekyll'), '');
 
-  console.log(`Published ${recipes.length} recipe(s) to docs/.`);
-  console.log('Commit and push docs/, then enable GitHub Pages (Settings -> Pages -> Deploy from a branch -> main / docs) if you haven\'t already.');
+  return { count: recipes.length };
 }
 
-publish();
+module.exports = { publish, DOCS_DIR, ROOT };
+
+if (require.main === module) {
+  const { count } = publish();
+  console.log(`Published ${count} recipe(s) to docs/.`);
+  console.log('Commit and push docs/, then enable GitHub Pages (Settings -> Pages -> Deploy from a branch -> main / docs) if you haven\'t already.');
+}
