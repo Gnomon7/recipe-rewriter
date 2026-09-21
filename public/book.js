@@ -90,8 +90,12 @@ function getFilteredRecipes() {
   const byDate = dateFilter
     ? byTags.filter((r) => typeof r.createdAt === 'string' && localDateKey(r.createdAt) === dateFilter)
     : byTags;
+  // madeOnFilter only ever comes from the dashboard's cooking-frequency
+  // chart, which reads real madeDates (see dashboard.js) -- so this filter
+  // matches against real data too, not the visitor's private local log,
+  // or a real-data chart would drill into an empty "no matches" list.
   const byMadeOn = madeOnFilter
-    ? byDate.filter((r) => getMadeDates(r).includes(madeOnFilter))
+    ? byDate.filter((r) => (r.madeDates || []).includes(madeOnFilter))
     : byDate;
   return byMadeOn.filter((r) => matchesSearch(r, searchQuery));
 }

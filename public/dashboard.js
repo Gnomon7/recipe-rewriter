@@ -161,8 +161,18 @@ function renderTimeChart(recipes) {
 
 // --- Chart 1b: cooking frequency, from "Mark as made" history ---------
 
+// Unlike getMadeDates() (app.js), this always reads the recipe's real
+// madeDates. Per-recipe made-badges and the recipe page's own cooking log
+// stay private/per-visitor on the static site (getMadeDates), but this
+// aggregate chart -- just counts per day, not tied to any one recipe card
+// -- is meant to show the owner's real cooking history so the dashboard is
+// actually meaningful to visitors.
+function realMadeDates(recipe) {
+  return recipe.madeDates || [];
+}
+
 function renderCookingChart(recipes) {
-  const madeDates = recipes.flatMap((r) => getMadeDates(r));
+  const madeDates = recipes.flatMap((r) => realMadeDates(r));
   renderDayBarChart('cooking-chart', datesToDayBuckets(madeDates), {
     ariaLabel: 'Recipes cooked per day',
     emptyText: 'Nothing marked as made yet — use "Mark as made" on a recipe to start tracking.',
