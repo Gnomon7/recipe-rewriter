@@ -82,8 +82,10 @@
     };
   }
 
+  console.log('[recipe-book] content script running on', window.location.href);
   const result = fromJsonLd() || fromMicrodata() || fromFallback();
   result.sourceUrl = window.location.href;
+  console.log('[recipe-book] extracted:', result);
 
   chrome.runtime.sendMessage({ type: 'RECIPE_CAPTURED', payload: result });
 })();
