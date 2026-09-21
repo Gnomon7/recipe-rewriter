@@ -12,9 +12,18 @@ function removeClient(res) {
   clients.delete(res);
 }
 
+// A client whose underlying socket died without cleanly firing the
+// request's 'close' event (a killed tab, a crashed browser, a network
+// drop) would otherwise sit in `clients` forever -- write() to it either
+// throws or silently fails, and every future broadcast pays for it. Catch
+// and prune rather than let one dead connection degrade every ingest.
 function broadcast(event) {
   for (const res of clients) {
-    res.write(`data: ${event}\n\n`);
+    try {
+      res.write(`data: ${event}\n\n`);
+    } catch {
+      clients.delete(res);
+    }
   }
 }
 
