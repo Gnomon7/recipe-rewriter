@@ -4,6 +4,10 @@ let searchQuery = '';
 let sortMode = 'newest';
 let dateFilter = null; // set via a dashboard deep link (?date=YYYY-MM-DD -- day added); cleared by the active-filter banner
 let madeOnFilter = null; // set via a dashboard deep link (?madeOn=YYYY-MM-DD -- day cooked); cleared by the active-filter banner
+// The Random button's own meal type, deliberately kept out of every filter
+// above -- Random is a standalone "surprise me" control, not a view onto
+// whatever the search/tags/sort controls currently show.
+let randomMealType = '';
 
 // Reads ?tag=, ?mealType=, ?date= and ?madeOn= from the URL (set by the
 // dashboard's clickable charts) and applies them as if the user had picked
@@ -27,9 +31,10 @@ function applyUrlFilters() {
   if (madeOn) madeOnFilter = madeOn;
 }
 
-// There are two (kept in sync) meal-type dropdowns -- one in the header,
-// one next to the search box -- so every place that touches "the" dropdown
-// actually operates on all elements with this class.
+// The header's Random select and the search bar's filter select both list
+// the same available meal types -- shared here for that population only.
+// Their *values* are deliberately independent (see syncMealTypeSelects,
+// which only ever touches the filter one).
 function mealTypeSelects() {
   return document.querySelectorAll('.meal-type-select');
 }
@@ -41,19 +46,20 @@ function renderMealTypeOptions() {
   mealTypeSelects().forEach((select) => { select.innerHTML = optionsHtml; });
 }
 
-// A <select> can only show one value, so it reflects the single meal-type
-// tag in selectedTags if there's exactly one -- otherwise (none, or several
-// picked via the multi-select tag panel) it falls back to "Any meal type"
-// rather than guessing.
+// A <select> can only show one value, so #meal-type-filter reflects the
+// single meal-type tag in selectedTags if there's exactly one -- otherwise
+// (none, or several picked via the tag sidebar) it falls back to "Any meal
+// type" rather than guessing. #random-meal-type is never touched here --
+// it's its own independent control (see randomMealType).
 function syncMealTypeSelects() {
+  const select = document.getElementById('meal-type-filter');
+  if (!select) return;
   const selectedMealTags = Array.from(selectedTags).filter((t) => MEAL_TYPE_TAGS.has(t.toLowerCase()));
   const value = selectedMealTags.length === 1 ? selectedMealTags[0] : '';
-  mealTypeSelects().forEach((select) => {
-    const match = Array.from(select.options).find(
-      (o) => o.value && value && o.value.toLowerCase() === value.toLowerCase()
-    );
-    select.value = match ? match.value : '';
-  });
+  const match = Array.from(select.options).find(
+    (o) => o.value && value && o.value.toLowerCase() === value.toLowerCase()
+  );
+  select.value = match ? match.value : '';
 }
 
 // Toggles one tag's membership in the multi-select set (used by the "Search
@@ -187,7 +193,6 @@ async function loadRecipes() {
     renderTagFilter();
     renderActiveFilterBanner();
     renderGrid();
-    if (selectedTags.size) document.getElementById('tag-filter-details').open = true;
   } catch (err) {
     dashboard.hidden = true;
     empty.hidden = true;
@@ -195,32 +200,62 @@ async function loadRecipes() {
   }
 }
 
+// Meal Type and Cuisine are curated allowlists (stats.js); Ingredient is a
+// broader food-item list for the same reason; anything left over (diet,
+// occasion, technique, and anything else a source site declared) goes in
+// Other rather than being force-fit into one of the first three.
+const TAG_GROUP_ORDER = ['Meal Type', 'Ingredient', 'Cuisine', 'Other'];
+
+function categorizeTag(tag) {
+  const key = tag.toLowerCase();
+  if (MEAL_TYPE_TAGS.has(key)) return 'Meal Type';
+  if (CUISINE_TAGS.has(key)) return 'Cuisine';
+  if (INGREDIENT_TAGS.has(key)) return 'Ingredient';
+  return 'Other';
+}
+
 function renderTagFilter() {
-  const bar = document.getElementById('tag-filter');
-  const details = document.getElementById('tag-filter-details');
-  if (!bar) return;
+  const container = document.getElementById('tag-groups');
+  const sidebar = document.getElementById('tag-sidebar');
+  const title = document.querySelector('.tag-sidebar-title');
+  if (!container) return;
   const tags = collectTags(allRecipes);
   if (!tags.length) {
-    if (details) details.hidden = true;
+    if (sidebar) sidebar.hidden = true;
     return;
   }
-  if (details) details.hidden = false;
+  if (sidebar) sidebar.hidden = false;
 
-  const summary = document.querySelector('.tag-filter-summary');
-  if (summary) {
-    summary.textContent = selectedTags.size
+  if (title) {
+    title.textContent = selectedTags.size
       ? `Search by Tags (${selectedTags.size} selected)`
       : 'Search by Tags';
   }
 
+  const groups = new Map(TAG_GROUP_ORDER.map((label) => [label, []]));
+  for (const t of tags) groups.get(categorizeTag(t)).push(t);
+
   const selectedKeys = new Set(Array.from(selectedTags).map((t) => t.toLowerCase()));
-  bar.innerHTML = tags
-    .map((t) => {
-      const isActive = selectedKeys.has(t.toLowerCase());
-      return `<button type="button" class="tag-pill${isActive ? ' active' : ''}" data-tag="${escapeHtml(t)}" aria-pressed="${isActive}">${escapeHtml(t)}</button>`;
+
+  container.innerHTML = TAG_GROUP_ORDER
+    .filter((label) => groups.get(label).length)
+    .map((label) => {
+      const list = groups.get(label);
+      const pills = list
+        .map((t) => {
+          const isActive = selectedKeys.has(t.toLowerCase());
+          return `<button type="button" class="tag-pill${isActive ? ' active' : ''}" data-tag="${escapeHtml(t)}" aria-pressed="${isActive}">${escapeHtml(t)}</button>`;
+        })
+        .join('');
+      return `
+        <details class="tag-group" open>
+          <summary>${escapeHtml(label)} (${list.length})</summary>
+          <div class="tag-filter" role="group" aria-label="Filter by ${escapeHtml(label)} tags">${pills}</div>
+        </details>`;
     })
     .join('');
-  bar.querySelectorAll('.tag-pill').forEach((btn) => {
+
+  container.querySelectorAll('.tag-pill').forEach((btn) => {
     btn.addEventListener('click', () => toggleTag(btn.dataset.tag));
   });
 }
@@ -308,14 +343,19 @@ document.getElementById('sort-select').addEventListener('change', (e) => {
   renderGrid();
 });
 
-mealTypeSelects().forEach((select) => {
-  select.addEventListener('change', (e) => setMealTypeTag(e.target.value || null));
+document.getElementById('meal-type-filter').addEventListener('change', (e) => setMealTypeTag(e.target.value || null));
+
+// Random is deliberately self-contained: its own meal-type select, its own
+// pool of allRecipes -- never selectedTags, searchQuery, dateFilter,
+// madeOnFilter, or sortMode from the rest of the page.
+document.getElementById('random-meal-type').addEventListener('change', (e) => {
+  randomMealType = e.target.value;
 });
 
 document.getElementById('random-btn').addEventListener('click', () => {
-  const pool = getFilteredRecipes();
+  const pool = randomMealType ? allRecipes.filter((r) => hasTag(r, randomMealType)) : allRecipes.slice();
   if (!pool.length) {
-    alert('No recipes match the current filters.');
+    alert('No recipes match that meal type.');
     return;
   }
   const pick = pool[Math.floor(Math.random() * pool.length)];

@@ -41,11 +41,6 @@
       "American",
       "French",
       "Italian",
-      "Easy Homemade Soup Recipe",
-      "Instant Pot Dinner Recipe",
-      "instant pot vegetarian recipe",
-      "italian lentil soup",
-      "pressure cooker soup",
       "Lentils",
       "Cheese"
     ],
@@ -97,9 +92,6 @@
       "Main Course",
       "Asian",
       "Asian American",
-      "Cashew Chicken Stir Fry",
-      "Cashew Chicken Stir Fry Recipe",
-      "chicken stir fry",
       "Stir Fry",
       "Chicken"
     ],
@@ -152,9 +144,6 @@
       "Dinner",
       "Entree",
       "American",
-      "Pomegranate Molasses Glazed Salmon with Roasted Kale and Mint Gremolata",
-      "sheet-pan salmon recipe",
-      "salmon and kale dinner recipe",
       "Salmon"
     ],
     "calories": 785,
@@ -211,7 +200,6 @@
       "Dinner",
       "U.S.",
       "American",
-      "publisher-tested",
       "Chicken",
       "Bacon",
       "Potato",
@@ -506,13 +494,7 @@
       "Vegan",
       "Indian",
       "vegan meatballs",
-      "lentil meatballs",
       "veggie balls",
-      "indian lentil meatballs",
-      "the best vegan meatballs",
-      "the best lentil balls",
-      "vegan meatball recipes",
-      "lentil meatball recipes",
       "Tofu",
       "Lentils",
       "Quinoa"
@@ -553,8 +535,7 @@
       "Drink",
       "Cocktail",
       "After dinner/digestif",
-      "Dessert cocktails",
-      "Floral (e.g. Elderflower spritz)"
+      "Dessert cocktails"
     ],
     "calories": 152,
     "madeDates": [
@@ -643,7 +624,6 @@
     "tags": [
       "Dinner",
       "Eastern European",
-      "publisher-tested",
       "Beef"
     ],
     "calories": 422,
@@ -696,7 +676,6 @@
       "Lentils",
       "Pie",
       "Sweet potato",
-      "vegan cottage pie",
       "Vegetarian",
       "Potato"
     ],
@@ -774,8 +753,7 @@
     "tags": [
       "Lunch",
       "Italian Inspired",
-      "Italian",
-      "publisher-tested"
+      "Italian"
     ],
     "calories": 254,
     "madeDates": [
@@ -828,8 +806,6 @@
     "tags": [
       "Bread",
       "American",
-      "crusty white bread",
-      "white mountain bread",
       "yeast bread",
       "Vegetarian"
     ],
@@ -893,7 +869,6 @@
       "Dinner",
       "Italian Inspired",
       "Italian",
-      "publisher-tested",
       "Beef",
       "Sausage",
       "Eggs",
@@ -947,7 +922,6 @@
       "Sandwich",
       "American",
       "Indian",
-      "publisher-tested",
       "Potato"
     ],
     "calories": 522,
@@ -1052,7 +1026,6 @@
     "rewriteError": null,
     "tags": [
       "holiday",
-      "smash burgers",
       "dinner",
       "4th of july",
       "Beef",
@@ -1212,7 +1185,6 @@
       "Side Dish",
       "American",
       "baked zucchini",
-      "zucchini casserole",
       "Pork",
       "Eggs",
       "Cheese"
@@ -1256,10 +1228,6 @@
       "Main Course",
       "Italian",
       "keto",
-      "keto zuppa toscana",
-      "Olive Garden copycat soup",
-      "zuppa toscana",
-      "zuppa toscana recipe",
       "Chicken",
       "Bacon",
       "Sausage"
@@ -1316,7 +1284,6 @@
       "Main Course",
       "French",
       "Vegan",
-      "Vegan Lentil Mushroom Stew",
       "Potato",
       "Lentils"
     ],
@@ -1364,14 +1331,6 @@
     "tags": [
       "Dessert",
       "American",
-      "best chocolate cake",
-      "chocolate cake",
-      "chocolate cake recipe",
-      "classic chocolate cake",
-      "dairy free chocolate cake",
-      "easy chocolate cake",
-      "egg free chocolate cake",
-      "gluten-free chocolate cake",
       "Eggs",
       "Chocolate"
     ],
@@ -1469,7 +1428,6 @@
     ],
     "rewriteError": null,
     "tags": [
-      "Sandwich bread;;Bread machine;;Gluten-free",
       "Eggs"
     ],
     "calories": 154,
@@ -1526,7 +1484,6 @@
       "Dinner",
       "Lunch",
       "American",
-      "instant pot crack chicken",
       "Chicken",
       "Bacon",
       "Cheese"
@@ -1599,7 +1556,6 @@
       "keto",
       "pie",
       "pot",
-      "recipe",
       "Eggs",
       "Cheese"
     ],
@@ -1750,7 +1706,6 @@
       "American",
       "beef stew",
       "comfort food",
-      "easy recipe",
       "Beef",
       "Potato",
       "Beans"
@@ -1795,7 +1750,6 @@
     ],
     "rewriteError": null,
     "tags": [
-      "Chocolate Chip Cookie",
       "Dessert",
       "Bittersweet Chocolate",
       "Bread Flour",
@@ -1849,7 +1803,6 @@
     "tags": [
       "Snack",
       "American",
-      "chocolate bread",
       "Eggs",
       "Chocolate"
     ],
@@ -1898,7 +1851,6 @@
     "tags": [
       "Dinner",
       "Cajun",
-      "publisher-tested",
       "Shrimp",
       "Pasta",
       "Cheese"
@@ -1945,7 +1897,6 @@
     "tags": [
       "Lunch",
       "American",
-      "Spinach stuffed tortilla",
       "Eggs",
       "Cheese"
     ],
@@ -2044,9 +1995,7 @@
       "American",
       "baked",
       "easy",
-      "how to make",
       "mozzarella",
-      "stuffed chicken breast",
       "Chicken",
       "Cheese"
     ],
@@ -2100,10 +2049,7 @@
       "American",
       "keto",
       "keto shrimp",
-      "keto shrimp alfredo",
-      "keto zucchini noodles",
       "low carb",
-      "shrimp zucchini noodles",
       "Shrimp",
       "Cheese"
     ],
@@ -2154,7 +2100,6 @@
     "rewriteError": null,
     "tags": [
       "Salad",
-      "kale salad",
       "fall",
       "spring",
       "summer",
@@ -2236,9 +2181,6 @@
     "rewriteError": null,
     "tags": [
       "American",
-      "keto lava cake",
-      "molten lava cake",
-      "molten lava cake recipe",
       "Eggs",
       "Chocolate"
     ],
@@ -2389,8 +2331,6 @@
     "tags": [
       "Main Course",
       "American",
-      "goat cheese tart",
-      "tomato goat cheese tart",
       "Bacon",
       "Eggs",
       "Cheese"
@@ -2427,8 +2367,7 @@
     "rewriteError": null,
     "tags": [
       "Dessert",
-      "American",
-      "keto pie crust"
+      "American"
     ],
     "calories": 187,
     "madeDates": [],
@@ -2465,10 +2404,7 @@
     ],
     "rewriteError": null,
     "tags": [
-      "All Recipes",
       "American",
-      "jalapeno popper chicken",
-      "jalapeno popper chicken recipe",
       "Chicken",
       "Bacon",
       "Cheese"
@@ -2513,7 +2449,6 @@
     "tags": [
       "Main Course",
       "Italian",
-      "creamy chicken and spinach",
       "Chicken",
       "Cheese"
     ],
@@ -2558,29 +2493,7 @@
       "feed a crowd",
       "spring",
       "breakfast",
-      "eggs",
-      "Herb Cuisine",
-      "Frittata Cuisine",
-      "Parsley Cuisine",
-      "Cilantro Cuisine",
-      "Chive Cuisine",
-      "Tarragon Cuisine",
-      "Onion Cuisine",
-      "Scallion Cuisine",
-      "Dill Cuisine",
-      "Oil Cuisine",
-      "Olive Oil Cuisine",
-      "Kosher Salt Cuisine",
-      "Kitchen Garden Cuisine",
-      "content-type: Recipe",
-      "locale: US",
-      "displayType: recipe",
-      "shortTitle: Spring Herb Frittata",
-      "contentId: 6f5c2aa1-4953-4e41-87c5-a5522082b6bf",
-      "collection: Spring",
-      "collection: Great Breakfast Recipes",
-      "sponsored: false",
-      "isSyndicated: false"
+      "eggs"
     ],
     "calories": 305,
     "madeDates": [
@@ -2627,8 +2540,6 @@
     "tags": [
       "Dessert",
       "Irish",
-      "stout chocolate cookies",
-      "guinness stout cookies",
       "boozy cookies",
       "Eggs",
       "Chocolate"
@@ -2730,9 +2641,6 @@
     "tags": [
       "Dessert",
       "American",
-      "easy brownie recipes",
-      "easy dessert recipes",
-      "party recipes",
       "Eggs",
       "Chocolate"
     ],
@@ -2771,7 +2679,6 @@
     "tags": [
       "Main Course",
       "Mexican",
-      "keto taco pie",
       "taco pie",
       "Beef",
       "Eggs",
@@ -2886,8 +2793,6 @@
       "Dessert",
       "American",
       "rainbow sprinkles",
-      "vegan birthday cookies",
-      "vegan funfetti cookies",
       "Vegan"
     ],
     "calories": 132,
@@ -2921,9 +2826,6 @@
     ],
     "rewriteError": null,
     "tags": [
-      "Appetizer Recipes",
-      "Side Dish Recipes",
-      "Japanese Recipes",
       "Gluten-Free",
       "Kosher",
       "Low-Calorie",
@@ -3036,36 +2938,7 @@
       "dinner party",
       "appetizers",
       "snack",
-      "Cheese Cuisine",
-      "Cream Cheese Cuisine",
-      "Sausage Cuisine",
-      "Italian Sausage Cuisine",
-      "Kosher Salt Cuisine",
-      "Baking Powder Cuisine",
-      "Almond Flour Cuisine",
-      "Oil Cuisine",
-      "Olive Oil Cuisine",
-      "Extra Virgin Olive Oil Cuisine",
-      "Keto Diet Cuisine",
-      "content-type: Recipe",
-      "locale: US",
-      "displayType: recipe",
-      "shortTitle: Keto Sausage Puffs",
-      "contentId: 2b7dfe97-cd06-43f4-a9a6-6fed6935fe35",
-      "subsection: Recipes",
-      "collection: Keto",
-      "collection: Appetizers",
-      "collection: Breakfast & Brunch",
-      "sponsored: false",
-      "isSyndicated: false",
       "American",
-      "NUTRITION: gluten-free",
-      "NUTRITION: low sugar",
-      "OCCASION: dinner party",
-      "CATEGORY: appetizers",
-      "CATEGORY: snack",
-      "TOTALTIME: 00:50:00",
-      "FILTERTIME: <1HR",
       "Sausage",
       "Eggs",
       "Cheese"
@@ -3107,8 +2980,7 @@
     "rewriteError": null,
     "tags": [
       "Salad",
-      "Greek",
-      "publisher-tested"
+      "Greek"
     ],
     "calories": 156,
     "madeDates": [
@@ -3199,7 +3071,6 @@
     "tags": [
       "Main Course",
       "Asian",
-      "instant pot chicken recipes",
       "Chicken"
     ],
     "calories": 370,
@@ -3316,8 +3187,6 @@
       "Main Course",
       "American",
       "keto chili",
-      "keto chili recipe",
-      "low carb chili",
       "Beef"
     ],
     "calories": 306,
@@ -3381,9 +3250,6 @@
     "tags": [
       "Dinner",
       "Mexican",
-      "tortilla soup",
-      "vegan tortilla soup",
-      "vegetarian tortilla soup",
       "Beans",
       "Lentils"
     ],
@@ -3484,9 +3350,6 @@
     "tags": [
       "Dinner",
       "American",
-      "grillng tri tip steak",
-      "tri tip steak",
-      "tri tip steak marinade",
       "tritip steak"
     ],
     "calories": 277,
@@ -3582,9 +3445,7 @@
     "tags": [
       "Breads",
       "American",
-      "French",
-      "Easy Rosemary Bread",
-      "Ridiculously Easy"
+      "French"
     ],
     "calories": 129,
     "madeDates": [],
@@ -3674,7 +3535,6 @@
       "American",
       "buttermilk",
       "chocolate chips",
-      "chocolate cookies",
       "Chocolate"
     ],
     "calories": 115,
@@ -3722,9 +3582,7 @@
     "tags": [
       "Dessert",
       "Gluten Free",
-      "Low Carb / Keto",
       "Vegetarian",
-      "keto chocolate chip cookies",
       "keto cookies",
       "Eggs",
       "Chocolate"

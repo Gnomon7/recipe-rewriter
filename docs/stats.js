@@ -11,6 +11,36 @@ const PROTEIN_TAGS = new Set([
   'shrimp', 'salmon', 'tuna', 'fish', 'tofu', 'eggs',
 ]);
 
+// Broader than PROTEIN_TAGS (which is just the dashboard's protein-source
+// chart) -- everything that names an actual food item, for the "Ingredient"
+// group in the tag sidebar.
+const INGREDIENT_TAGS = new Set([
+  ...PROTEIN_TAGS,
+  'cheese', 'mozzarella', 'gruyère', 'chocolate', 'rice', 'potato', 'russet potato',
+  'sweet potato', 'beans', 'lentils', 'lentil', 'quinoa', 'pasta', 'noodles',
+  'avocado', 'broccoli', 'brussels sprout', 'butternut squash', 'chickpea',
+  'leek', 'spinach', 'scallion', 'steak', 'cardamom', 'celery root',
+  'dijon mustard', 'maple syrup', 'walnut', 'bread', 'bread flour', 'cake flour',
+  'cranberry', 'mushroom', 'garlic', 'onion', 'tomato', 'carrot', 'zucchini',
+  'kale', 'cauliflower', 'cabbage', 'pepper', 'corn', 'peas', 'apple', 'banana',
+  'lemon', 'lime', 'ginger', 'cilantro', 'basil', 'parsley', 'mint', 'honey',
+  'butter', 'cream', 'sour cream', 'yogurt', 'milk', 'flour', 'sugar', 'vanilla',
+  'cinnamon', 'nutmeg', 'almond flour', 'coconut',
+]);
+
+// Country/region/culture descriptors, for the "Cuisine" group in the tag
+// sidebar.
+const CUISINE_TAGS = new Set([
+  'american', 'u.s.', 'southern', 'tex-mex', 'italian', 'italian inspired',
+  'french', 'mexican', 'indian', 'chinese', 'japanese', 'thai', 'vietnamese',
+  'korean', 'greek', 'spanish', 'mediterranean', 'middle eastern', 'cajun',
+  'creole', 'german', 'irish', 'british', 'caribbean', 'african', 'ethiopian',
+  'moroccan', 'turkish', 'eastern european', 'asian', 'asian american',
+  'latin american', 'hawaiian', 'scandinavian', 'russian', 'filipino',
+  'indonesian', 'cuban', 'brazilian', 'portuguese', 'jamaican', 'lebanese',
+  'persian', 'israeli',
+]);
+
 // Dedupes tags case-insensitively across all recipes (source sites vary in
 // casing -- "Dinner" vs "DINNER") while keeping one consistent display form.
 function collectTags(recipes) {
