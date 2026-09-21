@@ -116,6 +116,26 @@ Each friend clones the repo and runs their own local copy (their own
 `npm start`, their own recipe data, their own `.env`/API key if using the
 Claude engine). Nothing about one person's setup is shared with another's.
 
+**Don't use a terminal?** If a friend has [Claude Code](https://claude.com/claude-code)
+(the desktop app works fine — no terminal skills needed beyond opening it),
+they can paste this into a new chat and it'll do the whole setup for them:
+
+> Please set up the "My Recipe Book" app for me on this computer:
+> 1. Check that git and Node.js (v18+) are installed. If either is missing,
+>    tell me clearly what to install and where to get it, then stop.
+> 2. Clone https://github.com/Gnomon7/recipe-rewriter.git into a new
+>    `recipe-rewriter` folder on my Desktop.
+> 3. Inside that folder, run `npm install`, then copy `.env.example` to
+>    `.env` — no API key needed to start, it'll use the built-in local
+>    recipe rewriter by default.
+> 4. Start the app with `npm start` and open `http://localhost:5757` in my
+>    default browser.
+> 5. Tell me, in plain language, the one remaining manual step: loading the
+>    Chrome extension by going to `chrome://extensions`, turning on
+>    Developer mode, clicking "Load unpacked," and selecting the
+>    `extension` folder inside the cloned project — so I can start saving
+>    recipes from any page.
+
 **Your recipes** — to let people *browse* your saved recipes without
 installing anything, publish a read-only static copy to GitHub Pages. This
 repo already has Pages enabled (**Settings → Pages → Deploy from a branch
