@@ -45,11 +45,15 @@ function deriveIngredientTags(ingredients) {
 
 // Some sites' `keywords` field leaks internal CMS metadata instead of real
 // descriptors -- "shortTitle: X", "CATEGORY: appetizers", "contentId: ...",
-// TOTALTIME/FILTERTIME/NUTRITION/OCCASION fields -- always as "key: value".
-// Others run a broken cuisine auto-tagger that stamps every ingredient as
-// "<ingredient> Cuisine" ("Sausage Cuisine", "Baking Powder Cuisine"). A tag
-// should describe the recipe (an ingredient, a meal type, a cuisine/style),
-// not restate metadata or the dish's own name.
+// TOTALTIME/FILTERTIME/NUTRITION/OCCASION fields -- always as "key: value" --
+// or generic editorial boilerplate ("publisher-tested"). Others run a broken
+// cuisine auto-tagger that stamps every ingredient as "<ingredient> Cuisine"
+// ("Sausage Cuisine", "Baking Powder Cuisine"), or hand out long-tail SEO
+// keyword phrases that just describe the dish a different way ("dairy free
+// chocolate cake", "the best lentil balls", "Olive Garden copycat soup") --
+// distinct from a real ingredient/meal-type/cuisine tag by being several
+// words long with no other job. A tag should name one thing about the
+// recipe, not restate metadata or a variant of the dish's own name.
 function isJunkTag(tag, title) {
   const t = String(tag).trim();
   if (!t) return true;
@@ -57,25 +61,30 @@ function isJunkTag(tag, title) {
   if (/cuisine/i.test(t)) return true;
   if (/\brecipes?$/i.test(t)) return true; // "recipe" alone, or any "X Recipe(s)" -- never a useful filter, the X (if any) usually already exists as its own clean tag
   if (t.length > 45) return true; // a tag this long is a stray sentence/title, not a descriptor
+  if (/^(publisher[- ]tested|sponsored|syndicated)$/i.test(t)) return true; // editorial/CMS boilerplate, not a recipe attribute
+  if (/\bcopycat\b/i.test(t)) return true; // "X copycat Y" is a comparison, not a descriptor
+  if (/^the best\b/i.test(t)) return true; // a marketing superlative about this specific recipe
 
-  const normalize = (s) => s.toLowerCase().replace(/\brecipes?\b/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
-  const normTag = normalize(t);
-  const normTitle = normalize(title || '');
-  if (!normTitle) return false;
-  if (normTag === normTitle) return true;
-  // A multi-word tag that's mostly just the dish's own name (a common SEO
-  // keyword pattern -- "cashew chicken stir fry recipe" on a recipe titled
-  // exactly that) isn't a useful filter; a single ingredient word that also
-  // happens to appear in the title ("Chicken") still is, so this only
-  // applies once the tag itself has 2+ words.
-  if (normTag.length > 12) {
-    const titleWords = new Set(normTitle.split(' ').filter(Boolean));
-    const tagWords = normTag.split(' ').filter(Boolean);
-    if (tagWords.length >= 2) {
-      const overlap = tagWords.filter((w) => titleWords.has(w)).length;
-      if (overlap / tagWords.length >= 0.8) return true;
-    }
+  const words = t.split(/\s+/).filter(Boolean);
+  if (words.length >= 3) {
+    // A few genuinely useful multi-word patterns survive: a quantity/time
+    // constraint ("5 ingredients or fewer", "< 60 Mins"), or an occasion
+    // phrase ("For Large Groups", "feed a crowd"). A longer tag that isn't
+    // one of those is almost always a dish-description variant rather than
+    // a real ingredient/meal-type/cuisine tag.
+    const firstWord = words[0].toLowerCase();
+    const isQuantityOrOccasion = /^\d/.test(words[0]) || /^[<>]/.test(t) || ['for', 'feed', 'after'].includes(firstWord);
+    if (!isQuantityOrOccasion) return true;
   }
+
+  // Exact match against the title (ignoring a trailing "recipe(s)" and
+  // punctuation) catches the plain case -- a recipe titled "Kale Salad"
+  // tagged "kale salad". Deliberately not a fuzzy/partial match: a real
+  // ingredient or diet tag ("sour cream", "low carb", "celery root") often
+  // legitimately shares words with the title without being a restatement
+  // of it, and penalizing that would remove good tags, not just junk ones.
+  const normalize = (s) => s.toLowerCase().replace(/\brecipes?\b/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  if (title && normalize(t) === normalize(title)) return true;
   return false;
 }
 
