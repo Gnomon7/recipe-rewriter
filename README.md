@@ -1,6 +1,6 @@
 # My Recipe Book
 
-**Live (read-only):** [gnomon7.github.io/recipe-scraper](https://gnomon7.github.io/recipe-scraper/)
+**Live (read-only):** [gnomon7.github.io/recipe-rewriter](https://gnomon7.github.io/recipe-rewriter/)
 
 A local recipe book: click a button in Chrome on any recipe page and it gets
 cleaned up, saved, and rewritten so the instructions have ingredient
@@ -120,7 +120,7 @@ Claude engine). Nothing about one person's setup is shared with another's.
 installing anything, publish a read-only static copy to GitHub Pages. This
 repo already has Pages enabled (**Settings → Pages → Deploy from a branch
 → `main` / `docs`**), live at
-[gnomon7.github.io/recipe-scraper](https://gnomon7.github.io/recipe-scraper/) —
+[gnomon7.github.io/recipe-rewriter](https://gnomon7.github.io/recipe-rewriter/) —
 updating it is just:
 
 ```bash
