@@ -14,6 +14,7 @@
       <option value="">Any meal type</option>
     </select>
     <button type="button" id="random-btn" class="btn btn-primary btn-small">🎲 Random</button>
+    <a href="dashboard.html" class="btn btn-primary btn-small">📊 Dashboard</a>
     <button type="button" id="refresh-live-btn" class="btn btn-primary btn-small" hidden>🚀 Refresh Live Site</button>
   </div>
   <h1>My Recipe Book</h1>
@@ -21,7 +22,7 @@
 </header>
 <main>
   <section id="dashboard" class="dashboard" hidden>
-    <div id="stats-row" class="stats-row"></div>
+    <div id="active-filter-banner" class="active-filter-banner" hidden></div>
 
     <div class="dashboard-controls">
       <input
@@ -53,6 +54,7 @@
   <div id="recipe-grid" class="grid"></div>
 </main>
 <script src="app.js"></script>
+<script src="stats.js"></script>
 <script src="book.js"></script>
 </body>
 </html>
