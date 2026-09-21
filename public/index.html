@@ -10,7 +10,7 @@
 <script>window.RECIPE_BOOK_STATIC = false;</script>
 <header class="site-header">
   <div class="header-actions">
-    <select id="random-meal-type" class="sort-select" aria-label="Filter (and randomize) by meal type">
+    <select id="random-meal-type" class="meal-type-select sort-select" aria-label="Filter (and randomize) by meal type">
       <option value="">Any meal type</option>
     </select>
     <button type="button" id="random-btn" class="btn btn-primary btn-small">🎲 Random</button>
@@ -31,6 +31,9 @@
         placeholder="Search recipes (name, tags, ingredients)…"
         aria-label="Search recipes by name, tag, or ingredient"
       />
+      <select id="meal-type-filter" class="meal-type-select sort-select" aria-label="Filter by meal type">
+        <option value="">Any meal type</option>
+      </select>
       <select id="sort-select" class="sort-select" aria-label="Sort recipes">
         <option value="newest">Newest first</option>
         <option value="calories-asc">Calories: low to high</option>
@@ -38,7 +41,10 @@
       </select>
     </div>
 
-    <div id="tag-filter" class="tag-filter" role="group" aria-label="Filter by tag" hidden></div>
+    <details id="tag-filter-details" class="tag-filter-details" hidden>
+      <summary class="tag-filter-summary">Search by Tags</summary>
+      <div id="tag-filter" class="tag-filter" role="group" aria-label="Filter by tags (select multiple)"></div>
+    </details>
   </section>
 
   <p id="empty-state" class="empty-state" hidden>

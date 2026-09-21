@@ -1,5 +1,5 @@
 let allRecipes = [];
-let activeTag = null;
+let selectedTags = new Set(); // multi-select: a recipe must have every one of these
 let searchQuery = '';
 let sortMode = 'newest';
 
@@ -27,6 +27,10 @@ function collectTags(recipes) {
 
 function hasTag(recipe, tag) {
   return (recipe.tags || []).some((t) => t.toLowerCase() === tag.toLowerCase());
+}
+
+function hasAllTags(recipe, tags) {
+  return tags.every((t) => hasTag(recipe, t));
 }
 
 // Most frequent tag among `recipes` whose lowercased form is in `allowedSet`,
@@ -77,39 +81,67 @@ function renderStats() {
     .join('');
 }
 
-function renderRandomMealTypeOptions() {
-  const select = document.getElementById('random-meal-type');
+// There are two (kept in sync) meal-type dropdowns -- one in the header,
+// one next to the search box -- so every place that touches "the" dropdown
+// actually operates on all elements with this class.
+function mealTypeSelects() {
+  return document.querySelectorAll('.meal-type-select');
+}
+
+function renderMealTypeOptions() {
   const mealTags = collectTags(allRecipes).filter((t) => MEAL_TYPE_TAGS.has(t.toLowerCase()));
-  select.innerHTML = '<option value="">Any meal type</option>'
+  const optionsHtml = '<option value="">Any meal type</option>'
     + mealTags.map((t) => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+  mealTypeSelects().forEach((select) => { select.innerHTML = optionsHtml; });
 }
 
-// Keeps the meal-type dropdown showing whatever tag is currently active (if
-// it's one of the meal-type options), or "Any meal type" otherwise -- the
-// dropdown and the tag-filter pills are two views onto the same activeTag.
-function syncMealTypeSelect() {
-  const select = document.getElementById('random-meal-type');
-  const match = Array.from(select.options).find(
-    (o) => o.value && activeTag && o.value.toLowerCase() === activeTag.toLowerCase()
-  );
-  select.value = match ? match.value : '';
+// A <select> can only show one value, so it reflects the single meal-type
+// tag in selectedTags if there's exactly one -- otherwise (none, or several
+// picked via the multi-select tag panel) it falls back to "Any meal type"
+// rather than guessing.
+function syncMealTypeSelects() {
+  const selectedMealTags = Array.from(selectedTags).filter((t) => MEAL_TYPE_TAGS.has(t.toLowerCase()));
+  const value = selectedMealTags.length === 1 ? selectedMealTags[0] : '';
+  mealTypeSelects().forEach((select) => {
+    const match = Array.from(select.options).find(
+      (o) => o.value && value && o.value.toLowerCase() === value.toLowerCase()
+    );
+    select.value = match ? match.value : '';
+  });
 }
 
-// Sets the shared tag filter from either the tag-pill bar or the meal-type
-// dropdown, and keeps both controls in sync with the result.
-function setActiveTag(tag) {
-  activeTag = tag || null;
+// Toggles one tag's membership in the multi-select set (used by the "Search
+// by Tags" pills) without disturbing any other selected tags.
+function toggleTag(tag) {
+  const key = tag.toLowerCase();
+  const existing = Array.from(selectedTags).find((t) => t.toLowerCase() === key);
+  if (existing) selectedTags.delete(existing); else selectedTags.add(tag);
   renderTagFilter();
-  syncMealTypeSelect();
+  syncMealTypeSelects();
   renderGrid();
 }
 
-// The recipes currently matching both the tag filter and the search box
+// A <select> is inherently single-choice, so picking a meal type there
+// replaces any *other* previously-selected meal-type tag (but leaves
+// non-meal-type tags from the panel alone) rather than adding to them.
+function setMealTypeTag(tag) {
+  for (const t of Array.from(selectedTags)) {
+    if (MEAL_TYPE_TAGS.has(t.toLowerCase())) selectedTags.delete(t);
+  }
+  if (tag) selectedTags.add(tag);
+  renderTagFilter();
+  syncMealTypeSelects();
+  renderGrid();
+}
+
+// The recipes currently matching every selected tag AND the search box
 // (unsorted) -- shared by the grid and the Random button, so "random" means
 // "random among what I'm currently looking at."
 function getFilteredRecipes() {
-  const byTag = activeTag ? allRecipes.filter((r) => hasTag(r, activeTag)) : allRecipes.slice();
-  return byTag.filter((r) => matchesSearch(r, searchQuery));
+  const byTags = selectedTags.size
+    ? allRecipes.filter((r) => hasAllTags(r, Array.from(selectedTags)))
+    : allRecipes.slice();
+  return byTags.filter((r) => matchesSearch(r, searchQuery));
 }
 
 // Searches across everything meaningful about a recipe -- title, tags,
@@ -167,8 +199,8 @@ async function loadRecipes() {
     empty.hidden = true;
     dashboard.hidden = false;
     renderStats();
-    renderRandomMealTypeOptions();
-    syncMealTypeSelect();
+    renderMealTypeOptions();
+    syncMealTypeSelects();
     renderTagFilter();
     renderGrid();
   } catch (err) {
@@ -180,24 +212,31 @@ async function loadRecipes() {
 
 function renderTagFilter() {
   const bar = document.getElementById('tag-filter');
+  const details = document.getElementById('tag-filter-details');
   if (!bar) return;
   const tags = collectTags(allRecipes);
   if (!tags.length) {
-    bar.hidden = true;
+    if (details) details.hidden = true;
     return;
   }
-  bar.hidden = false;
+  if (details) details.hidden = false;
+
+  const summary = document.querySelector('.tag-filter-summary');
+  if (summary) {
+    summary.textContent = selectedTags.size
+      ? `Search by Tags (${selectedTags.size} selected)`
+      : 'Search by Tags';
+  }
+
+  const selectedKeys = new Set(Array.from(selectedTags).map((t) => t.toLowerCase()));
   bar.innerHTML = tags
     .map((t) => {
-      const isActive = activeTag && activeTag.toLowerCase() === t.toLowerCase();
-      return `<button type="button" class="tag-pill${isActive ? ' active' : ''}" data-tag="${escapeHtml(t)}">${escapeHtml(t)}</button>`;
+      const isActive = selectedKeys.has(t.toLowerCase());
+      return `<button type="button" class="tag-pill${isActive ? ' active' : ''}" data-tag="${escapeHtml(t)}" aria-pressed="${isActive}">${escapeHtml(t)}</button>`;
     })
     .join('');
   bar.querySelectorAll('.tag-pill').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const tag = btn.dataset.tag;
-      setActiveTag(activeTag && activeTag.toLowerCase() === tag.toLowerCase() ? null : tag);
-    });
+    btn.addEventListener('click', () => toggleTag(btn.dataset.tag));
   });
 }
 
@@ -207,7 +246,10 @@ function renderGrid() {
 
   if (!filtered.length) {
     const bits = [];
-    if (activeTag) bits.push(`tagged "${escapeHtml(activeTag)}"`);
+    if (selectedTags.size) {
+      const list = Array.from(selectedTags).map((t) => `"${escapeHtml(t)}"`).join(', ');
+      bits.push(`tagged ${list}`);
+    }
     if (searchQuery) bits.push(`matching "${escapeHtml(searchQuery)}"`);
     grid.innerHTML = `<p class="empty-state">No recipes ${bits.length ? bits.join(' and ') : 'found'}.</p>`;
     return;
@@ -281,8 +323,8 @@ document.getElementById('sort-select').addEventListener('change', (e) => {
   renderGrid();
 });
 
-document.getElementById('random-meal-type').addEventListener('change', (e) => {
-  setActiveTag(e.target.value || null);
+mealTypeSelects().forEach((select) => {
+  select.addEventListener('change', (e) => setMealTypeTag(e.target.value || null));
 });
 
 document.getElementById('random-btn').addEventListener('click', () => {
