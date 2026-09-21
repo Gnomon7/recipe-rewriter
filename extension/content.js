@@ -36,6 +36,47 @@
     return '';
   }
 
+  // recipeCategory/recipeCuisine/keywords can each be a plain string, a
+  // comma-separated string, or an array -- normalize all three shapes to a
+  // flat list of tag strings.
+  function toStringArray(value) {
+    if (!value) return [];
+    if (Array.isArray(value)) return value.flatMap(toStringArray);
+    if (typeof value === 'string') return value.split(',').map((s) => s.trim()).filter(Boolean);
+    return [];
+  }
+
+  // suitableForDiet uses schema.org's RestrictedDiet enum, given as a full
+  // URL ("https://schema.org/VeganDiet"), a bare name, or occasionally an
+  // object -- map it to a friendly label, or drop it if unrecognized.
+  const DIET_LABELS = {
+    diabeticdiet: 'Diabetic', glutenfreediet: 'Gluten-Free', halaldiet: 'Halal',
+    hindudiet: 'Hindu', kosherdiet: 'Kosher', lowcaloriediet: 'Low-Calorie',
+    lowfatdiet: 'Low-Fat', lowlactosediet: 'Low-Lactose', lowsodiumdiet: 'Low-Sodium',
+    paleodiet: 'Paleo', vegandiet: 'Vegan', vegetariandiet: 'Vegetarian',
+  };
+
+  function dietTags(value) {
+    if (!value) return [];
+    if (Array.isArray(value)) return value.flatMap(dietTags);
+    let raw = value;
+    if (typeof value === 'object') raw = value['@id'] || value.name || '';
+    if (typeof raw !== 'string') return [];
+    const slug = raw.split('/').pop().toLowerCase();
+    const label = DIET_LABELS[slug];
+    return label ? [label] : [];
+  }
+
+  function tagsFrom(recipe) {
+    const tags = [
+      ...toStringArray(recipe.recipeCategory),
+      ...toStringArray(recipe.recipeCuisine),
+      ...toStringArray(recipe.keywords),
+      ...dietTags(recipe.suitableForDiet),
+    ];
+    return Array.from(new Set(tags.map((t) => t.trim()).filter(Boolean)));
+  }
+
   function fromJsonLd() {
     const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
     for (const script of scripts) {
@@ -54,6 +95,7 @@
             image: imageUrlFrom(recipe.image),
             ingredients: recipe.recipeIngredient || recipe.ingredients || [],
             instructions: flattenInstructions(recipe.recipeInstructions),
+            tags: tagsFrom(recipe),
           };
         }
       }
@@ -65,11 +107,13 @@
     const ingredientEls = document.querySelectorAll('[itemprop="recipeIngredient"], [itemprop="ingredients"]');
     const instructionEls = document.querySelectorAll('[itemprop="recipeInstructions"]');
     if (!ingredientEls.length || !instructionEls.length) return null;
+    const tagEls = document.querySelectorAll('[itemprop="recipeCategory"], [itemprop="recipeCuisine"], [itemprop="keywords"]');
     return {
       title: document.querySelector('[itemprop="name"]')?.textContent?.trim() || document.title,
       image: document.querySelector('[itemprop="image"]')?.src || '',
       ingredients: Array.from(ingredientEls).map((el) => el.textContent.trim()).filter(Boolean),
       instructions: Array.from(instructionEls).map((el) => el.textContent.trim()).filter(Boolean),
+      tags: Array.from(new Set(Array.from(tagEls).flatMap((el) => toStringArray(el.textContent)))),
     };
   }
 
@@ -79,6 +123,7 @@
       image: document.querySelector('meta[property="og:image"]')?.content || '',
       ingredients: [],
       instructions: [],
+      tags: [],
     };
   }
 
