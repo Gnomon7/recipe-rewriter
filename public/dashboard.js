@@ -127,7 +127,7 @@ function renderDayBarChart(elementId, days, { ariaLabel, emptyText, unitLabel, o
     const y = padTop + chartH - h;
 
     if (h > 0) {
-      const bar = svgEl('path', { d: roundedTopRectPath(x, y, barW, h, 4), fill: 'var(--terracotta)' });
+      const bar = svgEl('path', { d: roundedTopRectPath(x, y, barW, h, 4), fill: 'var(--accent)' });
       wireMark(bar, {
         tooltip: `${formatDayLabel(d.date)} — ${d.count} ${unitLabel(d.count)}`,
         onActivate: () => onActivate(d.date),
@@ -202,7 +202,7 @@ function renderMealTypeChart(recipes) {
     label.textContent = c.label;
     svg.appendChild(label);
 
-    const bar = svgEl('path', { d: roundedRightRectPath(labelW, y, w, rowH, 4), fill: 'var(--terracotta)' });
+    const bar = svgEl('path', { d: roundedRightRectPath(labelW, y, w, rowH, 4), fill: 'var(--accent)' });
     wireMark(bar, {
       tooltip: `${c.label} — ${c.count} recipe${c.count === 1 ? '' : 's'}`,
       onActivate: () => navigateTo({ mealType: c.label }),

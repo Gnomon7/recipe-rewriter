@@ -50,6 +50,9 @@ async function handleCapturedRecipe(payload) {
 
     const recipe = await response.json();
     console.log('[recipe-book] saved:', recipe.id);
+    // The server pushes a "recipes changed" event over SSE to any open book
+    // tab (see public/app.js), which reloads itself -- no need to reach
+    // into browser tabs from here at all.
     notify('Saved to Recipe Book', `"${recipe.title}" was added to your recipe book.`);
   } catch (err) {
     console.error('[recipe-book] save failed:', err);

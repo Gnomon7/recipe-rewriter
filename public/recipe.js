@@ -76,11 +76,22 @@ function formatMadeDate(iso) {
   }
 }
 
+let madeDatesRenderedOnce = false;
+
 function renderMadeDates() {
   const dates = getMadeDates(currentRecipe).slice().sort().reverse();
+  const history = document.getElementById('made-history');
+  // Stays collapsed on page load even if history already exists -- that's
+  // the whole point of tucking it away. Only auto-opens for feedback right
+  // after a *live* change during this visit (marking made, or removing the
+  // last date and re-adding one).
+  const justGotFirstEntry = madeDatesRenderedOnce && history.hidden && dates.length > 0;
+  history.hidden = dates.length === 0;
+  if (justGotFirstEntry) history.open = true;
+  madeDatesRenderedOnce = true;
+  document.getElementById('made-history-summary').textContent = `Cooking History (${dates.length})`;
+
   const list = document.getElementById('made-dates');
-  const empty = document.getElementById('made-empty');
-  empty.hidden = dates.length > 0;
   list.innerHTML = dates
     .map((d) => `
       <li>
