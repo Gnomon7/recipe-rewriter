@@ -2,11 +2,69 @@ function getRecipeId() {
   return new URLSearchParams(window.location.search).get('id');
 }
 
+let currentRecipe = null;
+let currentMultiplier = 1;
+let currentSystem = 'us';
+
+// Single place that combines both transforms in the right order: convert
+// the unit system first (which may change both the number and the unit),
+// then scale the result by the multiplier. `nameHint` is only needed for
+// bare "qty unit" fragments (see convertMeasurementSystem's doc comment).
+function applyMeasurement(text, nameHint) {
+  return scaleQuantityText(convertMeasurementSystem(text, currentSystem, nameHint), currentMultiplier);
+}
+
 // Escapes untrusted text first, then promotes {{...}} markers (added by the
 // rewriter engines) into highlighted spans -- safe because escaping runs before
-// the marker substitution and {{ }} aren't HTML metacharacters.
+// the marker substitution and {{ }} aren't HTML metacharacters. A marker's
+// inner text is just "qty unit" (the ingredient name sits outside it in the
+// sentence, e.g. "{{2 cups}} flour"), so the word(s) immediately following
+// the marker are captured too and passed along as a density-lookup hint,
+// then re-emitted as plain text after the highlighted pill. Oven
+// temperatures in the surrounding prose are annotated separately, before
+// escaping.
 function renderMeasureText(text) {
-  return escapeHtml(text).replace(/\{\{(.+?)\}\}/g, '<strong class="measure">$1</strong>');
+  const withTemp = convertTemperatureText(text, currentSystem);
+  return escapeHtml(withTemp).replace(
+    /\{\{(.+?)\}\}(\s*[A-Za-z]+(?:\s+[A-Za-z]+){0,2})?/g,
+    (_, measure, trailingWords) => {
+      const hint = (trailingWords || '').trim();
+      const converted = applyMeasurement(measure, hint);
+      return `<strong class="measure">${escapeHtml(converted)}</strong>${escapeHtml(trailingWords || '')}`;
+    }
+  );
+}
+
+function renderIngredients() {
+  document.getElementById('ingredients').innerHTML = currentRecipe.ingredients
+    .map((i) => `<li>${escapeHtml(applyMeasurement(i))}</li>`).join('');
+}
+
+function renderInstructions() {
+  const steps = (currentRecipe.instructionsRewritten && currentRecipe.instructionsRewritten.length)
+    ? currentRecipe.instructionsRewritten
+    : currentRecipe.instructionsOriginal;
+  document.getElementById('instructions').innerHTML = steps
+    .map((s) => `<li>${renderMeasureText(s)}</li>`).join('');
+}
+
+function renderControlButtons() {
+  document.querySelectorAll('#scale-controls .scale-btn').forEach((btn) => {
+    const isActive = Number(btn.dataset.multiplier) === currentMultiplier;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', String(isActive));
+  });
+  document.querySelectorAll('#system-controls .scale-btn').forEach((btn) => {
+    const isActive = btn.dataset.system === currentSystem;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', String(isActive));
+  });
+}
+
+function rerender() {
+  renderIngredients();
+  renderInstructions();
+  renderControlButtons();
 }
 
 async function loadRecipe() {
@@ -19,6 +77,7 @@ async function loadRecipe() {
 
   try {
     const recipe = await fetchJson(`${API_BASE}/${encodeURIComponent(id)}`);
+    currentRecipe = recipe;
     document.title = `${recipe.title} — Recipe Book`;
     document.getElementById('title').textContent = recipe.title;
 
@@ -38,14 +97,14 @@ async function loadRecipe() {
       imgEl.hidden = false;
     }
 
-    document.getElementById('ingredients').innerHTML = recipe.ingredients
-      .map((i) => `<li>${escapeHtml(i)}</li>`).join('');
+    rerender();
 
-    const steps = (recipe.instructionsRewritten && recipe.instructionsRewritten.length)
-      ? recipe.instructionsRewritten
-      : recipe.instructionsOriginal;
-    document.getElementById('instructions').innerHTML = steps
-      .map((s) => `<li>${renderMeasureText(s)}</li>`).join('');
+    document.querySelectorAll('#scale-controls .scale-btn').forEach((btn) => {
+      btn.addEventListener('click', () => { currentMultiplier = Number(btn.dataset.multiplier); rerender(); });
+    });
+    document.querySelectorAll('#system-controls .scale-btn').forEach((btn) => {
+      btn.addEventListener('click', () => { currentSystem = btn.dataset.system; rerender(); });
+    });
 
     if (recipe.rewriteError) {
       const warn = document.getElementById('rewrite-warning');
@@ -54,7 +113,11 @@ async function loadRecipe() {
     }
 
     document.getElementById('keep-btn').addEventListener('click', () => {
-      const list = [recipe.title, '', ...recipe.ingredients].join('\n');
+      const convertedIngredients = currentRecipe.ingredients.map(applyMeasurement);
+      const suffix = [currentMultiplier > 1 ? `${currentMultiplier}x` : '', currentSystem === 'metric' ? 'Metric' : '']
+        .filter(Boolean).join(', ');
+      const title = suffix ? `${currentRecipe.title} (${suffix})` : currentRecipe.title;
+      const list = [title, '', ...convertedIngredients].join('\n');
       navigator.clipboard.writeText(list)
         .then(() => {
           window.open('https://keep.google.com/u/0/#NEW', '_blank', 'noopener');
