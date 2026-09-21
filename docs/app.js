@@ -24,7 +24,11 @@ if (!IS_STATIC && typeof EventSource !== 'undefined') {
 
 async function loadStaticRecipes() {
   if (!staticRecipesCache) {
-    const res = await fetch('data/recipes.json');
+    // GitHub Pages' CDN caches this file for several minutes (Cache-Control:
+    // max-age=600) -- a plain reload right after publishing can otherwise
+    // still show the pre-publish snapshot. The timestamp makes each load a
+    // distinct URL, so it's never served a stale cached copy.
+    const res = await fetch(`data/recipes.json?v=${Date.now()}`);
     if (!res.ok) throw new Error('Could not load the shared recipe data.');
     staticRecipesCache = await res.json();
   }
