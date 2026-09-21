@@ -182,7 +182,7 @@ async function loadRecipes() {
   const dashboard = document.getElementById('dashboard');
   const tagline = document.getElementById('tagline');
   if (IS_STATIC && tagline) {
-    tagline.textContent = 'A shared, read-only copy of a recipe book — browse, scale, convert units, and copy shopping lists to Google Keep.';
+    tagline.textContent = "A recipe simplifier that lets you browse, scale, convert units, and instantly copy shopping lists to Google Keep.";
   }
   document.getElementById('refresh-live-btn').hidden = IS_STATIC;
   try {
