@@ -112,6 +112,66 @@
     "id": "cashew-chicken-stir-fry-0e90fad3"
   },
   {
+    "title": "Buffalo Chicken and Roasted Potato Casserole",
+    "sourceUrl": "https://www.allrecipes.com/recipe/229964/buffalo-chicken-and-roasted-potato-casserole/",
+    "image": "https://www.allrecipes.com/thmb/zffjLIp1JBNaNl4JDvPeVvhOPm0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/229964-Buffalo-Chicken-and-Roasted-Potato-Casserole-DDMFS-4x3-1cb5e7777f70413698dec581007be735.jpg",
+    "ingredients": [
+      "cooking spray",
+      "6 tablespoons hot pepper sauce",
+      "0.33333334326744 cup olive oil",
+      "2 tablespoons garlic powder",
+      "1 tablespoon freshly ground black pepper",
+      "1 tablespoon paprika",
+      "1.5 teaspoons salt",
+      "8 potatoes, cut into 1/2-inch cubes",
+      "2 pounds skinless, boneless chicken breast halves, cut into 1/2-inch cubes",
+      "2 cups shredded Mexican cheese blend (such as Great Value Fiesta Blend®)",
+      "1 cup crumbled cooked bacon",
+      "1 cup diced green onions"
+    ],
+    "instructionsOriginal": [
+      "Gather all ingredients.",
+      "Preheat the oven to 500 degrees F (260 degrees C). Spray a 9x13-inch baking dish with cooking spray.",
+      "Heat hot pepper sauce, olive oil, garlic powder, black pepper, paprika, and salt in a large skillet over low heat, stirring until thoroughly combined. Turn off heat.",
+      "Toss potatoes in batches with the hot pepper sauce mixture to coat and use a slotted spoon to transfer potatoes to the prepared baking dish. Leave remaining sauce in the skillet.",
+      "Mix chicken into remaining sauce and allow to marinate while potatoes roast.",
+      "Bake potatoes until tender inside and crisp and brown outside, 45 to 50 minutes, stirring every 10 to 15 minutes.",
+      "Reduce oven heat to 400 degrees F (205 degrees C).",
+      "Spread chicken cubes over roasted potatoes.",
+      "Sprinkle shredded cheese, cooked bacon, and green onions over chicken. Return to the oven.",
+      "Bake in oven until chicken is cooked through and the cheese topping is bubbling, about 15 minutes."
+    ],
+    "instructionsRewritten": [
+      "Gather all ingredients.",
+      "Preheat the oven to 500 degrees F (260 degrees C). Spray a 9x13-inch baking dish with cooking spray.",
+      "Heat {{6 tablespoons}} hot {{1 tablespoon}} pepper sauce, {{0.33333334326744 cup}} olive oil, {{2 tablespoons}} garlic powder, black pepper, {{1 tablespoon}} paprika, and {{1.5 teaspoons}} salt in a large skillet over low heat, stirring until thoroughly combined. Turn off heat.",
+      "Toss {{8}} potatoes in batches with the hot pepper sauce mixture to coat and use a slotted spoon to transfer potatoes to the prepared baking dish. Leave remaining sauce in the skillet.",
+      "Mix chicken into remaining sauce and allow to marinate while potatoes roast.",
+      "Bake potatoes until tender inside and crisp and brown outside, 45 to 50 minutes, stirring every 10 to 15 minutes.",
+      "Reduce oven heat to 400 degrees F (205 degrees C).",
+      "Spread chicken cubes over roasted potatoes.",
+      "Sprinkle {{2 cups}} shredded cheese, cooked {{1 cup}} bacon, and green {{1 cup}} onions over chicken. Return to the oven.",
+      "Bake in oven until chicken is cooked through and the cheese topping is bubbling, about 15 minutes."
+    ],
+    "rewriteError": null,
+    "tags": [
+      "Dinner",
+      "U.S.",
+      "American",
+      "publisher-tested",
+      "Chicken",
+      "Bacon",
+      "Potato",
+      "Cheese"
+    ],
+    "calories": 501,
+    "madeDates": [
+      "2026-09-21"
+    ],
+    "createdAt": "2026-09-21T19:29:59.294Z",
+    "id": "buffalo-chicken-and-roasted-potato-casserole-75d2fec6"
+  },
+  {
     "title": "How to Cook Asparagus",
     "sourceUrl": "https://www.seriouseats.com/how-to-cook-asparagus-7487955",
     "image": "https://www.seriouseats.com/thmb/SqpUiFPZRNx1CD_THMz5LmGU1Ow=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__images__2016__05__20160504-sauteed-asparagus-vicky-wasik--4-abebe9a550d84d55aa2a1e28a918d17d.jpg",
@@ -144,7 +204,9 @@
       "Chicken"
     ],
     "calories": 100,
-    "madeDates": [],
+    "madeDates": [
+      "2026-09-21"
+    ],
     "createdAt": "2026-09-21T09:00:24.497Z",
     "id": "how-to-cook-asparagus-8e0fee69"
   },
