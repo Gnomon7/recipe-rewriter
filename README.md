@@ -69,10 +69,8 @@ to see your (empty) recipe book.
 
 ### Load the Chrome extension
 
-1. Open `chrome://extensions` in Chrome.
-2. Turn on **Developer mode** (top right).
-3. Click **Load unpacked** and select this repo's `extension/` folder.
-4. Pin the "Recipe Book Capture" icon to your toolbar (puzzle-piece icon → pin).
+See [extension/README.md](extension/README.md) for step-by-step instructions
+(loading it unpacked, pinning it to the toolbar, and troubleshooting).
 
 ### Using it
 
