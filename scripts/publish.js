@@ -14,7 +14,10 @@ const RECIPES_DIR = path.join(ROOT, 'server', 'data', 'recipes');
 const PUBLIC_DIR = path.join(ROOT, 'public');
 const DOCS_DIR = path.join(ROOT, 'docs');
 
-const STATIC_ASSETS = ['index.html', 'recipe.html', 'styles.css', 'app.js', 'units.js', 'book.js', 'recipe.js'];
+const STATIC_ASSETS = [
+  'index.html', 'recipe.html', 'dashboard.html', 'styles.css', 'app.js',
+  'units.js', 'stats.js', 'book.js', 'recipe.js', 'dashboard.js',
+];
 
 function loadRecipes() {
   if (!fs.existsSync(RECIPES_DIR)) return [];

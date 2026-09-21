@@ -2,83 +2,26 @@ let allRecipes = [];
 let selectedTags = new Set(); // multi-select: a recipe must have every one of these
 let searchQuery = '';
 let sortMode = 'newest';
+let monthFilter = null; // set via a dashboard deep link (?month=YYYY-MM); cleared by the active-filter banner
 
-const MEAL_TYPE_TAGS = new Set([
-  'breakfast', 'brunch', 'lunch', 'dinner', 'dessert', 'snack', 'appetizer',
-  'side dish', 'soup', 'salad', 'beverage', 'main course', 'main dish', 'entree',
-]);
-const PROTEIN_TAGS = new Set([
-  'chicken', 'beef', 'pork', 'bacon', 'sausage', 'ham', 'turkey', 'lamb',
-  'shrimp', 'salmon', 'tuna', 'fish', 'tofu', 'eggs',
-]);
-
-// Dedupes tags case-insensitively across all recipes (source sites vary in
-// casing -- "Dinner" vs "DINNER") while keeping one consistent display form.
-function collectTags(recipes) {
-  const seen = new Map();
-  for (const r of recipes) {
-    for (const t of r.tags || []) {
-      const key = t.toLowerCase();
-      if (!seen.has(key)) seen.set(key, t);
+// Reads ?tag=, ?mealType= and ?month= from the URL (set by the dashboard's
+// clickable charts) and applies them as if the user had picked them by hand.
+// Called once, before the first render, so the resulting filter state is
+// visible in the tag pills / meal-type select / active-filter banner rather
+// than silently narrowing the grid.
+function applyUrlFilters() {
+  const params = new URLSearchParams(window.location.search);
+  const tag = params.get('tag');
+  const mealType = params.get('mealType');
+  const month = params.get('month');
+  if (tag) selectedTags.add(tag);
+  if (mealType) {
+    for (const t of Array.from(selectedTags)) {
+      if (MEAL_TYPE_TAGS.has(t.toLowerCase())) selectedTags.delete(t);
     }
+    selectedTags.add(mealType);
   }
-  return Array.from(seen.values()).sort((a, b) => a.localeCompare(b));
-}
-
-function hasTag(recipe, tag) {
-  return (recipe.tags || []).some((t) => t.toLowerCase() === tag.toLowerCase());
-}
-
-function hasAllTags(recipe, tags) {
-  return tags.every((t) => hasTag(recipe, t));
-}
-
-// Most frequent tag among `recipes` whose lowercased form is in `allowedSet`,
-// merging case variants of the same tag into one count.
-function topTagFrom(recipes, allowedSet) {
-  const counts = new Map();
-  for (const r of recipes) {
-    for (const t of r.tags || []) {
-      const key = t.toLowerCase();
-      if (!allowedSet.has(key)) continue;
-      const entry = counts.get(key) || { label: t, count: 0 };
-      entry.count += 1;
-      counts.set(key, entry);
-    }
-  }
-  let best = null;
-  for (const entry of counts.values()) {
-    if (!best || entry.count > best.count) best = entry;
-  }
-  return best;
-}
-
-function computeStats(recipes) {
-  const calorieList = recipes.map((r) => r.calories).filter((c) => typeof c === 'number');
-  return {
-    total: recipes.length,
-    topMealType: topTagFrom(recipes, MEAL_TYPE_TAGS),
-    topProtein: topTagFrom(recipes, PROTEIN_TAGS),
-    calorieRange: calorieList.length ? { min: Math.min(...calorieList), max: Math.max(...calorieList) } : null,
-  };
-}
-
-function renderStats() {
-  const stats = computeStats(allRecipes);
-  const cards = [{ label: 'Recipes', value: String(stats.total) }];
-  if (stats.topMealType) cards.push({ label: 'Top meal type', value: `${stats.topMealType.label} (${stats.topMealType.count})` });
-  if (stats.topProtein) cards.push({ label: 'Most common protein', value: `${stats.topProtein.label} (${stats.topProtein.count})` });
-  cards.push({
-    label: 'Calorie range',
-    value: stats.calorieRange ? `${stats.calorieRange.min}–${stats.calorieRange.max} cal` : 'No data yet',
-  });
-  document.getElementById('stats-row').innerHTML = cards
-    .map((c) => `
-      <div class="stat-card">
-        <span class="stat-value">${escapeHtml(c.value)}</span>
-        <span class="stat-label">${escapeHtml(c.label)}</span>
-      </div>`)
-    .join('');
+  if (month) monthFilter = month;
 }
 
 // There are two (kept in sync) meal-type dropdowns -- one in the header,
@@ -141,7 +84,34 @@ function getFilteredRecipes() {
   const byTags = selectedTags.size
     ? allRecipes.filter((r) => hasAllTags(r, Array.from(selectedTags)))
     : allRecipes.slice();
-  return byTags.filter((r) => matchesSearch(r, searchQuery));
+  const byMonth = monthFilter
+    ? byTags.filter((r) => typeof r.createdAt === 'string' && r.createdAt.slice(0, 7) === monthFilter)
+    : byTags;
+  return byMonth.filter((r) => matchesSearch(r, searchQuery));
+}
+
+function monthFilterLabel(monthKey) {
+  const [y, m] = monthKey.split('-').map(Number);
+  return new Date(y, m - 1, 1).toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+}
+
+function renderActiveFilterBanner() {
+  const banner = document.getElementById('active-filter-banner');
+  if (!banner) return;
+  if (!monthFilter) {
+    banner.hidden = true;
+    return;
+  }
+  banner.hidden = false;
+  banner.innerHTML = `
+    <span>Showing recipes added in <strong>${escapeHtml(monthFilterLabel(monthFilter))}</strong></span>
+    <button type="button" id="clear-month-filter" class="btn btn-primary btn-small">Clear</button>`;
+  document.getElementById('clear-month-filter').addEventListener('click', () => {
+    monthFilter = null;
+    history.replaceState(null, '', window.location.pathname);
+    renderActiveFilterBanner();
+    renderGrid();
+  });
 }
 
 // Searches across everything meaningful about a recipe -- title, tags,
@@ -198,11 +168,13 @@ async function loadRecipes() {
     }
     empty.hidden = true;
     dashboard.hidden = false;
-    renderStats();
+    applyUrlFilters();
     renderMealTypeOptions();
     syncMealTypeSelects();
     renderTagFilter();
+    renderActiveFilterBanner();
     renderGrid();
+    if (selectedTags.size) document.getElementById('tag-filter-details').open = true;
   } catch (err) {
     dashboard.hidden = true;
     empty.hidden = true;
