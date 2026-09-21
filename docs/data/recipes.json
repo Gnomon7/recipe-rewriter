@@ -50,7 +50,9 @@
       "Cheese"
     ],
     "calories": 236,
-    "madeDates": [],
+    "madeDates": [
+      "2026-09-21"
+    ],
     "createdAt": "2026-09-21T23:23:14.000Z",
     "id": "instant-pot-lentil-soup-d532f320"
   },
@@ -108,6 +110,304 @@
     ],
     "createdAt": "2026-09-21T20:23:37.000Z",
     "id": "cashew-chicken-stir-fry-0e90fad3"
+  },
+  {
+    "title": "How to Cook Asparagus",
+    "sourceUrl": "https://www.seriouseats.com/how-to-cook-asparagus-7487955",
+    "image": "https://www.seriouseats.com/thmb/SqpUiFPZRNx1CD_THMz5LmGU1Ow=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__images__2016__05__20160504-sauteed-asparagus-vicky-wasik--4-abebe9a550d84d55aa2a1e28a918d17d.jpg",
+    "ingredients": [
+      "1 pound (454g) asparagus, woody bottoms trimmed",
+      "Kosher salt, freshly ground black pepper, vegetable or olive oil, chicken or vegetable stock, and butter, as needed depending on the preparation"
+    ],
+    "instructionsOriginal": [
+      "In a large bowl, prepare an ice water bath. In a large pot of salted boiling water, blanch asparagus until crisp-tender, about about 30 seconds to 1 minute for thinner asparagus and 1 to 2 minutes for thicker asparagus. Immediately transfer asparagus to ice bath to chill.",
+      "Light one chimney full of charcoal. When all the charcoal is lit and covered with gray ash, pour out and spread the coals evenly over half of the coal grate. Set cooking grate in place, cover grill and allow to preheat for 5 minutes. Clean and oil the grilling grate. If using a gas grill, preheat half the grill to high.",
+      "Toss asparagus with 2 tablespoons olive oil and season with salt and pepper. Add asparagus to hot side of grill and cook, turning occasionally, until well-charred and tender, 5 to 8 minutes.",
+      "Preheat broiler and position rack about 4 to 6 inches from it. On a rimmed baking sheet, drizzle asparagus with oil and toss to coat. Season with salt. Broil asparagus, shaking and rotating pan occasionally to cook them evenly on all sides, until asparagus is blistered, about 6 minutes.",
+      "In a large cast iron, carbon steel, or stainless steel skillet, heat 1 tablespoon (15ml) vegetable oil over high heat until shimmering. Add half of asparagus and cook, tossing, stirring, and rotating the spears frequently, until browned all over, charred lightly in spots, and crisp-tender within, about 10 minutes; lower heat if necessary to prevent burning. Using tongs, transfer each spear as it's done to a plate and keep warm. Repeat with remaining vegetable oil and asparagus. Season with salt and pepper.",
+      "Heat oil in a 12-inch straight-sided sauté pan over high heat until lightly smoking. Add asparagus in as close to a single layer as possible, season with salt and pepper, and cook without moving until lightly browned, about 1 1/2 minutes. Shake pan and cook until browned again, 1 1/2 minutes longer. Add 1 cup chicken or vegetable stock and 3 tablespoons butter to pan and immediately cover.",
+      "Continue to cook until asparagus is completely tender and stock and butter have emulsified and reduced to a shiny glaze, 7 to 10 minutes. If stock completely evaporates and butter starts to burn before asparagus is cooked through, top up with a few tablespoons of water. Serve immediately."
+    ],
+    "instructionsRewritten": [
+      "In a large bowl, prepare an ice water bath. In a large pot of salted boiling water, blanch {{1 pound}} asparagus until crisp-tender, about about 30 seconds to 1 minute for thinner asparagus and 1 to 2 minutes for thicker asparagus. Immediately transfer asparagus to ice bath to chill.",
+      "Light one chimney full of charcoal. When all the charcoal is lit and covered with gray ash, pour out and spread the coals evenly over half of the coal grate. Set cooking grate in place, cover grill and allow to preheat for 5 minutes. Clean and oil the grilling grate. If using a gas grill, preheat half the grill to high.",
+      "Toss asparagus with 2 tablespoons olive oil and season with salt and pepper. Add asparagus to hot side of grill and cook, turning occasionally, until well-charred and tender, 5 to 8 minutes.",
+      "Preheat broiler and position rack about 4 to 6 inches from it. On a rimmed baking sheet, drizzle asparagus with oil and toss to coat. Season with salt. Broil asparagus, shaking and rotating pan occasionally to cook them evenly on all sides, until asparagus is blistered, about 6 minutes.",
+      "In a large cast iron, carbon steel, or stainless steel skillet, heat 1 tablespoon (15ml) vegetable oil over high heat until shimmering. Add half of asparagus and cook, tossing, stirring, and rotating the spears frequently, until browned all over, charred lightly in spots, and crisp-tender within, about 10 minutes; lower heat if necessary to prevent burning. Using tongs, transfer each spear as it's done to a plate and keep warm. Repeat with remaining vegetable oil and asparagus. Season with salt and pepper.",
+      "Heat oil in a 12-inch straight-sided sauté pan over high heat until lightly smoking. Add asparagus in as close to a single layer as possible, season with salt and pepper, and cook without moving until lightly browned, about 1 1/2 minutes. Shake pan and cook until browned again, 1 1/2 minutes longer. Add 1 cup chicken or vegetable stock and 3 tablespoons butter to pan and immediately cover.",
+      "Continue to cook until asparagus is completely tender and stock and butter have emulsified and reduced to a shiny glaze, 7 to 10 minutes. If stock completely evaporates and butter starts to burn before asparagus is cooked through, top up with a few tablespoons of water. Serve immediately."
+    ],
+    "rewriteError": null,
+    "tags": [
+      "Side Dish",
+      "American",
+      "Chicken"
+    ],
+    "calories": 100,
+    "madeDates": [],
+    "createdAt": "2026-09-21T09:00:24.497Z",
+    "id": "how-to-cook-asparagus-8e0fee69"
+  },
+  {
+    "title": "Creamy Garlic Chicken Spanakopita Skillet Recipe",
+    "sourceUrl": "https://www.seriouseats.com/one-pot-chicken-spanakopita-skillet-pie-recipe",
+    "image": "https://www.seriouseats.com/thmb/GlkjBcUbkXqa_ejC9v4mXTEOnVw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2015__11__20151112-creamy-garlic-chicken-spanakopita-skillet-plate-morgan-eisenberg-80e32d58291f4281a9888e2982553d37.jpg",
+    "ingredients": [
+      "1 pound fresh baby spinach leaves, washed",
+      "6 tablespoons unsalted butter, divided",
+      "1 1/2 pounds boneless, skinless chicken breasts or thighs, chopped into 1-inch chunks",
+      "Kosher salt and freshly ground black pepper",
+      "5 medium cloves garlic, minced",
+      "2 tablespoons all-purpose flour",
+      "1/2 cup homemade chicken stock or low-sodium broth, plus more as needed",
+      "1/2 cup half-and-half",
+      "6 ounces feta cheese, crumbled",
+      "3 scallions, white and light green parts only, chopped",
+      "1 small bunch dill, chopped, plus more for garnish",
+      "6 to 8 sheets phyllo dough, thawed and covered with a towel"
+    ],
+    "instructionsOriginal": [
+      "Heat a large cast iron skillet over medium heat. Add spinach, a handful at a time, until the pan is full; you may have to cook the spinach in batches to ensure that it cooks evenly. Turn the spinach often until just wilted, then transfer to a colander and press out as much water as you can. Continue until all of the spinach is wilted and pressed.",
+      "Pour off any excess water in the skillet and place back over medium heat. Melt 2 tablespoons butter in the pan and add chicken. Season with salt and pepper. Cook, turning once, until the edges are lightly golden, about 4 minutes. Remove from heat and set aside.",
+      "Preheat oven to 425°F (220°C). Melt 2 tablespoons butter in same skillet and add garlic. Cook until fragrant, about 1 minute, then mix in flour. Stir together until the mixture forms a golden paste. Whisk in 1/2 cup chicken stock. Cook, stirring often, until mixture is thickened and coats the back of a spoon. Whisk in half-and-half.",
+      "Stir together feta cheese, scallions, and dill, allowing the feta to melt. Remove from heat. Return chicken and spinach to skillet, mixing well. If the sauce has thickened too much, add more chicken stock to reach the desired consistency, keeping in mind that the mixture will thicken even more when baking in the oven. Season with salt and pepper.",
+      "Melt the remaining 2 tablespoons butter in a small saucepan or in the microwave. Lay a sheet of phyllo on a work surface. Brush with melted butter, then scrunch up the sheet and set it on top of the spinach mixture in the skillet. Repeat with remaining phyllo until the skillet is completely covered.",
+      "Bake until phyllo is golden and crisp on top, about 20 minutes. Remove from oven, garnish with additional dill, and serve warm."
+    ],
+    "instructionsRewritten": [
+      "Heat a large cast iron skillet over medium heat. Add spinach, a handful at a time, until the pan is full; you may have to cook the spinach in batches to ensure that it cooks evenly. Turn the spinach often until just wilted, then transfer to a colander and press out as much water as you can. Continue until all of the spinach is wilted and pressed.",
+      "Pour off any excess water in the skillet and place back over medium heat. Melt 2 tablespoons {{6 tablespoons}} butter in the pan and add chicken. Season with salt and pepper. Cook, turning once, until the edges are lightly golden, about 4 minutes. Remove from heat and set aside.",
+      "Preheat oven to 425°F (220°C). Melt 2 tablespoons butter in same skillet and add {{5 medium}} garlic. Cook until fragrant, about 1 minute, then mix in {{2 tablespoons}} flour. Stir together until the mixture forms a golden paste. Whisk in 1/2 cup chicken stock. Cook, stirring often, until mixture is thickened and coats the back of a spoon. Whisk in {{1/2 cup}} half-and-half.",
+      "Stir together {{6 ounces}} feta cheese, {{3}} scallions, and {{1 small}} dill, allowing the feta to melt. Remove from heat. Return chicken and spinach to skillet, mixing well. If the sauce has thickened too much, add more chicken stock to reach the desired consistency, keeping in mind that the mixture will thicken even more when baking in the oven. Season with salt and pepper.",
+      "Melt the remaining 2 tablespoons butter in a small saucepan or in the microwave. Lay a {{6-8}} sheet of phyllo on a work surface. Brush with melted butter, then scrunch up the sheet and set it on top of the spinach mixture in the skillet. Repeat with remaining phyllo until the skillet is completely covered.",
+      "Bake until phyllo is golden and crisp on top, about 20 minutes. Remove from oven, garnish with additional dill, and serve warm."
+    ],
+    "rewriteError": null,
+    "tags": [
+      "Entree",
+      "Mains",
+      "Quick Dinners",
+      "Greek",
+      "chicken",
+      "one pot",
+      "Cheese"
+    ],
+    "calories": 363,
+    "madeDates": [
+      "2026-09-21"
+    ],
+    "createdAt": "2026-09-21T08:56:25.318Z",
+    "id": "creamy-garlic-chicken-spanakopita-skillet-recipe-11bbb7d3"
+  },
+  {
+    "title": "The Best Gin and Tonic",
+    "sourceUrl": "https://www.epicurious.com/recipes/food/views/best-gin-and-tonic",
+    "image": "https://assets.epicurious.com/photos/5ed54be0d5d9a26203051c15/16:9/w_4539,h_2553,c_limit/ClassicGin&Tonic_HERO_v1_052720_7942.jpg",
+    "ingredients": [
+      "1 approximately 7-oz. bottle tonic water (such as Fever Tree or Q), chilled",
+      "2 oz. gin, preferably chilled",
+      "Grapefruit slice, lime wedge, cucumber slice, or fresh herbs (for serving; optional)"
+    ],
+    "instructionsOriginal": [
+      "Fill a highball or Collins glass about two-thirds full with ice, then add about 2 oz. tonic, followed by 2 oz. gin and the remaining tonic. Garnish with a grapefruit slice, lime wedge, cucumber slice, or fresh herbs if desired. This way for more of our best gin cocktails →"
+    ],
+    "instructionsRewritten": [
+      "Fill a highball or Collins glass about two-thirds full with ice, then add about 2 oz. tonic, followed by 2 oz. {{2 oz}} gin and the remaining tonic. Garnish with a grapefruit slice, lime wedge, cucumber slice, or fresh herbs if desired. This way for more of our best gin cocktails →"
+    ],
+    "rewriteError": null,
+    "tags": [
+      "cocktail",
+      "aperitif",
+      "gin",
+      "american",
+      "beverages",
+      "dairy free",
+      "gluten free",
+      "nut free",
+      "vegan",
+      "vegetarian",
+      "quick",
+      "easy",
+      "5 ingredients or fewer",
+      "30 minutes or less",
+      "epicurious",
+      "web"
+    ],
+    "calories": null,
+    "madeDates": [
+      "2026-09-21"
+    ],
+    "createdAt": "2026-09-21T08:40:47.929Z",
+    "id": "the-best-gin-and-tonic-1d78b635"
+  },
+  {
+    "title": "Hanger Steak with Charred Scallion Sauce",
+    "sourceUrl": "https://www.epicurious.com/recipes/food/views/hanger-steak-with-charred-scallion-sauce",
+    "image": "https://assets.epicurious.com/photos/5b16fb09bf24904d9ece7fbe/16:9/w_4992,h_2808,c_limit/hanger-steak-with-charred-scallion-sauce-recipe-BA-060518.jpg",
+    "ingredients": [
+      "1/2 cup crushed or coarsely chopped walnuts",
+      "1 small garlic clove",
+      "9 Tbsp. extra-virgin olive oil, divided",
+      "1 (1 1/2-lb.) hanger steak, cut into 4 pieces, center membrane removed",
+      "Kosher salt, freshly ground pepper",
+      "3/4 tsp. Aleppo-style pepper, plus more for serving",
+      "12 scallions",
+      "5 tsp. sherry vinegar or red wine vinegar",
+      "1 Tbsp. chopped cornichons",
+      "1 Tbsp. chopped drained capers",
+      "1 Tbsp. whole grain mustard",
+      "3/4 tsp. chopped thyme",
+      "Pinch of sugar",
+      "Flaky sea salt"
+    ],
+    "instructionsOriginal": [
+      "Preheat oven to 350°F. Toast walnuts on a rimmed baking sheet, tossing once, until golden brown, 8–10 minutes. Transfer to a medium bowl. Finely grate garlic over warm walnuts and toss with 6 Tbsp. oil.",
+      "Heat a large cast-iron skillet over medium-high. Season steaks with kosher salt and black pepper; sprinkle all over with Aleppo-style pepper. Rub with 2 Tbsp. oil and cook, turning occasionally, until deeply browned and an instant-read thermometer inserted into the thickest part registers 130° for medium-rare, 10–12 minutes. Transfer steaks to a cutting board.",
+      "Wipe out skillet and reduce heat to medium. Place scallions and 1 Tbsp. oil in skillet, season with kosher salt, and cook, turning occasionally, until softened and deeply charred, about 4 minutes. Transfer to cutting board; trim and cut into 1\" pieces. Add to bowl with walnut mixture along with vinegar, cornichons, capers, mustard, thyme, and sugar and toss to combine; season with kosher salt and black pepper.",
+      "Slice steak against the grain and sprinkle with sea salt. Serve with scallion sauce and more Aleppo-style pepper."
+    ],
+    "instructionsRewritten": [
+      "Preheat oven to 350°F. Toast {{1/2 cup}} walnuts on a rimmed baking sheet, tossing once, until golden brown, 8–10 minutes. Transfer to a medium bowl. Finely grate {{1 small}} garlic over warm walnuts and toss with 6 Tbsp. {{9 tbsp}} oil.",
+      "Heat a large cast-iron skillet over medium-high. Season steaks with kosher salt and black pepper; sprinkle all over with {{3/4 tsp}} Aleppo-style pepper. Rub with 2 Tbsp. oil and cook, turning occasionally, until deeply browned and an instant-read thermometer inserted into the thickest part registers 130° for medium-rare, 10–12 minutes. Transfer steaks to a cutting board.",
+      "Wipe out skillet and reduce heat to medium. Place {{12}} scallions and 1 Tbsp. oil in skillet, season with kosher salt, and cook, turning occasionally, until softened and deeply charred, about 4 minutes. Transfer to cutting board; trim and cut into 1\" pieces. Add to bowl with walnut mixture along with {{5 tsp}} vinegar, {{1 tbsp}} cornichons, {{1 tbsp}} capers, {{1 tbsp}} mustard, {{3/4 tsp}} thyme, and sugar and toss to combine; season with kosher salt and black pepper.",
+      "Slice {{1 1 1/2-lb.}} steak against the grain and sprinkle with sea salt. Serve with scallion sauce and more Aleppo-style pepper."
+    ],
+    "rewriteError": null,
+    "tags": [
+      "steak",
+      "scallion",
+      "walnut",
+      "main",
+      "dinner",
+      "dairy free",
+      "gluten free",
+      "sear",
+      "bon appétit",
+      "web"
+    ],
+    "calories": null,
+    "madeDates": [],
+    "createdAt": "2026-09-21T08:38:22.428Z",
+    "id": "hanger-steak-with-charred-scallion-sauce-367ac9a4"
+  },
+  {
+    "title": "Crunchy Fried Fish Tacos Recipe",
+    "sourceUrl": "https://www.seriouseats.com/crispy-fried-fish-tacos-recipe",
+    "image": "https://www.seriouseats.com/thmb/y3Qf-ciu-nzLgYeJzK4xWoabibQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/SEA-M7011302_crunchy_fish_tacos6556-JenCausey-f8285ed3d8674b25bf16d027034fc41b.jpg",
+    "ingredients": [
+      "1 1/2 cups cake flour",
+      "2 tablespoons paprika",
+      "2 teaspoons black pepper",
+      "Kosher salt",
+      "3/4 cup beer (plus more as necessary)",
+      "1 egg",
+      "3/4 cup mayonnaise (see note)",
+      "2 tablespoons sriracha or other chili sauce (see note)",
+      "2 quarts peanut oil",
+      "1 pound white fish (such as cod, hake, or halibut), cut into eight 2-ounce fingers",
+      "16 corn tortillas, warmed",
+      "1 small head of cabbage, finely shredded",
+      "1 recipe pickled red onions",
+      "1/2 cup finely chopped fresh cilantro",
+      "2 limes, cut into wedges"
+    ],
+    "instructionsOriginal": [
+      "Combine flour, paprika, black pepper, and salt and whisk to combine. Transfer half of mixture to a large bowl and set aside. Add beer and egg to remaining mixture and whisk until a smooth batter is formed. Batter should have the consistency of thick paint (add up to 1/2 cup more beer as necessary until proper consistency is reached). Set aside.",
+      "Combine mayonnaise and hot sauce in a medium bowl and whisk until homogenous. Set aside.",
+      "Heat oil in a deep fryer, Dutch oven, or large wok to 350°F (175°C). Transfer fish pieces to bowl with batter and turn to coat thoroughly. Working one piece at a time, lift fish, let excess batter drip off, then transfer to bowl with remaining flour mixture. Toss to coat thoroughly. Lift carefully with tongs or dry fingers and slowly lower into hot oil. Repeat with remaining fish.",
+      "Fry, turning occasionally, until golden brown on all sides, about 3 minutes total. Transfer to a paper towel-lined plate and season with salt.",
+      "Divide tortillas into 8 double stacks. Top each with shredded cabbage, 1 piece of fish, pickled red onions, chile mayo, and cilantro. Serve with lime wedges."
+    ],
+    "instructionsRewritten": [
+      "Combine {{1 1/2 cups}} flour, {{2 tablespoons}} paprika, {{2 teaspoons}} black pepper, and salt and whisk to combine. Transfer half of mixture to a large bowl and set aside. Add {{3/4 cup}} beer and {{1}} egg to remaining mixture and whisk until a smooth batter is formed. Batter should have the consistency of thick paint (add up to 1/2 cup more beer as necessary until proper consistency is reached). Set aside.",
+      "Combine {{3/4 cup}} mayonnaise and hot {{2 tablespoons}} sauce in a medium bowl and whisk until homogenous. Set aside.",
+      "Heat {{2 quarts}} oil in a deep fryer, Dutch oven, or large wok to 350°F (175°C). Transfer fish pieces to bowl with batter and turn to coat thoroughly. Working one piece at a time, lift fish, let excess batter drip off, then transfer to bowl with remaining flour mixture. Toss to coat thoroughly. Lift carefully with tongs or dry fingers and slowly lower into hot oil. Repeat with remaining fish.",
+      "Fry, turning occasionally, until golden brown on all sides, about 3 minutes total. Transfer to a paper towel-lined plate and season with salt.",
+      "Divide {{16}} tortillas into 8 double stacks. Top each with shredded {{1 small}} cabbage, 1 piece of fish, pickled red {{1}} onions, chile mayo, and {{1/2 cup}} cilantro. Serve with {{2}} lime wedges."
+    ],
+    "rewriteError": null,
+    "tags": [
+      "Entree",
+      "Mains",
+      "Mexican",
+      "fish",
+      "seafood",
+      "Eggs"
+    ],
+    "calories": 4771,
+    "madeDates": [],
+    "createdAt": "2026-09-21T08:31:46.956Z",
+    "id": "crunchy-fried-fish-tacos-recipe-484a8e45"
+  },
+  {
+    "title": "Lentil Meatballs with Indian Coconut Curry Sauce",
+    "sourceUrl": "https://www.feastingathome.com/lentil-meatballs-with-indian-fenugreek-sauce/",
+    "image": "https://www.feastingathome.com/wp-content/uploads/2014/03/indian-lentil-meatballs-100-4-225x225.jpg",
+    "ingredients": [
+      "1 cup black caviar lentils (uncooked) Sub green lentils or brown lentils ( see notes)",
+      "1 tsp fennel seed",
+      "½ cup quinoa (uncooked)",
+      "1 tsp kosher salt",
+      "1 tsp granulated garlic",
+      "⅓ cup chopped cilantro",
+      "6 oz firm tofu, pressed down (to release water) and patted dry – this acts as the binder (do not use silken tofu)",
+      "1 tablespoon olive oil",
+      "spray olive oil",
+      "1- 2 tablespoons olive oil",
+      "4 cloves garlic- finly minced",
+      "1 tablespoon fresh ginger, grated",
+      "1 teaspoon fresh turmeric, grated (or ½ teaspoon ground turmeric )",
+      "1 extra large tomato, finely diced, with juices",
+      "1 tablespoon dried fenugreek leaves (FYI: this is different, and better than fenugreek seeds)",
+      "14-ounce can full fat coconut milk (not lite)",
+      "1 tablespoon lime juice",
+      "1 teaspoon brown sugar",
+      "½ teaspoon salt, more to taste",
+      "¼ teaspoon cayenne, more to taste",
+      "fresh cracked pepper to taste"
+    ],
+    "instructionsOriginal": [
+      "On high heat, bring lentils and fennel seeds to a boil in a small pot with 3 cups water. Cover, turn heat to medium-low, and simmer until tender, 15-25 minutes, depending on their size. Drain well, pat dry.",
+      "On high heat, bring quinoa to a boil in a small pot with 1 cup of water. Cover, turn heat to medium-low, simmer for 15 minutes, until all the water is gone, turn the heat off, and leave covered.",
+      "In a skillet or saute pan, over medium heat, saute garlic and ginger in olive oil, until just golden, stirring often to prevent scorching. Add turmeric ( fresh turmeric root, or ground) sauté 1 more minute. Add diced tomato, and sauté until most of the juices evaporate, about 5-8 minutes. Stir in coconut milk, fenugreek leaves, lime juice, brown sugar, salt, cayenne and pepper. Taste for salt. Bring to a simmer, then turn off the heat until ready to serve.",
+      "Pre-heat oven to 400F. In a food processor, place the cooked quinoa, and half of the drained lentils (see notes) and pulse until the texture of coarse sand—place in a large bowl. Add the remaining lentils, salt, granulated garlic, and chopped cilantro to the bowl and mix well.",
+      "In the same food processor (no need to rinse) add the tofu (blotted well, broken apart) and olive oil. The tofu will bind the mixture and oil will keep them from drying out. Pulse tofu and oil until a smooth creamy paste, scraping down the sides as necessary. Scoop it into the lentil mixture and mix it all well.",
+      "Prepare a parchment-lined baking sheet. With your hands, knead lentil mixture briefly so it’s thoroughly mixed and salt and spices are evenly distributed. With wet hands ( or small cookie scoop) form small ping-pong-sized balls. Spray with a little spray olive oil.",
+      "Place the meatballs on a parchement-lined baking sheet and place in the 400 F oven for 20-25 minutes.",
+      "Warm the sauce gently in the pan and place lentil meatballs in the sauce, and sprinkle with cilantro. Serve immediately."
+    ],
+    "instructionsRewritten": [
+      "On high heat, bring {{1 cup}} lentils and {{1 tsp}} fennel seeds to a boil in a small pot with 3 cups water. Cover, turn heat to medium-low, and simmer until tender, 15-25 minutes, depending on their size. Drain well, pat dry.",
+      "On high heat, bring {{1/2 cup}} quinoa to a boil in a small pot with 1 cup of water. Cover, turn heat to medium-low, simmer for 15 minutes, until all the water is gone, turn the heat off, and leave covered.",
+      "In a skillet or saute pan, over medium heat, saute {{1 tsp}} garlic and ginger in {{1 tablespoon}} {{1-2 tablespoons}} olive oil, until just golden, stirring often to prevent scorching. Add turmeric ( {{1 teaspoon}} {{1 tablespoon}} fresh turmeric root, or ground) sauté 1 more minute. Add diced {{1}} tomato, and sauté until most of the juices evaporate, about 5-8 minutes. Stir in coconut milk, fenugreek leaves, {{1 tablespoon}} lime juice, {{1 teaspoon}} brown sugar, {{1/2 teaspoon}} {{1 tsp}} salt, {{1/4 teaspoon}} cayenne and pepper. Taste for salt. Bring to a simmer, then turn off the heat until ready to serve.",
+      "Pre-heat oven to 400F. In a food processor, place the cooked quinoa, and half of the drained lentils (see notes) and pulse until the texture of coarse sand—place in a large bowl. Add the remaining lentils, salt, granulated garlic, and {{1/3 cup}} chopped cilantro to the bowl and mix well.",
+      "In the same food processor (no need to rinse) add the {{6 oz}} tofu (blotted well, broken apart) and olive oil. The tofu will bind the mixture and oil will keep them from drying out. Pulse tofu and oil until a smooth creamy paste, scraping down the sides as necessary. Scoop it into the lentil mixture and mix it all well.",
+      "Prepare a parchment-lined baking sheet. With your hands, knead lentil mixture briefly so it’s thoroughly mixed and salt and spices are evenly distributed. With wet hands ( or small cookie scoop) form small ping-pong-sized balls. Spray with a little spray olive oil.",
+      "Place the meatballs on a parchement-lined baking sheet and place in the 400 F oven for 20-25 minutes.",
+      "Warm the sauce gently in the pan and place lentil meatballs in the sauce, and sprinkle with cilantro. Serve immediately."
+    ],
+    "rewriteError": null,
+    "tags": [
+      "Vegan",
+      "Indian",
+      "vegan meatballs",
+      "lentil meatballs",
+      "veggie balls",
+      "indian lentil meatballs",
+      "the best vegan meatballs",
+      "the best lentil balls",
+      "vegan meatball recipes",
+      "lentil meatball recipes",
+      "Tofu",
+      "Lentils",
+      "Quinoa"
+    ],
+    "calories": 295,
+    "madeDates": [
+      "2026-09-21"
+    ],
+    "createdAt": "2026-09-21T08:22:17.813Z",
+    "id": "lentil-meatballs-with-indian-coconut-curry-sauce-695084aa"
   },
   {
     "title": "Perfect Guest",
@@ -700,7 +1000,8 @@
     "calories": null,
     "madeDates": [
       "2026-09-18",
-      "2026-09-19"
+      "2026-09-19",
+      "2026-09-21"
     ],
     "createdAt": "2026-09-10T08:05:28.000Z",
     "id": "cardamom-sour-cream-waffles-3fcf9366"

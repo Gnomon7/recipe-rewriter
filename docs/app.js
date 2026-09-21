@@ -8,6 +8,20 @@ const API_BASE = '/api/recipes';
 const IS_STATIC = typeof window !== 'undefined' && window.RECIPE_BOOK_STATIC === true;
 let staticRecipesCache = null;
 
+// Live mode only: reload this page when a recipe is captured elsewhere (the
+// Chrome extension, on whatever tab you're browsing a recipe on) so an
+// already-open book/dashboard/recipe tab shows the new data without you
+// having to switch to it and refresh by hand. The static export has no
+// server to push this from, and doesn't need it -- it's a frozen snapshot.
+if (!IS_STATIC && typeof EventSource !== 'undefined') {
+  try {
+    const events = new EventSource('/api/events');
+    events.onmessage = () => window.location.reload();
+  } catch {
+    // No SSE support -- the page still works, it just won't auto-refresh.
+  }
+}
+
 async function loadStaticRecipes() {
   if (!staticRecipesCache) {
     const res = await fetch('data/recipes.json');
