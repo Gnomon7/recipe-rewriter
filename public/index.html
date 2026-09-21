@@ -10,10 +10,12 @@
 <script>window.RECIPE_BOOK_STATIC = false;</script>
 <header class="site-header">
   <div class="header-actions">
-    <select id="random-meal-type" class="meal-type-select sort-select" aria-label="Filter (and randomize) by meal type">
-      <option value="">Any meal type</option>
-    </select>
-    <button type="button" id="random-btn" class="btn btn-primary btn-small">🎲 Random</button>
+    <div class="random-group" title="Independent of search, tags, and sort below">
+      <select id="random-meal-type" class="meal-type-select" aria-label="Meal type for Random (independent of the filters below)">
+        <option value="">Any meal type</option>
+      </select>
+      <button type="button" id="random-btn" class="btn btn-primary btn-small">🎲 Random</button>
+    </div>
     <a href="dashboard.html" class="btn btn-primary btn-small">📊 Dashboard</a>
     <button type="button" id="refresh-live-btn" class="btn btn-primary btn-small" hidden>🚀 Refresh Live Site</button>
   </div>
@@ -25,34 +27,39 @@
   <section id="dashboard" class="dashboard" hidden>
     <div id="active-filter-banner" class="active-filter-banner" hidden></div>
 
-    <div class="dashboard-controls">
-      <input
-        id="ingredient-search"
-        type="search"
-        class="search-input"
-        placeholder="Search recipes (name, tags, ingredients)…"
-        aria-label="Search recipes by name, tag, or ingredient"
-      />
-      <select id="meal-type-filter" class="meal-type-select sort-select" aria-label="Filter by meal type">
-        <option value="">Any meal type</option>
-      </select>
-      <select id="sort-select" class="sort-select" aria-label="Sort recipes">
-        <option value="newest">Newest first</option>
-        <option value="calories-asc">Calories: low to high</option>
-        <option value="calories-desc">Calories: high to low</option>
-      </select>
-    </div>
+    <div class="book-layout">
+      <aside id="tag-sidebar" class="tag-sidebar" hidden aria-label="Filter by tags">
+        <h2 class="tag-sidebar-title">Search by Tags</h2>
+        <div id="tag-groups"></div>
+      </aside>
 
-    <details id="tag-filter-details" class="tag-filter-details" hidden>
-      <summary class="tag-filter-summary">Search by Tags</summary>
-      <div id="tag-filter" class="tag-filter" role="group" aria-label="Filter by tags (select multiple)"></div>
-    </details>
+      <div class="book-main">
+        <div class="dashboard-controls">
+          <input
+            id="ingredient-search"
+            type="search"
+            class="search-input"
+            placeholder="Search recipes (name, tags, ingredients)…"
+            aria-label="Search recipes by name, tag, or ingredient"
+          />
+          <select id="meal-type-filter" class="meal-type-select sort-select" aria-label="Filter by meal type">
+            <option value="">Any meal type</option>
+          </select>
+          <select id="sort-select" class="sort-select" aria-label="Sort recipes">
+            <option value="newest">Newest first</option>
+            <option value="calories-asc">Calories: low to high</option>
+            <option value="calories-desc">Calories: high to low</option>
+          </select>
+        </div>
+
+        <div id="recipe-grid" class="grid"></div>
+      </div>
+    </div>
   </section>
 
   <p id="empty-state" class="empty-state" hidden>
     No recipes yet. Browse to a recipe online, click the Recipe Book extension icon, and it'll show up here.
   </p>
-  <div id="recipe-grid" class="grid"></div>
 </main>
 <script src="app.js"></script>
 <script src="stats.js"></script>
