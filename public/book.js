@@ -1,5 +1,16 @@
 let allRecipes = [];
 let activeTag = null;
+let searchQuery = '';
+let sortMode = 'newest';
+
+const MEAL_TYPE_TAGS = new Set([
+  'breakfast', 'brunch', 'lunch', 'dinner', 'dessert', 'snack', 'appetizer',
+  'side dish', 'soup', 'salad', 'beverage', 'main course', 'main dish', 'entree',
+]);
+const PROTEIN_TAGS = new Set([
+  'chicken', 'beef', 'pork', 'bacon', 'sausage', 'ham', 'turkey', 'lamb',
+  'shrimp', 'salmon', 'tuna', 'fish', 'tofu', 'eggs',
+]);
 
 // Dedupes tags case-insensitively across all recipes (source sites vary in
 // casing -- "Dinner" vs "DINNER") while keeping one consistent display form.
@@ -18,9 +29,87 @@ function hasTag(recipe, tag) {
   return (recipe.tags || []).some((t) => t.toLowerCase() === tag.toLowerCase());
 }
 
+// Most frequent tag among `recipes` whose lowercased form is in `allowedSet`,
+// merging case variants of the same tag into one count.
+function topTagFrom(recipes, allowedSet) {
+  const counts = new Map();
+  for (const r of recipes) {
+    for (const t of r.tags || []) {
+      const key = t.toLowerCase();
+      if (!allowedSet.has(key)) continue;
+      const entry = counts.get(key) || { label: t, count: 0 };
+      entry.count += 1;
+      counts.set(key, entry);
+    }
+  }
+  let best = null;
+  for (const entry of counts.values()) {
+    if (!best || entry.count > best.count) best = entry;
+  }
+  return best;
+}
+
+function computeStats(recipes) {
+  const calorieList = recipes.map((r) => r.calories).filter((c) => typeof c === 'number');
+  return {
+    total: recipes.length,
+    topMealType: topTagFrom(recipes, MEAL_TYPE_TAGS),
+    topProtein: topTagFrom(recipes, PROTEIN_TAGS),
+    calorieRange: calorieList.length ? { min: Math.min(...calorieList), max: Math.max(...calorieList) } : null,
+  };
+}
+
+function renderStats() {
+  const stats = computeStats(allRecipes);
+  const cards = [{ label: 'Recipes', value: String(stats.total) }];
+  if (stats.topMealType) cards.push({ label: 'Top meal type', value: `${stats.topMealType.label} (${stats.topMealType.count})` });
+  if (stats.topProtein) cards.push({ label: 'Most common protein', value: `${stats.topProtein.label} (${stats.topProtein.count})` });
+  cards.push({
+    label: 'Calorie range',
+    value: stats.calorieRange ? `${stats.calorieRange.min}–${stats.calorieRange.max} cal` : 'No data yet',
+  });
+  document.getElementById('stats-row').innerHTML = cards
+    .map((c) => `
+      <div class="stat-card">
+        <span class="stat-value">${escapeHtml(c.value)}</span>
+        <span class="stat-label">${escapeHtml(c.label)}</span>
+      </div>`)
+    .join('');
+}
+
+function renderRandomMealTypeOptions() {
+  const select = document.getElementById('random-meal-type');
+  const mealTags = collectTags(allRecipes).filter((t) => MEAL_TYPE_TAGS.has(t.toLowerCase()));
+  select.innerHTML = '<option value="">Any meal type</option>'
+    + mealTags.map((t) => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+}
+
+function matchesSearch(recipe, query) {
+  if (!query) return true;
+  const q = query.toLowerCase();
+  return (recipe.ingredients || []).some((i) => i.toLowerCase().includes(q));
+}
+
+function sortRecipes(recipes, mode) {
+  const hasCal = (r) => typeof r.calories === 'number';
+  const arr = recipes.slice();
+  if (mode === 'calories-asc' || mode === 'calories-desc') {
+    const dir = mode === 'calories-asc' ? 1 : -1;
+    arr.sort((a, b) => {
+      if (hasCal(a) && hasCal(b)) return (a.calories - b.calories) * dir;
+      if (hasCal(a)) return -1; // recipes without calorie data sort to the end either way
+      if (hasCal(b)) return 1;
+      return 0;
+    });
+  }
+  // 'newest': the store/export already lists recipes newest-first.
+  return arr;
+}
+
 async function loadRecipes() {
   const grid = document.getElementById('recipe-grid');
   const empty = document.getElementById('empty-state');
+  const dashboard = document.getElementById('dashboard');
   const tagline = document.getElementById('tagline');
   if (IS_STATIC && tagline) {
     tagline.textContent = 'A shared, read-only copy of a recipe book — browse, scale, convert units, and copy shopping lists to Google Keep.';
@@ -28,18 +117,22 @@ async function loadRecipes() {
   try {
     allRecipes = await fetchJson(API_BASE);
     if (!allRecipes.length) {
+      dashboard.hidden = true;
       empty.hidden = false;
       empty.textContent = IS_STATIC
         ? 'No recipes have been shared yet.'
         : "No recipes yet. Browse to a recipe online, click the Recipe Book extension icon, and it'll show up here.";
       grid.innerHTML = '';
-      renderTagFilter();
       return;
     }
     empty.hidden = true;
+    dashboard.hidden = false;
+    renderStats();
+    renderRandomMealTypeOptions();
     renderTagFilter();
     renderGrid();
   } catch (err) {
+    dashboard.hidden = true;
     empty.hidden = true;
     grid.innerHTML = `<p class="error">Could not load recipes: ${escapeHtml(err.message)}</p>`;
   }
@@ -72,10 +165,19 @@ function renderTagFilter() {
 
 function renderGrid() {
   const grid = document.getElementById('recipe-grid');
-  const filtered = activeTag ? allRecipes.filter((r) => hasTag(r, activeTag)) : allRecipes;
-  grid.innerHTML = filtered.length
-    ? filtered.map(cardHtml).join('')
-    : `<p class="empty-state">No recipes tagged "${escapeHtml(activeTag)}".</p>`;
+  let filtered = activeTag ? allRecipes.filter((r) => hasTag(r, activeTag)) : allRecipes.slice();
+  filtered = filtered.filter((r) => matchesSearch(r, searchQuery));
+  filtered = sortRecipes(filtered, sortMode);
+
+  if (!filtered.length) {
+    const bits = [];
+    if (activeTag) bits.push(`tagged "${escapeHtml(activeTag)}"`);
+    if (searchQuery) bits.push(`matching "${escapeHtml(searchQuery)}"`);
+    grid.innerHTML = `<p class="empty-state">No recipes ${bits.length ? bits.join(' and ') : 'found'}.</p>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(cardHtml).join('');
   wireCardEvents(grid);
 }
 
@@ -87,10 +189,11 @@ function cardHtml(recipe) {
   const deleteBtn = IS_STATIC
     ? ''
     : `<button class="card-delete" data-delete-id="${escapeHtml(recipe.id)}" title="Remove recipe" aria-label="Remove recipe">&times;</button>`;
-  const tagsHtml = (recipe.tags || [])
-    .slice(0, 3)
-    .map((t) => `<span class="tag-chip">${escapeHtml(t)}</span>`)
-    .join('');
+
+  const tagChips = (recipe.tags || []).slice(0, 3).map((t) => `<span class="tag-chip">${escapeHtml(t)}</span>`);
+  if (typeof recipe.calories === 'number') tagChips.push(`<span class="tag-chip cal-chip">${recipe.calories} cal</span>`);
+  const madeCount = getMadeDates(recipe).length;
+  if (madeCount > 0) tagChips.push(`<span class="tag-chip made-chip">Made ${madeCount}×</span>`);
 
   return `
     <div class="card" data-id="${escapeHtml(recipe.id)}" tabindex="0" role="link">
@@ -98,7 +201,7 @@ function cardHtml(recipe) {
       <div class="card-image" style="${img ? `background-image:url('${imgAttr}')` : ''}">${img ? '' : '🍽️'}</div>
       <div class="card-body">
         <h3>${escapeHtml(recipe.title)}</h3>
-        ${tagsHtml ? `<div class="tag-row">${tagsHtml}</div>` : ''}
+        ${tagChips.length ? `<div class="tag-row">${tagChips.join('')}</div>` : ''}
         <div class="card-meta">
           ${hostname ? `<span class="card-source">${escapeHtml(hostname)}</span>` : '<span></span>'}
           <span class="card-date">${formatDate(recipe.createdAt)}</span>
@@ -129,5 +232,26 @@ function wireCardEvents(grid) {
     });
   });
 }
+
+document.getElementById('ingredient-search').addEventListener('input', (e) => {
+  searchQuery = e.target.value.trim();
+  renderGrid();
+});
+
+document.getElementById('sort-select').addEventListener('change', (e) => {
+  sortMode = e.target.value;
+  renderGrid();
+});
+
+document.getElementById('random-btn').addEventListener('click', () => {
+  const mealType = document.getElementById('random-meal-type').value;
+  const pool = mealType ? allRecipes.filter((r) => hasTag(r, mealType)) : allRecipes;
+  if (!pool.length) {
+    alert('No recipes match that meal type yet.');
+    return;
+  }
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  window.location.href = `recipe.html?id=${encodeURIComponent(pick.id)}`;
+});
 
 loadRecipes();

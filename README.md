@@ -21,6 +21,12 @@ as a shopping list, a 1x/2x/3x/4x scale control, a US/Metric unit converter
 and automatic tags (category, cuisine, diet, main ingredients) you can
 filter the book by.
 
+The book page is a small dashboard: stats on your collection (recipe count,
+top meal type, most common protein, calorie range when available), search
+by ingredient, sort by calories, and a "🎲 Random" button that picks a
+surprise recipe (optionally narrowed to a meal type). Each recipe also has
+a cooking log — mark it as made and track the dates.
+
 Everything runs locally on your own machine — your recipes are stored as
 plain JSON files on disk, not on any server.
 
@@ -126,9 +132,17 @@ git add docs && git commit -m "Publish recipes" && git push
 own `docs/` folder starts serving.)
 
 The published site is read-only (no capture, no delete — those still need
-your local server) but browsing, scaling, unit conversion, and Copy-to-Keep
-all work, since they don't need a server. Re-run `npm run publish` and push
-again any time you want the shared site to reflect newly-saved recipes.
+your local server) but browsing, scaling, unit conversion, search, the
+dashboard, and Copy-to-Keep all work, since they don't need a server.
+Re-run `npm run publish` and push again any time you want the shared site
+to reflect newly-saved recipes — using Claude Code, `/recipe-publish` does
+this whole flow (publish, show you what changed, confirm, commit, push).
+
+The "mark as made" cooking log works differently in each place: on the live
+app it's the real record, saved to your recipe data. On the published site
+there's no server to write to, so it becomes a private, per-visitor tracker
+stored only in that visitor's own browser — including if you visit your own
+published site, since it's a separate storage from your local app.
 
 **Important**: since this only works with a public repo, anything you
 publish this way is visible to anyone with the link, not just people you

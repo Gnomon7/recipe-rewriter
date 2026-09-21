@@ -67,6 +67,35 @@ function rerender() {
   renderControlButtons();
 }
 
+function formatMadeDate(iso) {
+  try {
+    const [y, m, d] = iso.split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+  } catch {
+    return iso;
+  }
+}
+
+function renderMadeDates() {
+  const dates = getMadeDates(currentRecipe).slice().sort().reverse();
+  const list = document.getElementById('made-dates');
+  const empty = document.getElementById('made-empty');
+  empty.hidden = dates.length > 0;
+  list.innerHTML = dates
+    .map((d) => `
+      <li>
+        <span>${escapeHtml(formatMadeDate(d))}</span>
+        <button type="button" class="made-remove" data-date="${escapeHtml(d)}" title="Remove this date" aria-label="Remove this date">&times;</button>
+      </li>`)
+    .join('');
+  list.querySelectorAll('.made-remove').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      currentRecipe.madeDates = await removeMadeDate(currentRecipe.id, btn.dataset.date);
+      renderMadeDates();
+    });
+  });
+}
+
 async function loadRecipe() {
   const id = getRecipeId();
   const container = document.getElementById('recipe');
@@ -101,6 +130,12 @@ async function loadRecipe() {
     }
 
     rerender();
+    renderMadeDates();
+    document.getElementById('made-static-note').hidden = !IS_STATIC;
+    document.getElementById('mark-made-btn').addEventListener('click', async () => {
+      currentRecipe.madeDates = await addMadeDate(currentRecipe.id);
+      renderMadeDates();
+    });
 
     document.querySelectorAll('#scale-controls .scale-btn').forEach((btn) => {
       btn.addEventListener('click', () => { currentMultiplier = Number(btn.dataset.multiplier); rerender(); });
