@@ -1,13 +1,13 @@
 :root {
-  --cream: #fbf6ee;
+  --cream: #f2f7f1;
   --card: #ffffff;
-  --ink: #3a2e27;
-  --ink-soft: #6b5c50;
-  --terracotta: #c46a3f;
-  --terracotta-dark: #a5502a;
-  --line: #e8dcc8;
+  --ink: #26322a;
+  --ink-soft: #5b6d5e;
+  --accent: #3f8a57;
+  --accent-dark: #2c6b40;
+  --line: #dbe8db;
   --danger: #b3402f;
-  --shadow: 0 6px 18px rgba(58, 46, 39, 0.08);
+  --shadow: 0 6px 18px rgba(30, 41, 33, 0.08);
 
   /* Chart categorical palette -- fixed hue order, validated for CVD
      separation and contrast against --cream (see dataviz skill). Never
@@ -41,7 +41,7 @@ h1, h2, h3 {
   margin: 0;
 }
 
-a { color: var(--terracotta-dark); }
+a { color: var(--accent-dark); }
 
 .site-header {
   position: relative;
@@ -50,7 +50,15 @@ a { color: var(--terracotta-dark); }
 }
 
 .site-header h1 { font-size: 2.25rem; }
-.site-header .tagline { color: var(--ink-soft); margin-top: 0.5rem; }
+.site-header .subline {
+  margin-top: 0.3rem;
+  color: var(--accent-dark);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.site-header .tagline { color: var(--ink-soft); margin-top: 0.4rem; }
 
 .header-actions {
   position: absolute;
@@ -164,8 +172,8 @@ main {
 }
 
 .cal-chip, .made-chip {
-  background: #f6e4d6;
-  color: var(--terracotta-dark);
+  background: #e0f0e2;
+  color: var(--accent-dark);
 }
 
 .grid {
@@ -187,7 +195,7 @@ main {
 
 .card:hover, .card:focus-visible {
   transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(58, 46, 39, 0.14);
+  box-shadow: 0 10px 24px rgba(30, 41, 33, 0.14);
   outline: none;
 }
 
@@ -266,11 +274,11 @@ main {
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
-.tag-pill:hover { border-color: var(--terracotta); color: var(--terracotta-dark); }
+.tag-pill:hover { border-color: var(--accent); color: var(--accent-dark); }
 
 .tag-pill.active {
-  background: var(--terracotta);
-  border-color: var(--terracotta);
+  background: var(--accent);
+  border-color: var(--accent);
   color: #fff;
 }
 
@@ -282,7 +290,7 @@ main {
   height: 28px;
   border: none;
   border-radius: 50%;
-  background: rgba(58, 46, 39, 0.55);
+  background: rgba(30, 41, 33, 0.55);
   color: #fff;
   font-size: 1.1rem;
   line-height: 1;
@@ -299,7 +307,7 @@ main {
   right: 0;
   width: 64px;
   height: 64px;
-  background: rgba(20, 14, 10, 0.72);
+  background: rgba(14, 20, 16, 0.72);
   clip-path: polygon(100% 0, 100% 100%, 0 0);
   display: flex;
   align-items: flex-start;
@@ -410,11 +418,11 @@ main {
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
-.scale-btn:hover { border-color: var(--terracotta); color: var(--terracotta-dark); }
+.scale-btn:hover { border-color: var(--accent); color: var(--accent-dark); }
 
 .scale-btn.active {
-  background: var(--terracotta);
-  border-color: var(--terracotta);
+  background: var(--accent);
+  border-color: var(--accent);
   color: #fff;
 }
 
@@ -446,8 +454,8 @@ main {
 }
 
 .measure {
-  color: var(--terracotta-dark);
-  background: #f6e4d6;
+  color: var(--accent-dark);
+  background: #e0f0e2;
   padding: 0.05rem 0.35rem;
   border-radius: 5px;
   font-weight: 600;
@@ -483,7 +491,7 @@ main {
   transition: transform 0.15s ease;
 }
 .made-history[open] summary::before { transform: rotate(90deg); }
-.made-history summary:hover { color: var(--terracotta-dark); }
+.made-history summary:hover { color: var(--accent-dark); }
 
 .made-note {
   color: var(--ink-soft);
@@ -526,6 +534,8 @@ main {
 
 .made-remove:hover { background: var(--danger); color: #fff; }
 
+.btn[hidden] { display: none; }
+
 .btn {
   display: inline-block;
   border: none;
@@ -541,10 +551,10 @@ main {
 .btn-block { width: 100%; }
 
 .btn-primary {
-  background: var(--terracotta);
+  background: var(--accent);
   color: #fff;
 }
-.btn-primary:hover { background: var(--terracotta-dark); }
+.btn-primary:hover { background: var(--accent-dark); }
 
 .btn-danger {
   background: transparent;
@@ -558,18 +568,18 @@ main {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --cream: #211a15;
-    --card: #2c231d;
-    --ink: #f1e7da;
-    --ink-soft: #b8a798;
-    --line: #4a3c31;
+    --cream: #141b16;
+    --card: #1e2921;
+    --ink: #e6f0e5;
+    --ink-soft: #a3b6a5;
+    --line: #354a37;
     --shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
-    --terracotta: #d98a5e;
-    --terracotta-dark: #eda474;
+    --accent: #5fb377;
+    --accent-dark: #85d69a;
   }
-  .measure { background: #4a3120; color: var(--terracotta-dark); }
+  .measure { background: #1f3a26; color: var(--accent-dark); }
   .warning { background: #3a2c1c; border-color: #5c4527; color: #e3b98a; }
-  .cal-chip, .made-chip { background: #4a3120; color: var(--terracotta-dark); }
+  .cal-chip, .made-chip { background: #1f3a26; color: var(--accent-dark); }
 
   --series-1: #3987e5;
   --series-2: #d95926;
