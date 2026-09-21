@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const config = require('./config');
 const recipesRouter = require('./routes/recipes');
+const publishRouter = require('./routes/publish');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/recipes', recipesRouter);
+app.use('/api/publish', publishRouter);
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.listen(config.port, () => {
