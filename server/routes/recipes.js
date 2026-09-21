@@ -3,6 +3,7 @@ const store = require('../lib/store');
 const { cleanText, cleanList } = require('../lib/normalize');
 const { rewriteInstructions } = require('../lib/rewriter');
 const { deriveIngredientTags, mergeTags } = require('../lib/tags');
+const { broadcast } = require('../lib/events');
 
 const router = express.Router();
 
@@ -64,6 +65,7 @@ router.post('/ingest', async (req, res) => {
       createdAt: new Date().toISOString(),
     });
 
+    broadcast('recipes-changed');
     res.status(201).json(recipe);
   } catch (err) {
     console.error(err);
