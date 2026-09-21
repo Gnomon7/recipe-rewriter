@@ -13,12 +13,25 @@
 </header>
 <main id="recipe" class="recipe-detail">
   <div class="recipe-top">
-    <img id="hero-image" alt="" hidden />
-    <div class="recipe-heading">
-      <h1 id="title"></h1>
-      <div id="tags" class="tag-row"></div>
-      <a id="source-link" class="source-link" target="_blank" rel="noopener" hidden></a>
+    <div class="recipe-top-main">
+      <img id="hero-image" alt="" hidden />
+      <div class="recipe-heading">
+        <h1 id="title"></h1>
+        <div id="tags" class="tag-row"></div>
+        <a id="source-link" class="source-link" target="_blank" rel="noopener" hidden></a>
+      </div>
     </div>
+    <section class="made-panel">
+      <div class="panel-header">
+        <h2>Cooking log</h2>
+        <button id="mark-made-btn" class="btn btn-primary btn-small">Mark as made today</button>
+      </div>
+      <p id="made-static-note" class="made-note" hidden>
+        Tracked locally in your browser only — this doesn't sync anywhere or affect the recipe owner's own log.
+      </p>
+      <p id="made-empty" class="made-note" hidden>Not marked as made yet.</p>
+      <ul id="made-dates" class="made-dates"></ul>
+    </section>
   </div>
   <p id="rewrite-warning" class="warning" hidden></p>
   <div class="recipe-columns">
@@ -46,17 +59,6 @@
       <ol id="instructions"></ol>
     </section>
   </div>
-  <section class="made-panel">
-    <div class="panel-header">
-      <h2>Cooking log</h2>
-      <button id="mark-made-btn" class="btn btn-primary">Mark as made today</button>
-    </div>
-    <p id="made-static-note" class="made-note" hidden>
-      Tracked locally in your browser only — this doesn't sync anywhere or affect the recipe owner's own log.
-    </p>
-    <p id="made-empty" class="made-note" hidden>Not marked as made yet.</p>
-    <ul id="made-dates" class="made-dates"></ul>
-  </section>
   <button id="delete-btn" class="btn btn-danger">Remove recipe</button>
 </main>
 <script src="app.js"></script>
