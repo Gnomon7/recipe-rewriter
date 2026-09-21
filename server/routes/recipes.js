@@ -2,6 +2,7 @@ const express = require('express');
 const store = require('../lib/store');
 const { cleanText, cleanList } = require('../lib/normalize');
 const { rewriteInstructions } = require('../lib/rewriter');
+const { deriveIngredientTags, mergeTags } = require('../lib/tags');
 
 const router = express.Router();
 
@@ -29,6 +30,7 @@ router.post('/ingest', async (req, res) => {
     const instructionsOriginal = cleanList(body.instructions);
     const sourceUrl = typeof body.sourceUrl === 'string' ? body.sourceUrl : '';
     const image = typeof body.image === 'string' ? body.image : '';
+    const sourceTags = cleanList(body.tags);
 
     if (!ingredients.length || !instructionsOriginal.length) {
       return res.status(422).json({
@@ -45,6 +47,8 @@ router.post('/ingest', async (req, res) => {
       rewriteError = err.message;
     }
 
+    const tags = mergeTags(sourceTags, deriveIngredientTags(ingredients));
+
     const recipe = store.saveRecipe({
       title,
       sourceUrl,
@@ -53,6 +57,7 @@ router.post('/ingest', async (req, res) => {
       instructionsOriginal,
       instructionsRewritten,
       rewriteError,
+      tags,
       createdAt: new Date().toISOString(),
     });
 

@@ -14,7 +14,10 @@ becomes:
 > whisk together the **2 cups** flour, **1/3 cup** granulated sugar, **1 Tbsp** baking powder, and **1/2 tsp** salt
 
 It also has a one-click button to get the ingredient list into Google Keep
-as a shopping list.
+as a shopping list, a 1x/2x/3x/4x scale control, a US/Metric unit converter
+(density-aware — a cup of flour and a cup of sugar don't weigh the same),
+and automatic tags (category, cuisine, diet, main ingredients) you can
+filter the book by.
 
 Everything runs locally on your own machine — your recipes are stored as
 plain JSON files on disk, not on any server.
@@ -100,10 +103,34 @@ The server defaults to port 5757. If that's taken on your machine, change
 
 ## Sharing this with friends
 
-This is a personal local app, not a hosted service — each friend clones the
-repo and runs their own local copy (their own `npm start`, their own recipe
-data, their own `.env`/API key if using the Claude engine). Nothing about
-one person's setup is shared with another's.
+There are two ways to share, depending on what you want to share:
+
+**The app itself** — this is a personal local tool, not a hosted service.
+Each friend clones the repo and runs their own local copy (their own
+`npm start`, their own recipe data, their own `.env`/API key if using the
+Claude engine). Nothing about one person's setup is shared with another's.
+
+**Your recipes** — to let people *browse* your saved recipes without
+installing anything, publish a read-only static copy to GitHub Pages:
+
+```bash
+npm run publish
+git add docs && git commit -m "Publish recipes" && git push
+```
+
+Then, once (in your GitHub repo): **Settings → Pages → Build and
+deployment → Deploy from a branch → `main` / `docs`**. Your recipe book will
+be live at `https://<your-username>.github.io/<repo-name>/`.
+
+The published site is read-only (no capture, no delete — those still need
+your local server) but browsing, scaling, unit conversion, and Copy-to-Keep
+all work, since they don't need a server. Re-run `npm run publish` and push
+again any time you want the shared site to reflect newly-saved recipes.
+
+**Important**: since this only works with a public repo, anything you
+publish this way is visible to anyone with the link, not just people you
+send it to — and stays recoverable in git history even after you remove it
+from a later commit. Only publish recipes you're fine with being public.
 
 ## Notes on Google Keep
 
