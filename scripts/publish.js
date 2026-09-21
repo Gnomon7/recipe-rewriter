@@ -46,6 +46,10 @@ function publish() {
     let content = fs.readFileSync(src, 'utf8');
     if (asset.endsWith('.html')) {
       content = content.replace('window.RECIPE_BOOK_STATIC = false;', 'window.RECIPE_BOOK_STATIC = true;');
+      // The "env-local" body class drives the grey/blue admin look + badge
+      // that mark the editable local app -- stripped here so the published
+      // read-only site keeps its own (green) look instead.
+      content = content.replace(' class="env-local"', '');
     }
     fs.writeFileSync(path.join(DOCS_DIR, asset), content);
   }
