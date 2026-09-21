@@ -215,11 +215,28 @@ main {
   white-space: nowrap;
 }
 
+.tag-filter-details {
+  margin-bottom: 1rem;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 0.75rem 1rem;
+}
+
+.tag-filter-summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--ink);
+  user-select: none;
+}
+
+.tag-filter-details[open] .tag-filter-summary { margin-bottom: 0.75rem; }
+
 .tag-filter {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .tag-pill {
