@@ -91,6 +91,27 @@ a { color: var(--accent-dark); }
 .header-actions .btn-small { font-size: 0.85rem; padding: 0.5rem 0.9rem; }
 .header-actions select { padding: 0.5rem 0.6rem; font-size: 0.85rem; }
 
+/* Visually couples the Random button with its own meal-type select, so it
+   reads as one self-contained control -- independent of the search bar,
+   the tag sidebar, the other meal-type filter, and sort. */
+.random-group {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.2rem 0.2rem 0.2rem 0.7rem;
+}
+.random-group select {
+  border: none;
+  background: transparent;
+  padding: 0.3rem 0.2rem;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+.random-group .btn { white-space: nowrap; }
+
 @media (max-width: 640px) {
   .header-actions {
     position: static;
@@ -254,28 +275,66 @@ main {
   white-space: nowrap;
 }
 
-.tag-filter-details {
-  margin-bottom: 1rem;
+/* Book browsing layout: a persistent tag sidebar beside search/sort/grid,
+   instead of a full-width panel that pushes the grid down the page when
+   open. Stacks on narrow screens since there's no room for two columns. */
+.book-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.book-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.tag-sidebar {
+  flex: 0 0 230px;
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
   background: var(--card);
   border-radius: 12px;
   box-shadow: var(--shadow);
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.1rem;
 }
 
-.tag-filter-summary {
+.tag-sidebar-title { font-size: 1rem; margin-bottom: 0.9rem; }
+
+@media (max-width: 760px) {
+  .book-layout { flex-direction: column; }
+  .tag-sidebar { flex: none; width: 100%; position: static; max-height: none; }
+}
+
+.tag-group { margin-bottom: 1rem; }
+.tag-group:last-child { margin-bottom: 0; }
+
+.tag-group summary {
   cursor: pointer;
   font-weight: 700;
-  color: var(--ink);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  list-style: none;
   user-select: none;
 }
-
-.tag-filter-details[open] .tag-filter-summary { margin-bottom: 0.75rem; }
+.tag-group summary::-webkit-details-marker { display: none; }
+.tag-group summary::before {
+  content: '▸';
+  display: inline-block;
+  margin-right: 0.35rem;
+  transition: transform 0.15s ease;
+}
+.tag-group[open] summary::before { transform: rotate(90deg); }
 
 .tag-filter {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin-top: 0.75rem;
+  margin-top: 0.6rem;
 }
 
 .tag-pill {
