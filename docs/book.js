@@ -114,6 +114,7 @@ async function loadRecipes() {
   if (IS_STATIC && tagline) {
     tagline.textContent = 'A shared, read-only copy of a recipe book — browse, scale, convert units, and copy shopping lists to Google Keep.';
   }
+  document.getElementById('refresh-live-btn').hidden = IS_STATIC;
   try {
     allRecipes = await fetchJson(API_BASE);
     if (!allRecipes.length) {
@@ -254,6 +255,23 @@ document.getElementById('random-btn').addEventListener('click', () => {
   }
   const pick = pool[Math.floor(Math.random() * pool.length)];
   window.location.href = `recipe.html?id=${encodeURIComponent(pick.id)}`;
+});
+
+document.getElementById('refresh-live-btn').addEventListener('click', async () => {
+  if (!confirm("Publish your current recipes to the live site now? This repo is public, so they'll be visible to anyone with the link.")) return;
+  const btn = document.getElementById('refresh-live-btn');
+  const original = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Publishing…';
+  try {
+    const result = await fetchJson('/api/publish', { method: 'POST' });
+    alert(result.message);
+  } catch (err) {
+    alert(`Could not publish: ${err.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = original;
+  }
 });
 
 loadRecipes();

@@ -1,32 +1,101 @@
 [
   {
-    "title": "Cilantro Tomato Corn Salad",
-    "sourceUrl": "https://www.allrecipes.com/recipe/70285/cilantro-tomato-corn-salad/",
-    "image": "https://www.allrecipes.com/thmb/tiivAnf5JYRqDYuyR2XhH_Ud77A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/213251-faac1a57cce84748bc2be83f76e7e65a.jpg",
+    "title": "Root Beer Smash Burgers",
+    "sourceUrl": "https://joythebaker.com/2023/06/these-root-beer-smash-burgers-are-your-weekend-burger/",
+    "image": "https://joythebaker.com/wp-content/uploads/2023/06/Root-Beer-BBQ-Burgers-and-Potatoes-JTB-Summer-15-225x225.jpg",
     "ingredients": [
-      "3 ears fresh corn in husks",
-      "0.25 cup butter, melted",
-      "2 roma (plum) tomatoes, chopped",
-      "1 jalapeno pepper, seeded and finely chopped",
-      "0.5 small red onion, finely chopped",
-      "2 cloves garlic, minced",
-      "0.5 bunch fresh cilantro, chopped",
-      "salt and freshly ground black pepper to taste",
-      "1 pinch salt-free lemon-herb seasoning (such as Mrs. Dash)"
+      "2 cups root beer",
+      "1 cup tomato sauce",
+      "1/2 cup lightly packed light brown sugar",
+      "2 tablespoons apple cider vinegar",
+      "2 tablespoons Worcestershire sauce",
+      "1 tablespoon molasses",
+      "1/2 teaspoon garlic powder",
+      "1/2 teaspoon onion powder",
+      "1/2 teaspoon ground ginger",
+      "1/2 teaspoon fresh cracked black pepper",
+      "1 teaspoon kosher salt",
+      "Few dashes of hot sauce, to taste",
+      "1 pound cold ground beef",
+      "3/4 teaspoon kosher salt",
+      "1/2 teaspoon fresh cracked black pepper",
+      "1/2 teaspoon garlic powder",
+      "2 tablespoons root beer barbecue sauce (recipe follows), plus more for brushing",
+      "4 potato hamburger buns",
+      "1 tablespoons butter",
+      "4 slices American cheese",
+      "4 pieces lettuce",
+      "4-8 slices tomato",
+      "mayonnaise"
     ],
     "instructionsOriginal": [
-      "Peel back corn husks, but leave them attached at the bottom. Remove the silks, and fold husks back up over the corn. Place on a dinner plate, and cook in the microwave for 5 minutes on High power, turning corn once half way through. Cool until cool enough to touch, then slice corn kernels from the cob and place them in a serving bowl.",
-      "Stir butter into the corn along with the tomatoes, jalapeno, red onion, garlic and cilantro. Season with salt, pepper, and seasoning blend. Mix well, taste, and adjust seasoning if necessary. Some people like the salad warm, but I prefer to chill it a little before serving."
+      "To make the barbecue sauce, combine all ingredients in a medium, heavy bottom saucepan over medium heat. Bring to a simmer and lower heat. All mixture to simmer for 15 to 20 minutes, reducing until desired thickness. Sauce will thicken some as it cools. Taste and add additional seasoning to your taste. Allow the sauce to cool before placing in a jar. Refrigerate in an airtight container for up to two weeks.",
+      "To make the burgers, break ground beef up loosely in a large bowl. Sprinkle salt, pepper and garlic powder over beef. Drizzle sauce over beef. Loosely combine. No need to knead the the beef to a mush, just lightly combine. Divide the beef into four 4-ounce balls, keeping the balls cohesive but loose (which will make them easier to smash in the pan).",
+      "Heat a large cast iron skillet over medium heat. Add the butter and allow to melt. Once melted, split open two buns and face inside down to brown, 30-45 seconds. Remove from the pan, add the remaining butter and two remaining buns and toast to golden.",
+      "Increase the heat to medium-high, wait for the pan to get hotter and add one ground beef portion. Use a large, flat metal spatula to press down firmly on the meat making it as flat as possible. The burger won’t be perfectly round but those imperfect edges will caramelize really nicely. Cook for about 2 1/2 minutes or until browned and caramelized. Flip the burger, brush with barbecue sauce, top with cheese and allow to cook for 1 minute. Remove to a plate and repeat the process with the other three burgers.",
+      "To assemble, spread the toasted bun with mayonnaise. Place cheeseburger patty on the bottom bun followed by lettuce and tomato. Enjoy warm."
     ],
     "instructionsRewritten": [
-      "Peel back corn {{3}} husks, but leave them attached at the bottom. Remove the silks, and fold husks back up over the corn. Place on a dinner plate, and cook in the microwave for 5 minutes on High power, turning corn once half way through. Cool until cool enough to touch, then slice corn kernels from the cob and place them in a serving bowl.",
-      "Stir {{0.25 cup}} butter into the corn along with the {{2}} tomatoes, {{1}} jalapeno, {{0.5 small}} red onion, {{2 cloves}} garlic and {{0.5 bunch}} cilantro. Season with salt, pepper, and {{1 pinch}} seasoning blend. Mix well, taste, and adjust seasoning if necessary. Some people like the salad warm, but I prefer to chill it a little before serving."
+      "To make the barbecue {{2 tablespoons}} {{2 tablespoons}} {{1 cup}} sauce, combine all ingredients in a medium, heavy bottom saucepan over medium heat. Bring to a simmer and lower heat. All mixture to simmer for 15 to 20 minutes, reducing until desired thickness. Sauce will thicken some as it cools. Taste and add additional seasoning to your taste. Allow the sauce to cool before placing in a jar. Refrigerate in an airtight container for up to two weeks.",
+      "To make the burgers, break {{1/2 teaspoon}} ground {{1 pound}} beef up loosely in a large bowl. Sprinkle {{1 teaspoon}} {{3/4 teaspoon}} salt, {{1/2 teaspoon}} pepper and {{1/2 teaspoon}} garlic {{1/2 teaspoon}} powder over beef. Drizzle sauce over beef. Loosely combine. No need to knead the the beef to a mush, just {{1/2 cup}} lightly combine. Divide the beef into four 4-ounce balls, keeping the balls cohesive but loose (which will make them easier to smash in the pan).",
+      "Heat a large cast iron skillet over medium heat. Add the {{1 tablespoons}} butter and allow to melt. Once melted, split open two {{4}} buns and face inside down to brown, 30-45 seconds. Remove from the pan, add the remaining butter and two remaining buns and toast to golden.",
+      "Increase the heat to medium-high, wait for the pan to get hotter and add one ground beef portion. Use a large, flat metal spatula to press down firmly on the meat making it as flat as possible. The burger won’t be perfectly round but those imperfect edges will caramelize really nicely. Cook for about 2 1/2 minutes or until browned and caramelized. Flip the burger, brush with barbecue sauce, top with {{4 slices}} cheese and allow to cook for 1 minute. Remove to a plate and repeat the process with the other three burgers.",
+      "To assemble, spread the toasted bun with mayonnaise. Place cheeseburger patty on the bottom bun followed by {{4}} lettuce and {{4-8 slices}} tomato. Enjoy warm."
     ],
     "rewriteError": null,
-    "createdAt": "2026-09-21T04:00:37.376Z",
-    "id": "cilantro-tomato-corn-salad-0e2e583a",
-    "tags": [],
-    "madeDates": []
+    "tags": [
+      "holiday",
+      "smash burgers",
+      "dinner",
+      "4th of july",
+      "Beef",
+      "Potato",
+      "Cheese"
+    ],
+    "calories": null,
+    "madeDates": [],
+    "createdAt": "2026-09-21T06:11:30.620Z",
+    "id": "root-beer-smash-burgers-08df42e7"
+  },
+  {
+    "title": "Cucumber Tomato Salad",
+    "sourceUrl": "https://www.allrecipes.com/recipe/237984/marinated-cucumber-onion-and-tomato-salad/",
+    "image": "https://www.allrecipes.com/thmb/tpfs_TonT1nLyAeEnuaHxmwqWxs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/237984-Marinated-Cucunber-Onion-and-Tomato-Salad-DDMFS-3X4-11906-383c6af35f2a47d4a78996736e9bd5e4.jpg",
+    "ingredients": [
+      "1 cup water",
+      "0.5 cup distilled white vinegar",
+      "0.25 cup vegetable oil",
+      "0.25 cup sugar",
+      "1 teaspoon salt, or to taste",
+      "1 teaspoon freshly ground black pepper, or to taste",
+      "3 cucumbers, peeled and sliced 1/4-inch thick",
+      "3 tomatoes, cut into wedges",
+      "1 onion, sliced and separated into rings"
+    ],
+    "instructionsOriginal": [
+      "Gather all ingredients.",
+      "Whisk water, vinegar, oil, sugar, salt, and black pepper together in a large bowl until smooth.",
+      "Add cucumbers, tomatoes, and onion; stir to coat.",
+      "Cover the bowl with plastic wrap; refrigerate for at least 2 hours for best flavor results.",
+      "Enjoy!"
+    ],
+    "instructionsRewritten": [
+      "Gather all ingredients.",
+      "Whisk {{1 cup}} water, {{0.5 cup}} vinegar, {{0.25 cup}} oil, {{0.25 cup}} sugar, {{1 teaspoon}} salt, and black {{1 teaspoon}} pepper together in a large bowl until smooth.",
+      "Add {{3}} cucumbers, {{3}} tomatoes, and {{1}} onion; stir to coat.",
+      "Cover the bowl with plastic wrap; refrigerate for at least 2 hours for best flavor results.",
+      "Enjoy!"
+    ],
+    "rewriteError": null,
+    "tags": [
+      "Salad",
+      "Greek",
+      "publisher-tested"
+    ],
+    "calories": 156,
+    "madeDates": [],
+    "createdAt": "2026-09-21T06:10:35.007Z",
+    "id": "cucumber-tomato-salad-9d7252ea"
   },
   {
     "title": "Cajun Seafood Pasta",
@@ -65,13 +134,18 @@
       "Serve hot and enjoy!"
     ],
     "rewriteError": null,
-    "createdAt": "2026-09-21T03:58:35.984Z",
-    "id": "cajun-seafood-pasta-d7847749",
     "tags": [
+      "Dinner",
+      "Cajun",
+      "publisher-tested",
       "Shrimp",
       "Pasta",
       "Cheese"
-    ]
+    ],
+    "calories": 695,
+    "madeDates": [],
+    "createdAt": "2026-09-21T06:10:09.551Z",
+    "id": "cajun-seafood-pasta-1cb91afb"
   },
   {
     "title": "World's Best Lasagna",
@@ -124,15 +198,63 @@
       "Let the lasagna rest at room temperature for about 15 minutes before cutting; this helps it set and firm up."
     ],
     "rewriteError": null,
-    "createdAt": "2026-09-21T03:58:26.321Z",
-    "id": "world-s-best-lasagna-77498746",
     "tags": [
+      "Dinner",
+      "Italian Inspired",
+      "Italian",
+      "publisher-tested",
       "Beef",
       "Sausage",
       "Eggs",
       "Noodles",
       "Cheese"
-    ]
+    ],
+    "calories": 448,
+    "madeDates": [],
+    "createdAt": "2026-09-21T06:08:46.655Z",
+    "id": "world-s-best-lasagna-23ddd6b5"
+  },
+  {
+    "title": "Roasted Red Pepper and Feta Puff Pastry Bites",
+    "sourceUrl": "https://www.allrecipes.com/roasted-red-pepper-and-feta-puff-pastry-bites-recipe-12029364",
+    "image": "https://www.allrecipes.com/thmb/cYoaOpUQ1Jzgi0NhB1-cSm4WWOo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/12029364-roasted-red-pepper-and-feta-puff-pastry-bites-recipe-PICS-Beauty-4x3-d8dbc6e367fb4c30b87eb0c6fac23d60.jpg",
+    "ingredients": [
+      "1 sheet puff pastry, thawed, such as Pepperidge Farm™",
+      "1 1/2 tablespoons Dijon mustard, or as needed",
+      "1/2 cup roasted red peppers, well drained, minced",
+      "1/3 cup Kalamata olives, pitted and minced",
+      "24 (1/2 inch) feta cheese cubes, preferably sheep’s milk",
+      "2 teaspoons dried basil or oregano, or to taste",
+      "1 teaspoon granulated garlic",
+      "drizzle of olive oil"
+    ],
+    "instructionsOriginal": [
+      "Preheat the oven to 400 degrees F (200 degrees C), and spray a 24-cup mini muffin tin with cooking spray.",
+      "Unroll puff pastry sheet on a lightly floured work surface, smoothing out the creases. Roll into a rectangle about 10x14 inches. Using a pizza cutter or knife, cut the sheet lengthwise into 4 even strips and then crosswise into 6 even strips for a total of 24 squares. Gently press each square into the prepared muffin cups with the pastry slightly protruding.",
+      "Spoon about 1/8 teaspoon Dijon into each muffin cup. Evenly add roasted red peppers, olives, and the cubes in the center. Sprinkle with granulated garlic, basil or oregano, and a drizzle of olive oil.",
+      "Bake in the preheated oven until pastry is puffed and golden brown, about 12 to 15 minutes.",
+      "Refrigerate leftovers in an airtight container, or place in a resealable plastic bag and freeze for up to 3 months."
+    ],
+    "instructionsRewritten": [
+      "Preheat the oven to 400 degrees F (200 degrees C), and spray a 24-cup mini muffin tin with cooking spray.",
+      "Unroll puff pastry {{1}} sheet on a lightly floured work surface, smoothing out the creases. Roll into a rectangle about 10x14 inches. Using a pizza cutter or knife, cut the sheet lengthwise into 4 even strips and then crosswise into 6 even strips for a total of 24 squares. Gently press each square into the prepared muffin cups with the pastry slightly protruding.",
+      "Spoon about 1/8 teaspoon {{1 1/2 tablespoons}} Dijon into each muffin cup. Evenly add {{1/2 cup}} roasted red peppers, {{1/3 cup}} olives, and the {{24 1/2 inch}} cubes in the center. Sprinkle with {{1 teaspoon}} granulated garlic, basil or {{2 teaspoons}} oregano, and a drizzle of olive oil.",
+      "Bake in the preheated oven until pastry is puffed and golden brown, about 12 to 15 minutes.",
+      "Refrigerate leftovers in an airtight container, or place in a resealable plastic bag and freeze for up to 3 months."
+    ],
+    "rewriteError": null,
+    "tags": [
+      "Appetizer",
+      "Dinner",
+      "American",
+      "Cheese"
+    ],
+    "calories": 81,
+    "madeDates": [
+      "2026-09-21"
+    ],
+    "createdAt": "2026-09-21T06:07:47.914Z",
+    "id": "roasted-red-pepper-and-feta-puff-pastry-bites-ccb5612e"
   },
   {
     "title": "Mom's Chicken Pot Pie",
@@ -171,58 +293,9 @@
     "tags": [
       "Chicken",
       "Potato"
-    ]
-  },
-  {
-    "title": "Root Beer Smash Burgers",
-    "sourceUrl": "https://joythebaker.com/2023/06/these-root-beer-smash-burgers-are-your-weekend-burger/",
-    "image": "https://joythebaker.com/wp-content/uploads/2023/06/Root-Beer-BBQ-Burgers-and-Potatoes-JTB-Summer-15-225x225.jpg",
-    "ingredients": [
-      "2 cups root beer",
-      "1 cup tomato sauce",
-      "1/2 cup lightly packed light brown sugar",
-      "2 tablespoons apple cider vinegar",
-      "2 tablespoons Worcestershire sauce",
-      "1 tablespoon molasses",
-      "1/2 teaspoon garlic powder",
-      "1/2 teaspoon onion powder",
-      "1/2 teaspoon ground ginger",
-      "1/2 teaspoon fresh cracked black pepper",
-      "1 teaspoon kosher salt",
-      "Few dashes of hot sauce, to taste",
-      "1 pound cold ground beef",
-      "3/4 teaspoon kosher salt",
-      "1/2 teaspoon fresh cracked black pepper",
-      "1/2 teaspoon garlic powder",
-      "2 tablespoons root beer barbecue sauce (recipe follows), plus more for brushing",
-      "4 potato hamburger buns",
-      "1 tablespoons butter",
-      "4 slices American cheese",
-      "4 pieces lettuce",
-      "4-8 slices tomato",
-      "mayonnaise"
     ],
-    "instructionsOriginal": [
-      "To make the barbecue sauce, combine all ingredients in a medium, heavy bottom saucepan over medium heat. Bring to a simmer and lower heat. All mixture to simmer for 15 to 20 minutes, reducing until desired thickness. Sauce will thicken some as it cools. Taste and add additional seasoning to your taste. Allow the sauce to cool before placing in a jar. Refrigerate in an airtight container for up to two weeks.",
-      "To make the burgers, break ground beef up loosely in a large bowl. Sprinkle salt, pepper and garlic powder over beef. Drizzle sauce over beef. Loosely combine. No need to knead the the beef to a mush, just lightly combine. Divide the beef into four 4-ounce balls, keeping the balls cohesive but loose (which will make them easier to smash in the pan).",
-      "Heat a large cast iron skillet over medium heat. Add the butter and allow to melt. Once melted, split open two buns and face inside down to brown, 30-45 seconds. Remove from the pan, add the remaining butter and two remaining buns and toast to golden.",
-      "Increase the heat to medium-high, wait for the pan to get hotter and add one ground beef portion. Use a large, flat metal spatula to press down firmly on the meat making it as flat as possible. The burger won’t be perfectly round but those imperfect edges will caramelize really nicely. Cook for about 2 1/2 minutes or until browned and caramelized. Flip the burger, brush with barbecue sauce, top with cheese and allow to cook for 1 minute. Remove to a plate and repeat the process with the other three burgers.",
-      "To assemble, spread the toasted bun with mayonnaise. Place cheeseburger patty on the bottom bun followed by lettuce and tomato. Enjoy warm."
-    ],
-    "instructionsRewritten": [
-      "To make the barbecue {{2 tablespoons}} {{2 tablespoons}} {{1 cup}} sauce, combine all ingredients in a medium, heavy bottom saucepan over medium heat. Bring to a simmer and lower heat. All mixture to simmer for 15 to 20 minutes, reducing until desired thickness. Sauce will thicken some as it cools. Taste and add additional seasoning to your taste. Allow the sauce to cool before placing in a jar. Refrigerate in an airtight container for up to two weeks.",
-      "To make the burgers, break {{1/2 teaspoon}} ground {{1 pound}} beef up loosely in a large bowl. Sprinkle {{1 teaspoon}} {{3/4 teaspoon}} salt, {{1/2 teaspoon}} pepper and {{1/2 teaspoon}} garlic {{1/2 teaspoon}} powder over beef. Drizzle sauce over beef. Loosely combine. No need to knead the the beef to a mush, just {{1/2 cup}} lightly combine. Divide the beef into four 4-ounce balls, keeping the balls cohesive but loose (which will make them easier to smash in the pan).",
-      "Heat a large cast iron skillet over medium heat. Add the {{1 tablespoons}} butter and allow to melt. Once melted, split open two {{4}} buns and face inside down to brown, 30-45 seconds. Remove from the pan, add the remaining butter and two remaining buns and toast to golden.",
-      "Increase the heat to medium-high, wait for the pan to get hotter and add one ground beef portion. Use a large, flat metal spatula to press down firmly on the meat making it as flat as possible. The burger won’t be perfectly round but those imperfect edges will caramelize really nicely. Cook for about 2 1/2 minutes or until browned and caramelized. Flip the burger, brush with barbecue sauce, top with {{4 slices}} cheese and allow to cook for 1 minute. Remove to a plate and repeat the process with the other three burgers.",
-      "To assemble, spread the toasted bun with mayonnaise. Place cheeseburger patty on the bottom bun followed by {{4}} lettuce and {{4-8 slices}} tomato. Enjoy warm."
-    ],
-    "rewriteError": null,
-    "createdAt": "2026-09-21T03:55:47.208Z",
-    "id": "root-beer-smash-burgers-16cd54e1",
-    "tags": [
-      "Beef",
-      "Potato",
-      "Cheese"
+    "madeDates": [
+      "2026-09-21"
     ]
   },
   {
@@ -249,40 +322,6 @@
     "rewriteError": null,
     "createdAt": "2026-09-21T03:54:37.615Z",
     "id": "peach-and-tomato-caprese-salad-27d33887",
-    "tags": []
-  },
-  {
-    "title": "Cucumber Tomato Salad",
-    "sourceUrl": "https://www.allrecipes.com/recipe/237984/marinated-cucumber-onion-and-tomato-salad/",
-    "image": "https://www.allrecipes.com/thmb/tpfs_TonT1nLyAeEnuaHxmwqWxs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/237984-Marinated-Cucunber-Onion-and-Tomato-Salad-DDMFS-3X4-11906-383c6af35f2a47d4a78996736e9bd5e4.jpg",
-    "ingredients": [
-      "1 cup water",
-      "0.5 cup distilled white vinegar",
-      "0.25 cup vegetable oil",
-      "0.25 cup sugar",
-      "1 teaspoon salt, or to taste",
-      "1 teaspoon freshly ground black pepper, or to taste",
-      "3 cucumbers, peeled and sliced 1/4-inch thick",
-      "3 tomatoes, cut into wedges",
-      "1 onion, sliced and separated into rings"
-    ],
-    "instructionsOriginal": [
-      "Gather all ingredients.",
-      "Whisk water, vinegar, oil, sugar, salt, and black pepper together in a large bowl until smooth.",
-      "Add cucumbers, tomatoes, and onion; stir to coat.",
-      "Cover the bowl with plastic wrap; refrigerate for at least 2 hours for best flavor results.",
-      "Enjoy!"
-    ],
-    "instructionsRewritten": [
-      "Gather all ingredients.",
-      "Whisk {{1 cup}} water, {{0.5 cup}} vinegar, {{0.25 cup}} oil, {{0.25 cup}} sugar, {{1 teaspoon}} salt, and black {{1 teaspoon}} pepper together in a large bowl until smooth.",
-      "Add {{3}} cucumbers, {{3}} tomatoes, and {{1}} onion; stir to coat.",
-      "Cover the bowl with plastic wrap; refrigerate for at least 2 hours for best flavor results.",
-      "Enjoy!"
-    ],
-    "rewriteError": null,
-    "createdAt": "2026-09-21T03:53:32.736Z",
-    "id": "cucumber-tomato-salad-89bb0e18",
     "tags": []
   },
   {
