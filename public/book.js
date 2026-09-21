@@ -194,10 +194,12 @@ function cardHtml(recipe) {
   if (typeof recipe.calories === 'number') tagChips.push(`<span class="tag-chip cal-chip">${recipe.calories} cal</span>`);
   const madeCount = getMadeDates(recipe).length;
   if (madeCount > 0) tagChips.push(`<span class="tag-chip made-chip">Made ${madeCount}×</span>`);
+  const madeBadge = madeCount > 0 ? `<span class="made-badge" title="You've made this">✓</span>` : '';
 
   return `
     <div class="card" data-id="${escapeHtml(recipe.id)}" tabindex="0" role="link">
       ${deleteBtn}
+      ${madeBadge}
       <div class="card-image" style="${img ? `background-image:url('${imgAttr}')` : ''}">${img ? '' : '🍽️'}</div>
       <div class="card-body">
         <h3>${escapeHtml(recipe.title)}</h3>
