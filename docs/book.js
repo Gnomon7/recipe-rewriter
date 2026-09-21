@@ -2,18 +2,20 @@ let allRecipes = [];
 let selectedTags = new Set(); // multi-select: a recipe must have every one of these
 let searchQuery = '';
 let sortMode = 'newest';
-let monthFilter = null; // set via a dashboard deep link (?month=YYYY-MM); cleared by the active-filter banner
+let dateFilter = null; // set via a dashboard deep link (?date=YYYY-MM-DD -- day added); cleared by the active-filter banner
+let madeOnFilter = null; // set via a dashboard deep link (?madeOn=YYYY-MM-DD -- day cooked); cleared by the active-filter banner
 
-// Reads ?tag=, ?mealType= and ?month= from the URL (set by the dashboard's
-// clickable charts) and applies them as if the user had picked them by hand.
-// Called once, before the first render, so the resulting filter state is
-// visible in the tag pills / meal-type select / active-filter banner rather
-// than silently narrowing the grid.
+// Reads ?tag=, ?mealType=, ?date= and ?madeOn= from the URL (set by the
+// dashboard's clickable charts) and applies them as if the user had picked
+// them by hand. Called once, before the first render, so the resulting
+// filter state is visible in the tag pills / meal-type select /
+// active-filter banner rather than silently narrowing the grid.
 function applyUrlFilters() {
   const params = new URLSearchParams(window.location.search);
   const tag = params.get('tag');
   const mealType = params.get('mealType');
-  const month = params.get('month');
+  const date = params.get('date');
+  const madeOn = params.get('madeOn');
   if (tag) selectedTags.add(tag);
   if (mealType) {
     for (const t of Array.from(selectedTags)) {
@@ -21,7 +23,8 @@ function applyUrlFilters() {
     }
     selectedTags.add(mealType);
   }
-  if (month) monthFilter = month;
+  if (date) dateFilter = date;
+  if (madeOn) madeOnFilter = madeOn;
 }
 
 // There are two (kept in sync) meal-type dropdowns -- one in the header,
@@ -84,30 +87,37 @@ function getFilteredRecipes() {
   const byTags = selectedTags.size
     ? allRecipes.filter((r) => hasAllTags(r, Array.from(selectedTags)))
     : allRecipes.slice();
-  const byMonth = monthFilter
-    ? byTags.filter((r) => typeof r.createdAt === 'string' && r.createdAt.slice(0, 7) === monthFilter)
+  const byDate = dateFilter
+    ? byTags.filter((r) => typeof r.createdAt === 'string' && localDateKey(r.createdAt) === dateFilter)
     : byTags;
-  return byMonth.filter((r) => matchesSearch(r, searchQuery));
+  const byMadeOn = madeOnFilter
+    ? byDate.filter((r) => getMadeDates(r).includes(madeOnFilter))
+    : byDate;
+  return byMadeOn.filter((r) => matchesSearch(r, searchQuery));
 }
 
-function monthFilterLabel(monthKey) {
-  const [y, m] = monthKey.split('-').map(Number);
-  return new Date(y, m - 1, 1).toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+function dayFilterLabel(dateKey) {
+  const d = new Date(`${dateKey}T00:00:00`);
+  return d.toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
 function renderActiveFilterBanner() {
   const banner = document.getElementById('active-filter-banner');
   if (!banner) return;
-  if (!monthFilter) {
+  if (!dateFilter && !madeOnFilter) {
     banner.hidden = true;
     return;
   }
   banner.hidden = false;
+  const bits = [];
+  if (dateFilter) bits.push(`added on <strong>${escapeHtml(dayFilterLabel(dateFilter))}</strong>`);
+  if (madeOnFilter) bits.push(`made on <strong>${escapeHtml(dayFilterLabel(madeOnFilter))}</strong>`);
   banner.innerHTML = `
-    <span>Showing recipes added in <strong>${escapeHtml(monthFilterLabel(monthFilter))}</strong></span>
-    <button type="button" id="clear-month-filter" class="btn btn-primary btn-small">Clear</button>`;
-  document.getElementById('clear-month-filter').addEventListener('click', () => {
-    monthFilter = null;
+    <span>Showing recipes ${bits.join(' and ')}</span>
+    <button type="button" id="clear-date-filter" class="btn btn-primary btn-small">Clear</button>`;
+  document.getElementById('clear-date-filter').addEventListener('click', () => {
+    dateFilter = null;
+    madeOnFilter = null;
     history.replaceState(null, '', window.location.pathname);
     renderActiveFilterBanner();
     renderGrid();

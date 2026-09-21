@@ -92,55 +92,83 @@ function renderStatsRow(recipes) {
     .join('');
 }
 
-// --- Chart 1: recipes added over time (vertical bars, single series) ------
+// --- Day-bucketed bar chart (shared by "added over time" and "cooking
+// frequency" -- both are a single series of counts per calendar day, just
+// counting a different thing) ------------------------------------------
 
-function renderTimeChart(recipes) {
-  const wrap = document.getElementById('time-chart');
-  const months = recipesByMonth(recipes);
-  if (!months.length) {
-    wrap.innerHTML = '<p class="chart-empty">No dated recipes yet.</p>';
+function renderDayBarChart(elementId, days, { ariaLabel, emptyText, unitLabel, onActivate }) {
+  const wrap = document.getElementById(elementId);
+  if (!days.length) {
+    wrap.innerHTML = `<p class="chart-empty">${emptyText}</p>`;
     return;
   }
 
-  const barW = 26;
-  const gap = 16;
+  const dense = days.length > 40;
+  const barW = dense ? 10 : days.length > 20 ? 16 : 26;
+  const gap = dense ? 4 : days.length > 20 ? 8 : 16;
   const chartH = 200;
   const padTop = 16;
   const padBottom = 34;
   const padLeft = 8;
-  const width = padLeft + months.length * (barW + gap);
+  const width = padLeft + days.length * (barW + gap);
   const height = padTop + chartH + padBottom;
-  const max = Math.max(1, ...months.map((m) => m.count));
+  const max = Math.max(1, ...days.map((d) => d.count));
+  const labelEvery = Math.max(1, Math.ceil(days.length / 12)); // keep axis labels from colliding
 
-  const svg = svgEl('svg', { viewBox: `0 0 ${width} ${height}`, width, height, role: 'img', 'aria-label': 'Recipes added per month' });
+  const svg = svgEl('svg', { viewBox: `0 0 ${width} ${height}`, width, height, role: 'img', 'aria-label': ariaLabel });
   svg.appendChild(svgEl('line', {
     x1: padLeft, y1: padTop + chartH, x2: width, y2: padTop + chartH,
     stroke: 'var(--chart-grid)', 'stroke-width': 1,
   }));
 
-  months.forEach((m, i) => {
+  days.forEach((d, i) => {
     const x = padLeft + i * (barW + gap);
-    const h = m.count ? Math.max(4, (m.count / max) * chartH) : 0;
+    const h = d.count ? Math.max(4, (d.count / max) * chartH) : 0;
     const y = padTop + chartH - h;
 
     if (h > 0) {
       const bar = svgEl('path', { d: roundedTopRectPath(x, y, barW, h, 4), fill: 'var(--terracotta)' });
       wireMark(bar, {
-        tooltip: `${formatMonthLabel(m.month)} — ${m.count} recipe${m.count === 1 ? '' : 's'}`,
-        onActivate: () => navigateTo({ month: m.month }),
+        tooltip: `${formatDayLabel(d.date)} — ${d.count} ${unitLabel(d.count)}`,
+        onActivate: () => onActivate(d.date),
       });
       svg.appendChild(bar);
     }
 
-    const label = svgEl('text', {
-      x: x + barW / 2, y: padTop + chartH + 16, 'text-anchor': 'middle', class: 'chart-axis-label',
-    });
-    label.textContent = formatMonthLabel(m.month);
-    svg.appendChild(label);
+    if (i % labelEvery === 0 || i === days.length - 1) {
+      const label = svgEl('text', {
+        x: x + barW / 2, y: padTop + chartH + 16, 'text-anchor': 'middle', class: 'chart-axis-label',
+      });
+      label.textContent = formatDayLabel(d.date);
+      svg.appendChild(label);
+    }
   });
 
   wrap.innerHTML = '';
   wrap.appendChild(svg);
+}
+
+// --- Chart 1: recipes added over time ---------------------------------
+
+function renderTimeChart(recipes) {
+  renderDayBarChart('time-chart', recipesByDay(recipes), {
+    ariaLabel: 'Recipes added per day',
+    emptyText: 'No dated recipes yet.',
+    unitLabel: (n) => `recipe${n === 1 ? '' : 's'} added`,
+    onActivate: (date) => navigateTo({ date }),
+  });
+}
+
+// --- Chart 1b: cooking frequency, from "Mark as made" history ---------
+
+function renderCookingChart(recipes) {
+  const madeDates = recipes.flatMap((r) => getMadeDates(r));
+  renderDayBarChart('cooking-chart', datesToDayBuckets(madeDates), {
+    ariaLabel: 'Recipes cooked per day',
+    emptyText: 'Nothing marked as made yet — use "Mark as made" on a recipe to start tracking.',
+    unitLabel: (n) => `recipe${n === 1 ? '' : 's'} cooked`,
+    onActivate: (date) => navigateTo({ madeOn: date }),
+  });
 }
 
 // --- Chart 2: meal-type distribution (horizontal bars, single series) -----
@@ -316,6 +344,7 @@ async function loadDashboard() {
     charts.hidden = false;
     renderStatsRow(recipes);
     renderTimeChart(recipes);
+    renderCookingChart(recipes);
     renderMealTypeChart(recipes);
     renderProteinChart(recipes);
   } catch (err) {
