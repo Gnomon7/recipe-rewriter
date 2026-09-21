@@ -9,7 +9,13 @@
 <body>
 <script>window.RECIPE_BOOK_STATIC = true;</script>
 <header class="site-header">
-  <button type="button" id="refresh-live-btn" class="btn btn-primary refresh-live-btn" hidden>🚀 Refresh Live Site</button>
+  <div class="header-actions">
+    <select id="random-meal-type" class="sort-select" aria-label="Filter (and randomize) by meal type">
+      <option value="">Any meal type</option>
+    </select>
+    <button type="button" id="random-btn" class="btn btn-primary btn-small">🎲 Random</button>
+    <button type="button" id="refresh-live-btn" class="btn btn-primary btn-small" hidden>🚀 Refresh Live Site</button>
+  </div>
   <h1>My Recipe Book</h1>
   <p id="tagline" class="tagline">Recipes captured from around the web, cleaned up and ready to cook from.</p>
 </header>
@@ -22,20 +28,14 @@
         id="ingredient-search"
         type="search"
         class="search-input"
-        placeholder="Search by ingredient (e.g. garlic, chicken)…"
-        aria-label="Search recipes by ingredient"
+        placeholder="Search recipes (name, tags, ingredients)…"
+        aria-label="Search recipes by name, tag, or ingredient"
       />
       <select id="sort-select" class="sort-select" aria-label="Sort recipes">
         <option value="newest">Newest first</option>
         <option value="calories-asc">Calories: low to high</option>
         <option value="calories-desc">Calories: high to low</option>
       </select>
-      <div class="random-picker">
-        <select id="random-meal-type" aria-label="Meal type for random pick">
-          <option value="">Any meal type</option>
-        </select>
-        <button type="button" id="random-btn" class="btn btn-primary">🎲 Random</button>
-      </div>
     </div>
 
     <div id="tag-filter" class="tag-filter" role="group" aria-label="Filter by tag" hidden></div>

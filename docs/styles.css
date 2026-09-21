@@ -37,15 +37,31 @@ a { color: var(--terracotta-dark); }
 .site-header h1 { font-size: 2.25rem; }
 .site-header .tagline { color: var(--ink-soft); margin-top: 0.5rem; }
 
-.refresh-live-btn {
+.header-actions {
   position: absolute;
   top: 1rem;
   right: 1.5rem;
-  font-size: 0.85rem;
-  padding: 0.5rem 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: calc(100% - 3rem);
 }
 
-.refresh-live-btn:disabled {
+.header-actions .btn-small { font-size: 0.85rem; padding: 0.5rem 0.9rem; }
+.header-actions select { padding: 0.5rem 0.6rem; font-size: 0.85rem; }
+
+@media (max-width: 640px) {
+  .header-actions {
+    position: static;
+    justify-content: center;
+    max-width: none;
+    margin-bottom: 1rem;
+  }
+}
+
+#refresh-live-btn:disabled {
   opacity: 0.6;
   cursor: default;
 }
@@ -123,19 +139,13 @@ main {
   font-size: 0.95rem;
 }
 
-.sort-select, .random-picker select {
+.sort-select {
   padding: 0.55rem 0.7rem;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--card);
   color: var(--ink);
   font-size: 0.9rem;
-}
-
-.random-picker {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
 }
 
 .cal-chip, .made-chip {
