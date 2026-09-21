@@ -69,35 +69,44 @@ function computeStats(recipes) {
   };
 }
 
-// Recipes added per calendar month, chronological, zero-filled for any month
-// in range with no additions (so a bar chart shows real gaps, not a
-// misleadingly compressed timeline).
-function recipesByMonth(recipes) {
-  const withDates = recipes
-    .map((r) => r.createdAt)
-    .filter((d) => typeof d === 'string' && d.length >= 7)
-    .map((d) => d.slice(0, 7))
-    .sort();
-  if (!withDates.length) return [];
-
-  const counts = new Map();
-  for (const month of withDates) counts.set(month, (counts.get(month) || 0) + 1);
-
-  const [startY, startM] = withDates[0].split('-').map(Number);
-  const [endY, endM] = withDates[withDates.length - 1].split('-').map(Number);
-  const months = [];
-  let y = startY;
-  let m = startM;
-  while (y < endY || (y === endY && m <= endM)) {
-    const key = `${y}-${String(m).padStart(2, '0')}`;
-    months.push({ month: key, count: counts.get(key) || 0 });
-    m += 1;
-    if (m > 12) { m = 1; y += 1; }
-  }
-  return months;
+// createdAt is stored as a UTC ISO timestamp, but recipe cards display it in
+// the viewer's local timezone (via toLocaleDateString) -- bucketing/filtering
+// must use that same local calendar day, or a recipe saved just after UTC
+// midnight would land in a different day's bar than the one its own card
+// shows.
+function localDateKey(iso) {
+  const d = new Date(iso);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-function formatMonthLabel(monthKey) {
-  const [y, m] = monthKey.split('-').map(Number);
-  return new Date(y, m - 1, 1).toLocaleDateString(undefined, { month: 'short', year: '2-digit' });
+// Zero-fills a list of YYYY-MM-DD strings into one entry per calendar day
+// from the earliest to the latest, so a bar chart shows real gaps (and real
+// peaks) instead of a misleadingly compressed timeline. Shared by both the
+// "recipes added" and "cooking frequency" charts -- each just supplies a
+// different list of dates.
+function datesToDayBuckets(dateStrings) {
+  const valid = dateStrings.filter((d) => typeof d === 'string' && d.length >= 10).map((d) => d.slice(0, 10)).sort();
+  if (!valid.length) return [];
+
+  const counts = new Map();
+  for (const day of valid) counts.set(day, (counts.get(day) || 0) + 1);
+
+  const start = new Date(`${valid[0]}T00:00:00`);
+  const end = new Date(`${valid[valid.length - 1]}T00:00:00`);
+  const days = [];
+  for (let d = start; d <= end; d.setDate(d.getDate() + 1)) {
+    const key = d.toISOString().slice(0, 10);
+    days.push({ date: key, count: counts.get(key) || 0 });
+  }
+  return days;
+}
+
+// Recipes added per calendar day (local time -- see localDateKey above).
+function recipesByDay(recipes) {
+  return datesToDayBuckets(recipes.map((r) => (r.createdAt ? localDateKey(r.createdAt) : null)).filter(Boolean));
+}
+
+function formatDayLabel(dateKey) {
+  const d = new Date(`${dateKey}T00:00:00`);
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 }
