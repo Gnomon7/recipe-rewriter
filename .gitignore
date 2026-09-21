@@ -3,4 +3,5 @@ node_modules/
 server/data/recipes/*.json
 .DS_Store
 *.log
-.claude/
+.claude/*
+!.claude/commands/

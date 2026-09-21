@@ -59,6 +59,76 @@ main {
   font-size: 1.05rem;
 }
 
+.dashboard { margin-top: 1rem; }
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.stat-card {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.stat-value {
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.dashboard-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1 1 240px;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.sort-select, .random-picker select {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.random-picker {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.cal-chip, .made-chip {
+  background: #f6e4d6;
+  color: var(--terracotta-dark);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
@@ -299,6 +369,56 @@ main {
   white-space: nowrap;
 }
 
+.made-panel {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow);
+  margin-top: 2rem;
+}
+
+.made-panel .panel-header h2 { font-size: 1.2rem; }
+.made-panel .btn { white-space: nowrap; }
+
+.made-note {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  margin: 0 0 0.75rem;
+}
+
+.made-dates {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.made-dates li {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.3rem 0.4rem 0.3rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+.made-remove {
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.1rem 0.3rem;
+  border-radius: 50%;
+}
+
+.made-remove:hover { background: var(--danger); color: #fff; }
+
 .btn {
   border: none;
   border-radius: 10px;
@@ -340,4 +460,5 @@ main {
   }
   .measure { background: #4a3120; color: var(--terracotta-dark); }
   .warning { background: #3a2c1c; border-color: #5c4527; color: #e3b98a; }
+  .cal-chip, .made-chip { background: #4a3120; color: var(--terracotta-dark); }
 }

@@ -41,6 +41,71 @@ async function fetchJson(url, options) {
   return res.json();
 }
 
+// --- "Made it" tracking ---------------------------------------------------
+// On the live app this is the real record, stored server-side per recipe
+// (recipe.madeDates). The static/shared site has no server to write to, so
+// there it's a separate, private, per-visitor tracker in that browser's
+// localStorage -- completely disconnected from the recipe owner's own data.
+// A static export never reads localStorage back in, so this never leaks
+// between visitors or back to the owner.
+
+const STATIC_MADE_KEY = 'recipe-book-made-dates';
+
+function readStaticMadeStore() {
+  try {
+    return JSON.parse(localStorage.getItem(STATIC_MADE_KEY) || '{}');
+  } catch {
+    return {};
+  }
+}
+
+function writeStaticMadeStore(store) {
+  try {
+    localStorage.setItem(STATIC_MADE_KEY, JSON.stringify(store));
+  } catch {
+    // Private browsing, storage disabled, etc. -- just won't persist.
+  }
+}
+
+// Synchronous: static mode reads localStorage directly, live mode reads a
+// field already present on the already-fetched recipe -- neither needs a
+// network round-trip.
+function getMadeDates(recipe) {
+  if (IS_STATIC) return (readStaticMadeStore()[recipe.id] || []).slice().sort();
+  return recipe.madeDates || [];
+}
+
+async function addMadeDate(recipeId, date) {
+  const day = date || new Date().toISOString().slice(0, 10);
+  if (IS_STATIC) {
+    const store = readStaticMadeStore();
+    const dates = new Set(store[recipeId] || []);
+    dates.add(day);
+    store[recipeId] = Array.from(dates).sort();
+    writeStaticMadeStore(store);
+    return store[recipeId];
+  }
+  const recipe = await fetchJson(`${API_BASE}/${encodeURIComponent(recipeId)}/made`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ date: day }),
+  });
+  return recipe.madeDates || [];
+}
+
+async function removeMadeDate(recipeId, date) {
+  if (IS_STATIC) {
+    const store = readStaticMadeStore();
+    store[recipeId] = (store[recipeId] || []).filter((d) => d !== date);
+    writeStaticMadeStore(store);
+    return store[recipeId];
+  }
+  const recipe = await fetchJson(`${API_BASE}/${encodeURIComponent(recipeId)}/made/${encodeURIComponent(date)}`, {
+    method: 'DELETE',
+  });
+  return recipe.madeDates || [];
+}
+
 function escapeHtml(str) {
   return String(str ?? '')
     .replace(/&/g, '&amp;')

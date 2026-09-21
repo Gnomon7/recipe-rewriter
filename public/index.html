@@ -13,7 +13,33 @@
   <p id="tagline" class="tagline">Recipes captured from around the web, cleaned up and ready to cook from.</p>
 </header>
 <main>
-  <div id="tag-filter" class="tag-filter" role="group" aria-label="Filter by tag" hidden></div>
+  <section id="dashboard" class="dashboard" hidden>
+    <div id="stats-row" class="stats-row"></div>
+
+    <div class="dashboard-controls">
+      <input
+        id="ingredient-search"
+        type="search"
+        class="search-input"
+        placeholder="Search by ingredient (e.g. garlic, chicken)…"
+        aria-label="Search recipes by ingredient"
+      />
+      <select id="sort-select" class="sort-select" aria-label="Sort recipes">
+        <option value="newest">Newest first</option>
+        <option value="calories-asc">Calories: low to high</option>
+        <option value="calories-desc">Calories: high to low</option>
+      </select>
+      <div class="random-picker">
+        <select id="random-meal-type" aria-label="Meal type for random pick">
+          <option value="">Any meal type</option>
+        </select>
+        <button type="button" id="random-btn" class="btn btn-primary">🎲 Random</button>
+      </div>
+    </div>
+
+    <div id="tag-filter" class="tag-filter" role="group" aria-label="Filter by tag" hidden></div>
+  </section>
+
   <p id="empty-state" class="empty-state" hidden>
     No recipes yet. Browse to a recipe online, click the Recipe Book extension icon, and it'll show up here.
   </p>

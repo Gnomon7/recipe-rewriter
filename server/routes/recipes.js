@@ -31,6 +31,7 @@ router.post('/ingest', async (req, res) => {
     const sourceUrl = typeof body.sourceUrl === 'string' ? body.sourceUrl : '';
     const image = typeof body.image === 'string' ? body.image : '';
     const sourceTags = cleanList(body.tags);
+    const calories = Number.isFinite(body.calories) ? Math.round(body.calories) : null;
 
     if (!ingredients.length || !instructionsOriginal.length) {
       return res.status(422).json({
@@ -58,6 +59,8 @@ router.post('/ingest', async (req, res) => {
       instructionsRewritten,
       rewriteError,
       tags,
+      calories,
+      madeDates: [],
       createdAt: new Date().toISOString(),
     });
 
@@ -66,6 +69,31 @@ router.post('/ingest', async (req, res) => {
     console.error(err);
     res.status(500).json({ error: 'Failed to save recipe.' });
   }
+});
+
+// Records a date this recipe was cooked. Body: { date? } (defaults to today,
+// ISO yyyy-mm-dd). Static/read-only sites can't reach this endpoint at all
+// (no server) -- see public/app.js's localStorage-backed equivalent there.
+router.post('/:id/made', (req, res) => {
+  const recipe = store.getRecipe(req.params.id);
+  if (!recipe) return res.status(404).json({ error: 'Recipe not found' });
+
+  const date = typeof req.body?.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(req.body.date)
+    ? req.body.date
+    : new Date().toISOString().slice(0, 10);
+
+  const madeDates = Array.from(new Set([...(recipe.madeDates || []), date])).sort();
+  const updated = store.saveRecipe({ ...recipe, madeDates });
+  res.json(updated);
+});
+
+router.delete('/:id/made/:date', (req, res) => {
+  const recipe = store.getRecipe(req.params.id);
+  if (!recipe) return res.status(404).json({ error: 'Recipe not found' });
+
+  const madeDates = (recipe.madeDates || []).filter((d) => d !== req.params.date);
+  const updated = store.saveRecipe({ ...recipe, madeDates });
+  res.json(updated);
 });
 
 module.exports = router;

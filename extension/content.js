@@ -77,6 +77,16 @@
     return Array.from(new Set(tags.map((t) => t.trim()).filter(Boolean)));
   }
 
+  // schema.org's nutrition.calories is free text ("270 calories", "270kcal",
+  // sometimes a range) -- pull the first number out for sorting/filtering,
+  // and keep null when there's nothing to parse rather than guessing.
+  function caloriesFrom(recipe) {
+    const value = recipe.nutrition && recipe.nutrition.calories;
+    if (!value) return null;
+    const match = String(value).match(/(\d+(?:\.\d+)?)/);
+    return match ? Math.round(parseFloat(match[1])) : null;
+  }
+
   function fromJsonLd() {
     const scripts = Array.from(document.querySelectorAll('script[type="application/ld+json"]'));
     for (const script of scripts) {
@@ -96,6 +106,7 @@
             ingredients: recipe.recipeIngredient || recipe.ingredients || [],
             instructions: flattenInstructions(recipe.recipeInstructions),
             tags: tagsFrom(recipe),
+            calories: caloriesFrom(recipe),
           };
         }
       }
@@ -108,12 +119,14 @@
     const instructionEls = document.querySelectorAll('[itemprop="recipeInstructions"]');
     if (!ingredientEls.length || !instructionEls.length) return null;
     const tagEls = document.querySelectorAll('[itemprop="recipeCategory"], [itemprop="recipeCuisine"], [itemprop="keywords"]');
+    const caloriesEl = document.querySelector('[itemprop="calories"]');
     return {
       title: document.querySelector('[itemprop="name"]')?.textContent?.trim() || document.title,
       image: document.querySelector('[itemprop="image"]')?.src || '',
       ingredients: Array.from(ingredientEls).map((el) => el.textContent.trim()).filter(Boolean),
       instructions: Array.from(instructionEls).map((el) => el.textContent.trim()).filter(Boolean),
       tags: Array.from(new Set(Array.from(tagEls).flatMap((el) => toStringArray(el.textContent)))),
+      calories: caloriesFrom({ nutrition: { calories: caloriesEl?.textContent } }),
     };
   }
 
@@ -124,6 +137,7 @@
       ingredients: [],
       instructions: [],
       tags: [],
+      calories: null,
     };
   }
 
