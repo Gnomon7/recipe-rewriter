@@ -1,5 +1,7 @@
 # My Recipe Book
 
+**Live (read-only):** [gnomon7.github.io/recipe-scraper](https://gnomon7.github.io/recipe-scraper/)
+
 A local recipe book: click a button in Chrome on any recipe page and it gets
 cleaned up, saved, and rewritten so the instructions have ingredient
 measurements inlined right where you need them — no more bouncing between
@@ -111,16 +113,19 @@ Each friend clones the repo and runs their own local copy (their own
 Claude engine). Nothing about one person's setup is shared with another's.
 
 **Your recipes** — to let people *browse* your saved recipes without
-installing anything, publish a read-only static copy to GitHub Pages:
+installing anything, publish a read-only static copy to GitHub Pages. This
+repo already has Pages enabled (**Settings → Pages → Deploy from a branch
+→ `main` / `docs`**), live at
+[gnomon7.github.io/recipe-scraper](https://gnomon7.github.io/recipe-scraper/) —
+updating it is just:
 
 ```bash
 npm run publish
 git add docs && git commit -m "Publish recipes" && git push
 ```
 
-Then, once (in your GitHub repo): **Settings → Pages → Build and
-deployment → Deploy from a branch → `main` / `docs`**. Your recipe book will
-be live at `https://<your-username>.github.io/<repo-name>/`.
+(A fresh clone/fork would need to redo that one-time Settings step before its
+own `docs/` folder starts serving.)
 
 The published site is read-only (no capture, no delete — those still need
 your local server) but browsing, scaling, unit conversion, and Copy-to-Keep
