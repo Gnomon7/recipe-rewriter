@@ -13,25 +13,24 @@
 </header>
 <main id="recipe" class="recipe-detail">
   <div class="recipe-top">
-    <div class="recipe-top-main">
+    <div class="recipe-media-row">
       <img id="hero-image" alt="" hidden />
-      <div class="recipe-heading">
-        <h1 id="title"></h1>
-        <div id="tags" class="tag-row"></div>
-        <a id="source-link" class="source-link" target="_blank" rel="noopener" hidden></a>
+      <div class="made-panel">
+        <button id="mark-made-btn" class="btn btn-primary btn-small">Mark as made today</button>
+        <details id="made-history" class="made-history" hidden>
+          <summary id="made-history-summary">Cooking History</summary>
+          <p id="made-static-note" class="made-note" hidden>
+            Tracked locally in your browser for you only
+          </p>
+          <ul id="made-dates" class="made-dates"></ul>
+        </details>
       </div>
     </div>
-    <section class="made-panel">
-      <div class="panel-header">
-        <h2>Cooking log</h2>
-        <button id="mark-made-btn" class="btn btn-primary btn-small">Mark as made today</button>
-      </div>
-      <p id="made-static-note" class="made-note" hidden>
-        Tracked locally in your browser for you only
-      </p>
-      <p id="made-empty" class="made-note" hidden>Not marked as made yet.</p>
-      <ul id="made-dates" class="made-dates"></ul>
-    </section>
+    <div class="recipe-heading">
+      <h1 id="title"></h1>
+      <div id="tags" class="tag-row"></div>
+      <a id="source-link" class="source-link" target="_blank" rel="noopener" hidden></a>
+    </div>
   </div>
   <p id="rewrite-warning" class="warning" hidden></p>
   <div class="recipe-columns">
