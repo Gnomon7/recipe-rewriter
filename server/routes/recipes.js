@@ -49,7 +49,7 @@ router.post('/ingest', async (req, res) => {
       rewriteError = err.message;
     }
 
-    const tags = mergeTags(sourceTags, deriveIngredientTags(ingredients));
+    const tags = mergeTags([sourceTags, deriveIngredientTags(ingredients)], title);
 
     const recipe = store.saveRecipe({
       title,
