@@ -242,7 +242,7 @@ function renderTagFilter() {
       : 'Search by Tags';
   }
   const clearBtn = document.getElementById('clear-tags-btn');
-  if (clearBtn) clearBtn.hidden = !selectedTags.size;
+  if (clearBtn) clearBtn.disabled = !selectedTags.size;
 
   const groups = new Map(TAG_GROUP_ORDER.map((label) => [label, []]));
   for (const t of tags) {
