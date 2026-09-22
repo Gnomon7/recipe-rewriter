@@ -316,7 +316,8 @@
     ],
     "rewriteError": null,
     "tags": [
-      "american"
+      "american",
+      "Beverage"
     ],
     "calories": null,
     "madeDates": [
@@ -504,7 +505,9 @@
       "EXPRESS lemon zest twist over the cocktail and use as garnish."
     ],
     "rewriteError": null,
-    "tags": [],
+    "tags": [
+      "Beverage"
+    ],
     "calories": 152,
     "madeDates": [
       "2026-09-21"
