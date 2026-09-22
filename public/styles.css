@@ -320,6 +320,12 @@ main {
   white-space: nowrap;
 }
 .clear-tags-btn:hover { text-decoration: underline; }
+.clear-tags-btn:disabled {
+  color: var(--ink-soft);
+  opacity: 0.55;
+  cursor: default;
+}
+.clear-tags-btn:disabled:hover { text-decoration: none; }
 
 @media (max-width: 760px) {
   .book-layout { flex-direction: column; }
