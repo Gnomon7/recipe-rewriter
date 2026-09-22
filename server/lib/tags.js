@@ -98,6 +98,10 @@ const TAG_ALIASES = new Map([
   ['main-dish', 'Main Course'],
   ['main dish', 'Main Course'],
   ['desserts', 'Dessert'],
+  ['drink', 'Beverage'],
+  ['drinks', 'Beverage'],
+  ['cocktail', 'Beverage'],
+  ['cocktails', 'Beverage'],
 ]);
 
 function canonicalizeTag(tag) {
