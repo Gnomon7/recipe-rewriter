@@ -62,6 +62,14 @@ function syncMealTypeSelects() {
   select.value = match ? match.value : '';
 }
 
+// Empties the multi-select tag set entirely (the sidebar's "Clear all").
+function clearAllTags() {
+  selectedTags.clear();
+  renderTagFilter();
+  syncMealTypeSelects();
+  renderGrid();
+}
+
 // Toggles one tag's membership in the multi-select set (used by the "Search
 // by Tags" pills) without disturbing any other selected tags.
 function toggleTag(tag) {
@@ -233,6 +241,8 @@ function renderTagFilter() {
       ? `Search by Tags (${selectedTags.size} selected)`
       : 'Search by Tags';
   }
+  const clearBtn = document.getElementById('clear-tags-btn');
+  if (clearBtn) clearBtn.hidden = !selectedTags.size;
 
   const groups = new Map(TAG_GROUP_ORDER.map((label) => [label, []]));
   for (const t of tags) {
@@ -246,6 +256,7 @@ function renderTagFilter() {
     .filter((label) => groups.get(label).length)
     .map((label) => {
       const list = groups.get(label);
+      const hasActive = list.some((t) => selectedKeys.has(t.toLowerCase()));
       const pills = list
         .map((t) => {
           const isActive = selectedKeys.has(t.toLowerCase());
@@ -253,7 +264,7 @@ function renderTagFilter() {
         })
         .join('');
       return `
-        <details class="tag-group" open>
+        <details class="tag-group"${hasActive ? ' open' : ''}>
           <summary>${escapeHtml(label)} (${list.length})</summary>
           <div class="tag-filter" role="group" aria-label="Filter by ${escapeHtml(label)} tags">${pills}</div>
         </details>`;
@@ -349,6 +360,8 @@ document.getElementById('sort-select').addEventListener('change', (e) => {
 });
 
 document.getElementById('meal-type-filter').addEventListener('change', (e) => setMealTypeTag(e.target.value || null));
+
+document.getElementById('clear-tags-btn').addEventListener('click', clearAllTags);
 
 // Random is deliberately self-contained: its own meal-type select, its own
 // pool of allRecipes -- never selectedTags, searchQuery, dateFilter,
