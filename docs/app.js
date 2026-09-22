@@ -8,25 +8,15 @@ const API_BASE = '/api/recipes';
 const IS_STATIC = typeof window !== 'undefined' && window.RECIPE_BOOK_STATIC === true;
 let staticRecipesCache = null;
 
-// Live mode only: refresh this page when a recipe is captured elsewhere (the
+// Live mode only: reload this page when a recipe is captured elsewhere (the
 // Chrome extension, on whatever tab you're browsing a recipe on) so an
 // already-open book/dashboard/recipe tab shows the new data without you
 // having to switch to it and refresh by hand. The static export has no
 // server to push this from, and doesn't need it -- it's a frozen snapshot.
-//
-// A page can opt into a soft refresh by setting window.onRecipesChanged to
-// its own re-fetch-and-render function (book.js/dashboard.js both do) --
-// that re-renders in place, keeping scroll position and filter state intact
-// instead of flashing through a full navigation on every single ingest,
-// delete, or "mark as made" anywhere else. A page that doesn't set one
-// (recipe.html) falls back to the original hard reload.
 if (!IS_STATIC && typeof EventSource !== 'undefined') {
   try {
     const events = new EventSource('/api/events');
-    events.onmessage = () => {
-      if (typeof window.onRecipesChanged === 'function') window.onRecipesChanged();
-      else window.location.reload();
-    };
+    events.onmessage = () => window.location.reload();
   } catch {
     // No SSE support -- the page still works, it just won't auto-refresh.
   }

@@ -410,10 +410,4 @@ async function loadDashboard() {
   }
 }
 
-// Lets app.js's SSE listener refresh this page in place instead of a full
-// reload -- see the comment there. Rebuilding all four charts in place is
-// still some work, but far less jarring than a hard navigation every time
-// a recipe is captured, deleted, or marked made anywhere else.
-window.onRecipesChanged = loadDashboard;
-
 loadDashboard();
