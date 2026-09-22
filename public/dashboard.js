@@ -220,6 +220,61 @@ function renderMealTypeChart(recipes) {
   wrap.appendChild(svg);
 }
 
+// --- Chart 2b: most-used tags overall (horizontal bars, single series) ----
+// A word cloud was the original ask, but size-only encoding makes exact
+// ranking and comparison hard to read (and to click) -- this reuses the
+// meal-type chart's proven bar layout across the whole tag taxonomy instead,
+// capped to the top N so it stays legible as the book grows.
+
+const TOP_TAGS_LIMIT = 12;
+
+function renderTopTagsChart(recipes) {
+  const wrap = document.getElementById('top-tags-chart');
+  const counts = countTagsFrom(recipes, ALL_TAGS).slice(0, TOP_TAGS_LIMIT);
+  if (!counts.length) {
+    wrap.innerHTML = '<p class="chart-empty">No tags yet.</p>';
+    return;
+  }
+
+  const rowH = 26;
+  const gap = 8;
+  const labelW = 120;
+  const valueW = 40;
+  const barMaxW = 320;
+  const width = labelW + barMaxW + valueW;
+  const height = counts.length * (rowH + gap);
+  const max = Math.max(1, ...counts.map((c) => c.count));
+
+  const svg = svgEl('svg', { viewBox: `0 0 ${width} ${height}`, width, height, role: 'img', 'aria-label': 'Most-used tags' });
+
+  counts.forEach((c, i) => {
+    const y = i * (rowH + gap);
+    const w = Math.max(6, (c.count / max) * barMaxW);
+
+    const label = svgEl('text', {
+      x: labelW - 10, y: y + rowH / 2 + 4, 'text-anchor': 'end', class: 'chart-axis-label',
+    });
+    label.textContent = c.label;
+    svg.appendChild(label);
+
+    const bar = svgEl('path', { d: roundedRightRectPath(labelW, y, w, rowH, 4), fill: 'var(--accent)' });
+    wireMark(bar, {
+      tooltip: `${c.label} — ${c.count} recipe${c.count === 1 ? '' : 's'}`,
+      onActivate: () => navigateTo({ tag: c.label }),
+    });
+    svg.appendChild(bar);
+
+    const value = svgEl('text', {
+      x: labelW + w + 8, y: y + rowH / 2 + 4, class: 'chart-data-label',
+    });
+    value.textContent = c.count;
+    svg.appendChild(value);
+  });
+
+  wrap.innerHTML = '';
+  wrap.appendChild(svg);
+}
+
 // --- Chart 3: protein sources (donut pie, categorical palette) ------------
 
 function polarPoint(cx, cy, r, angle) {
@@ -346,6 +401,7 @@ async function loadDashboard() {
     renderTimeChart(recipes);
     renderCookingChart(recipes);
     renderMealTypeChart(recipes);
+    renderTopTagsChart(recipes);
     renderProteinChart(recipes);
   } catch (err) {
     empty.hidden = false;

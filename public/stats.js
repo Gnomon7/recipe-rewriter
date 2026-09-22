@@ -41,6 +41,11 @@ const CUISINE_TAGS = new Set([
   'persian', 'israeli',
 ]);
 
+// Every tag the server's allowlist accepts, across all three categories --
+// used for the dashboard's "most-used tags" chart, which ranks across the
+// whole taxonomy rather than one category at a time.
+const ALL_TAGS = new Set([...MEAL_TYPE_TAGS, ...INGREDIENT_TAGS, ...CUISINE_TAGS]);
+
 // Dedupes tags case-insensitively across all recipes (source sites vary in
 // casing -- "Dinner" vs "DINNER") while keeping one consistent display form.
 function collectTags(recipes) {
