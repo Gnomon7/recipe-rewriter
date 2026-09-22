@@ -4,6 +4,7 @@ let searchQuery = '';
 let sortMode = 'newest';
 let dateFilter = null; // set via a dashboard deep link (?date=YYYY-MM-DD -- day added); cleared by the active-filter banner
 let madeOnFilter = null; // set via a dashboard deep link (?madeOn=YYYY-MM-DD -- day cooked); cleared by the active-filter banner
+let madeStatusFilter = ''; // '' | 'yes' | 'no' -- the "Already made" search dropdown
 // The Random button's own meal type, deliberately kept out of every filter
 // above -- Random is a standalone "surprise me" control, not a view onto
 // whatever the search/tags/sort controls currently show.
@@ -110,7 +111,10 @@ function getFilteredRecipes() {
   const byMadeOn = madeOnFilter
     ? byDate.filter((r) => getMadeDates(r).includes(madeOnFilter))
     : byDate;
-  return byMadeOn.filter((r) => matchesSearch(r, searchQuery));
+  const byMadeStatus = madeStatusFilter
+    ? byMadeOn.filter((r) => (getMadeDates(r).length > 0) === (madeStatusFilter === 'yes'))
+    : byMadeOn;
+  return byMadeStatus.filter((r) => matchesSearch(r, searchQuery));
 }
 
 function dayFilterLabel(dateKey) {
@@ -287,6 +291,7 @@ function renderGrid() {
       bits.push(`tagged ${list}`);
     }
     if (searchQuery) bits.push(`matching "${escapeHtml(searchQuery)}"`);
+    if (madeStatusFilter) bits.push(madeStatusFilter === 'yes' ? "you've already made" : "you haven't made yet");
     grid.innerHTML = `<p class="empty-state">No recipes ${bits.length ? bits.join(' and ') : 'found'}.</p>`;
     return;
   }
@@ -360,6 +365,11 @@ document.getElementById('sort-select').addEventListener('change', (e) => {
 });
 
 document.getElementById('meal-type-filter').addEventListener('change', (e) => setMealTypeTag(e.target.value || null));
+
+document.getElementById('made-filter').addEventListener('change', (e) => {
+  madeStatusFilter = e.target.value;
+  renderGrid();
+});
 
 document.getElementById('clear-tags-btn').addEventListener('click', clearAllTags);
 
