@@ -1,5 +1,48 @@
 [
   {
+    "title": "Ground Beef Tacos",
+    "sourceUrl": "https://feelgoodfoodie.net/recipe/ground-beef-tacos-napa-cabbage-guacamole/#wprm-recipe-container-5870",
+    "image": "https://feelgoodfoodie.net/wp-content/uploads/2024/04/Ground-Beef-Tacos-TIMG.jpg",
+    "ingredients": [
+      "1 tablespoon olive oil",
+      "1 pound lean ground beef",
+      "2 teaspoons chili powder",
+      "2 teaspoons cumin",
+      "½ teaspoon oregano",
+      "½ teaspoon garlic powder",
+      "½ teaspoon salt",
+      "½ teaspoon black pepper",
+      "2 tablespoons tomato paste",
+      "½ cup water",
+      "8 Corn or flour tortillas",
+      "Lettuce (finely chopped)",
+      "Shredded Mexican cheese blend or cheddar cheese",
+      "Tomatoes (chopped)",
+      "Red onions (chopped)"
+    ],
+    "instructionsOriginal": [
+      "Heat the olive oil in skillet over medium high heat. Add the ground beef and cook until browned, about 5-7 minutes. Drain any fat.",
+      "Add the chili powder, cumin, dried oregano, garlic powder, salt, pepper, tomato paste and water. Stir to combine and continue cooking over medium-low heat until the sauce has thickened, about 3-5 minutes",
+      "Serve warm over tortillas with lettuce, tomatoes, cheese and red onions, or your other desired toppings."
+    ],
+    "instructionsRewritten": [
+      "Heat the {{1 tablespoon}} olive oil in skillet over medium high heat. Add the ground {{1 pound}} beef and cook until browned, about 5-7 minutes. Drain any fat.",
+      "Add the {{2 teaspoons}} chili powder, {{2 teaspoons}} cumin, dried {{1/2 teaspoon}} oregano, {{1/2 teaspoon}} garlic powder, {{1/2 teaspoon}} salt, {{1/2 teaspoon}} pepper, {{2 tablespoons}} tomato paste and {{1/2 cup}} water. Stir to combine and continue cooking over medium-low heat until the sauce has thickened, about 3-5 minutes",
+      "Serve warm over {{8}} tortillas with lettuce, tomatoes, cheese and red onions, or your other desired toppings."
+    ],
+    "rewriteError": null,
+    "tags": [
+      "Main Course",
+      "Mexican",
+      "Beef",
+      "Cheese"
+    ],
+    "calories": 404,
+    "madeDates": [],
+    "createdAt": "2026-09-22T01:36:19.357Z",
+    "id": "ground-beef-tacos-890fd029"
+  },
+  {
     "title": "Instant Pot Lentil Soup",
     "sourceUrl": "https://www.wellplated.com/instant-pot-lentil-soup/#wprm-recipe-container-33058",
     "image": "https://www.wellplated.com/wp-content/uploads/2018/02/Instant-Pot-Lentil-Soup-Recipe.jpg",
