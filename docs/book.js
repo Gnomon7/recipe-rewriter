@@ -407,4 +407,10 @@ document.getElementById('refresh-live-btn').addEventListener('click', async () =
   }
 });
 
+// Lets app.js's SSE listener refresh this page in place instead of a full
+// reload -- see the comment there. loadRecipes() re-fetches and re-renders
+// without touching selectedTags/searchQuery/sortMode/madeStatusFilter, so
+// whatever you were filtering by stays put.
+window.onRecipesChanged = loadRecipes;
+
 loadRecipes();
