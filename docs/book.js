@@ -200,18 +200,20 @@ async function loadRecipes() {
   }
 }
 
-// Meal Type and Cuisine are curated allowlists (stats.js); Ingredient is a
-// broader food-item list for the same reason; anything left over (diet,
-// occasion, technique, and anything else a source site declared) goes in
-// Other rather than being force-fit into one of the first three.
-const TAG_GROUP_ORDER = ['Meal Type', 'Ingredient', 'Cuisine', 'Other'];
+// Meal Type, Ingredient, and Cuisine are curated allowlists (stats.js) --
+// the same three the server now restricts tags to at ingest, so nothing
+// should land outside them. Anything that still doesn't match (older data
+// from before that restriction existed) is simply not shown, rather than
+// given a catch-all "Other" section -- those tags were the whole reason
+// this sidebar needed grouping in the first place.
+const TAG_GROUP_ORDER = ['Meal Type', 'Ingredient', 'Cuisine'];
 
 function categorizeTag(tag) {
   const key = tag.toLowerCase();
   if (MEAL_TYPE_TAGS.has(key)) return 'Meal Type';
   if (CUISINE_TAGS.has(key)) return 'Cuisine';
   if (INGREDIENT_TAGS.has(key)) return 'Ingredient';
-  return 'Other';
+  return null;
 }
 
 function renderTagFilter() {
@@ -233,7 +235,10 @@ function renderTagFilter() {
   }
 
   const groups = new Map(TAG_GROUP_ORDER.map((label) => [label, []]));
-  for (const t of tags) groups.get(categorizeTag(t)).push(t);
+  for (const t of tags) {
+    const group = categorizeTag(t);
+    if (group) groups.get(group).push(t);
+  }
 
   const selectedKeys = new Set(Array.from(selectedTags).map((t) => t.toLowerCase()));
 

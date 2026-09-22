@@ -92,7 +92,6 @@
       "Main Course",
       "Asian",
       "Asian American",
-      "Stir Fry",
       "Chicken"
     ],
     "calories": 420,
@@ -288,11 +287,9 @@
     "rewriteError": null,
     "tags": [
       "Entree",
-      "Mains",
-      "Quick Dinners",
+      "Main Course",
       "Greek",
       "chicken",
-      "one pot",
       "Cheese"
     ],
     "calories": 363,
@@ -319,22 +316,7 @@
     ],
     "rewriteError": null,
     "tags": [
-      "cocktail",
-      "aperitif",
-      "gin",
-      "american",
-      "beverages",
-      "dairy free",
-      "gluten free",
-      "nut free",
-      "vegan",
-      "vegetarian",
-      "quick",
-      "easy",
-      "5 ingredients or fewer",
-      "30 minutes or less",
-      "epicurious",
-      "web"
+      "american"
     ],
     "calories": null,
     "madeDates": [
@@ -380,13 +362,8 @@
       "steak",
       "scallion",
       "walnut",
-      "main",
-      "dinner",
-      "dairy free",
-      "gluten free",
-      "sear",
-      "bon appétit",
-      "web"
+      "Main Course",
+      "dinner"
     ],
     "calories": null,
     "madeDates": [],
@@ -431,10 +408,9 @@
     "rewriteError": null,
     "tags": [
       "Entree",
-      "Mains",
+      "Main Course",
       "Mexican",
       "fish",
-      "seafood",
       "Eggs"
     ],
     "calories": 4771,
@@ -491,10 +467,7 @@
     ],
     "rewriteError": null,
     "tags": [
-      "Vegan",
       "Indian",
-      "vegan meatballs",
-      "veggie balls",
       "Tofu",
       "Lentils",
       "Quinoa"
@@ -531,12 +504,7 @@
       "EXPRESS lemon zest twist over the cocktail and use as garnish."
     ],
     "rewriteError": null,
-    "tags": [
-      "Drink",
-      "Cocktail",
-      "After dinner/digestif",
-      "Dessert cocktails"
-    ],
+    "tags": [],
     "calories": 152,
     "madeDates": [
       "2026-09-21"
@@ -570,13 +538,7 @@
       "american",
       "potato",
       "russet potato",
-      "5 ingredients or fewer",
-      "nut-free",
-      "gluten-free",
-      "vegetarian",
-      "fry",
-      "breakfast",
-      "web"
+      "breakfast"
     ],
     "calories": null,
     "madeDates": [
@@ -672,11 +634,8 @@
     "rewriteError": null,
     "tags": [
       "Dinner",
-      "Comfort Food",
       "Lentils",
-      "Pie",
       "Sweet potato",
-      "Vegetarian",
       "Potato"
     ],
     "calories": 374,
@@ -805,9 +764,7 @@
     "rewriteError": null,
     "tags": [
       "Bread",
-      "American",
-      "yeast bread",
-      "Vegetarian"
+      "American"
     ],
     "calories": 190,
     "madeDates": [],
@@ -919,7 +876,6 @@
     ],
     "rewriteError": null,
     "tags": [
-      "Sandwich",
       "American",
       "Indian",
       "Potato"
@@ -968,7 +924,6 @@
     "tags": [
       "Dessert",
       "American",
-      "Brownies",
       "Eggs",
       "Chocolate"
     ],
@@ -1025,9 +980,7 @@
     ],
     "rewriteError": null,
     "tags": [
-      "holiday",
       "dinner",
-      "4th of july",
       "Beef",
       "Potato",
       "Cheese"
@@ -1072,17 +1025,11 @@
     ],
     "rewriteError": null,
     "tags": [
-      "waffle",
       "cardamom",
       "sour cream",
-      "main",
+      "Main Course",
       "breakfast",
       "brunch",
-      "vegetarian",
-      "nut free",
-      "easy",
-      "gourmet",
-      "web",
       "Eggs"
     ],
     "calories": null,
@@ -1140,9 +1087,7 @@
     "rewriteError": null,
     "tags": [
       "Breakfast",
-      "Lunch/Snacks",
       "Brunch",
-      "< 60 Mins",
       "Eggs",
       "Potato",
       "Cheese"
@@ -1184,7 +1129,6 @@
     "tags": [
       "Side Dish",
       "American",
-      "baked zucchini",
       "Pork",
       "Eggs",
       "Cheese"
@@ -1227,7 +1171,6 @@
     "tags": [
       "Main Course",
       "Italian",
-      "keto",
       "Chicken",
       "Bacon",
       "Sausage"
@@ -1283,7 +1226,6 @@
     "tags": [
       "Main Course",
       "French",
-      "Vegan",
       "Potato",
       "Lentils"
     ],
@@ -1375,10 +1317,7 @@
       "Soup",
       "Spanish",
       "Chickpea",
-      "Great Leftovers",
       "Spinach",
-      "Vegan",
-      "Vegetarian",
       "Potato"
     ],
     "calories": 274,
@@ -1549,13 +1488,10 @@
     ],
     "rewriteError": null,
     "tags": [
-      "Main Dishes",
+      "Main Course",
       "American",
       "Chicken",
       "dinner",
-      "keto",
-      "pie",
-      "pot",
       "Eggs",
       "Cheese"
     ],
@@ -1660,9 +1596,6 @@
       "Middle Eastern",
       "Leek",
       "Lentil",
-      "One Pot",
-      "Vegan",
-      "Vegetarian",
       "Rice",
       "Lentils"
     ],
@@ -1704,8 +1637,6 @@
     "tags": [
       "Main Course",
       "American",
-      "beef stew",
-      "comfort food",
       "Beef",
       "Potato",
       "Beans"
@@ -1751,12 +1682,8 @@
     "rewriteError": null,
     "tags": [
       "Dessert",
-      "Bittersweet Chocolate",
       "Bread Flour",
       "Cake Flour",
-      "Freezer Friendly",
-      "Plan-Ahead",
-      "Thanksgiving",
       "Eggs",
       "Chocolate"
     ],
@@ -1993,8 +1920,6 @@
       "lunch",
       "Main Course",
       "American",
-      "baked",
-      "easy",
       "mozzarella",
       "Chicken",
       "Cheese"
@@ -2047,9 +1972,6 @@
       "dinner",
       "lunch",
       "American",
-      "keto",
-      "keto shrimp",
-      "low carb",
       "Shrimp",
       "Cheese"
     ],
@@ -2100,10 +2022,6 @@
     "rewriteError": null,
     "tags": [
       "Salad",
-      "fall",
-      "spring",
-      "summer",
-      "winter",
       "Rice"
     ],
     "calories": null,
@@ -2142,9 +2060,6 @@
     "rewriteError": null,
     "tags": [
       "Breakfast",
-      "Kid Friendly",
-      "< 60 Mins",
-      "For Large Groups",
       "Eggs"
     ],
     "calories": 137,
@@ -2285,7 +2200,7 @@
     ],
     "rewriteError": null,
     "tags": [
-      "main-dish",
+      "Main Course",
       "italian"
     ],
     "calories": 896,
@@ -2488,10 +2403,7 @@
     ],
     "rewriteError": null,
     "tags": [
-      "vegetarian",
       "brunch",
-      "feed a crowd",
-      "spring",
       "breakfast",
       "eggs"
     ],
@@ -2540,7 +2452,6 @@
     "tags": [
       "Dessert",
       "Irish",
-      "boozy cookies",
       "Eggs",
       "Chocolate"
     ],
@@ -2579,20 +2490,13 @@
     ],
     "rewriteError": null,
     "tags": [
-      "gratin",
       "french",
       "potato",
       "celery root",
       "gruyère",
       "leek",
       "russet potato",
-      "fall",
-      "side",
-      "gluten-free",
-      "nut-free",
-      "vegetarian",
-      "dinner",
-      "web"
+      "dinner"
     ],
     "calories": null,
     "madeDates": [
@@ -2679,7 +2583,6 @@
     "tags": [
       "Main Course",
       "Mexican",
-      "taco pie",
       "Beef",
       "Eggs",
       "Cheese"
@@ -2733,11 +2636,7 @@
       "Enjoy!"
     ],
     "rewriteError": null,
-    "tags": [
-      "Drinks",
-      "Celebrations",
-      "Holidays"
-    ],
+    "tags": [],
     "calories": null,
     "madeDates": [
       "2026-08-29",
@@ -2791,9 +2690,7 @@
     "rewriteError": null,
     "tags": [
       "Dessert",
-      "American",
-      "rainbow sprinkles",
-      "Vegan"
+      "American"
     ],
     "calories": 132,
     "madeDates": [],
@@ -2826,13 +2723,6 @@
     ],
     "rewriteError": null,
     "tags": [
-      "Gluten-Free",
-      "Kosher",
-      "Low-Calorie",
-      "Low-Fat",
-      "Low-Lactose",
-      "Vegan",
-      "Vegetarian",
       "Rice"
     ],
     "calories": 141,
@@ -2933,10 +2823,6 @@
     ],
     "rewriteError": null,
     "tags": [
-      "gluten-free",
-      "low sugar",
-      "dinner party",
-      "appetizers",
       "snack",
       "American",
       "Sausage",
@@ -3111,7 +2997,6 @@
     ],
     "rewriteError": null,
     "tags": [
-      "Vegetables",
       "Dinner",
       "Lunch",
       "Side Dish",
@@ -3119,13 +3004,7 @@
       "Butternut Squash",
       "Brussels Sprout",
       "Dijon Mustard",
-      "Maple Syrup",
-      "Sheet-Pan",
-      "Easy",
-      "Fall",
-      "Thanksgiving",
-      "Vegan",
-      "Vegetarian"
+      "Maple Syrup"
     ],
     "calories": 196,
     "madeDates": [],
@@ -3186,7 +3065,6 @@
     "tags": [
       "Main Course",
       "American",
-      "keto chili",
       "Beef"
     ],
     "calories": 306,
@@ -3349,8 +3227,7 @@
     "rewriteError": null,
     "tags": [
       "Dinner",
-      "American",
-      "tritip steak"
+      "American"
     ],
     "calories": 277,
     "madeDates": [],
@@ -3393,7 +3270,6 @@
     "tags": [
       "Breakfast",
       "American",
-      "cranberry muffins",
       "Eggs"
     ],
     "calories": 237,
@@ -3443,7 +3319,6 @@
     ],
     "rewriteError": null,
     "tags": [
-      "Breads",
       "American",
       "French"
     ],
@@ -3530,11 +3405,8 @@
     ],
     "rewriteError": null,
     "tags": [
-      "Cookies",
-      "Desserts",
+      "Dessert",
       "American",
-      "buttermilk",
-      "chocolate chips",
       "Chocolate"
     ],
     "calories": 115,
@@ -3581,9 +3453,6 @@
     "rewriteError": null,
     "tags": [
       "Dessert",
-      "Gluten Free",
-      "Vegetarian",
-      "keto cookies",
       "Eggs",
       "Chocolate"
     ],
@@ -3636,18 +3505,8 @@
     "tags": [
       "Dinner",
       "Main course",
-      "Supper",
-      "2 of 5-a-day",
       "Avocado",
-      "baja taco",
-      "Comfort Food",
-      "Fibre",
-      "Folate",
-      "Mexican",
-      "Rosie Birkett",
-      "Tacos",
-      "Vit C",
-      "Vegetarian"
+      "Mexican"
     ],
     "calories": 574,
     "madeDates": [
