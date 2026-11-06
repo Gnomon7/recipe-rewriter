@@ -30,7 +30,16 @@
       <h1 id="title"></h1>
       <div id="tags" class="tag-row"></div>
       <a id="source-link" class="source-link" target="_blank" rel="noopener" hidden></a>
+      <button id="edit-btn" class="btn btn-small edit-btn" type="button" hidden>Edit recipe</button>
     </div>
+  </div>
+  <div id="edit-bar" class="edit-bar" role="toolbar" aria-label="Recipe editor" hidden>
+    <div class="edit-bar-main">
+      <button id="save-edit-btn" class="btn btn-primary btn-small" type="button">Save changes</button>
+      <button id="cancel-edit-btn" class="btn btn-small btn-ghost" type="button">Cancel</button>
+      <button id="measure-btn" class="btn btn-small btn-ghost" type="button" title="Select text in a step, then click to highlight (or un-highlight) it as a measurement">Highlight as measurement</button>
+    </div>
+    <p id="edit-status" class="edit-status" role="status"></p>
   </div>
   <p id="rewrite-warning" class="warning" hidden></p>
   <div class="recipe-columns">
@@ -51,17 +60,21 @@
         </div>
       </div>
       <ul id="ingredients"></ul>
+      <button id="add-ingredient-btn" class="edit-add edit-only" type="button">+ Add ingredient</button>
       <button id="keep-btn" class="btn btn-primary btn-block">Copy &amp; Open Google Keep</button>
     </section>
     <section class="instructions-panel">
       <h2>Instructions</h2>
       <ol id="instructions"></ol>
+      <button id="add-step-btn" class="edit-add edit-only" type="button">+ Add step</button>
+      <p class="edit-hint edit-only">Highlighted text is a measurement. Select text in a step and click "Highlight as measurement" to add or remove one. Press Enter for a new line.</p>
     </section>
   </div>
   <button id="delete-btn" class="btn btn-danger">Remove recipe</button>
 </main>
 <script src="app.js"></script>
 <script src="units.js"></script>
+<script src="stats.js"></script>
 <script src="recipe.js"></script>
 </body>
 </html>

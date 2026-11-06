@@ -107,6 +107,353 @@ function renderMadeDates() {
   });
 }
 
+function renderHeading() {
+  document.title = `${currentRecipe.title} — Recipe Book`;
+  document.getElementById('title').textContent = currentRecipe.title;
+  document.getElementById('tags').innerHTML = (currentRecipe.tags || [])
+    .map((t) => `<span class="tag-chip">${escapeHtml(t)}</span>`).join('');
+}
+
+// --- WYSIWYG editing (live app only) ----------------------------------------
+// Edit mode swaps the page's own title / tags / ingredients / steps for
+// editable versions of the *stored* text (never the unit-converted, scaled
+// display text -- saving that would bake a 2x metric view into the recipe),
+// so scale/unit/Keep controls are off while editing. Steps keep their
+// {{qty unit}} measure markers as highlighted pills, exactly as they render.
+
+let isEditing = false;
+let editDirty = false;
+let lastSaveAt = 0;
+let editTags = [];
+
+// A capture, delete, or made-date change elsewhere would normally reload this
+// page (see app.js) -- which would throw away unsaved edits, and would also
+// needlessly bounce the page right after our own save.
+window.onRecipesChanged = () => {
+  if (isEditing || Date.now() - lastSaveAt < 3000) return;
+  window.location.reload();
+};
+
+window.addEventListener('beforeunload', (e) => {
+  if (isEditing && editDirty) { e.preventDefault(); e.returnValue = ''; }
+});
+
+function setEditStatus(message, isError = false) {
+  const el = document.getElementById('edit-status');
+  el.textContent = message;
+  el.classList.toggle('error', isError);
+}
+
+function focusEnd(el) {
+  el.focus();
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  range.collapse(false);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
+function unwrapEl(el) {
+  while (el.firstChild) el.parentNode.insertBefore(el.firstChild, el);
+  el.remove();
+}
+
+function stepToEditorHtml(step) {
+  return escapeHtml(step).replace(/\{\{(.+?)\}\}/g, '<strong class="measure">$1</strong>');
+}
+
+// Turns an editable step back into stored text: highlighted spans become
+// {{...}} markers again, anything else the browser may have injected
+// (<div>, <span>, <br>) is flattened to plain text.
+function serializeStep(root) {
+  let text = '';
+  (function walk(node) {
+    node.childNodes.forEach((child) => {
+      if (child.nodeType === Node.TEXT_NODE) { text += child.nodeValue; return; }
+      if (child.nodeType !== Node.ELEMENT_NODE) return;
+      if (child.tagName === 'BR') { text += ' '; return; }
+      if (child.tagName === 'STRONG' || child.tagName === 'B') {
+        const raw = child.textContent;
+        const inner = raw.replace(/\s+/g, ' ').trim();
+        if (inner) text += `${/^\s/.test(raw) ? ' ' : ''}{{${inner}}}${/\s$/.test(raw) ? ' ' : ''}`;
+        return;
+      }
+      walk(child);
+    });
+  })(root);
+  return text.replace(/\s+/g, ' ').trim();
+}
+
+function plainText(el) {
+  return el.textContent.replace(/\s+/g, ' ').trim();
+}
+
+// Shared behaviour for every editable field: paste as plain text only (no
+// rich HTML from other sites), mark the form dirty on typing.
+function wireEditable(el, { onEnter, onBackspaceEmpty } = {}) {
+  el.addEventListener('input', () => { editDirty = true; });
+  el.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const text = (e.clipboardData.getData('text/plain') || '').replace(/\s*\n+\s*/g, ' ');
+    const sel = window.getSelection();
+    if (!text || !sel.rangeCount) return;
+    const range = sel.getRangeAt(0);
+    range.deleteContents();
+    const node = document.createTextNode(text);
+    range.insertNode(node);
+    range.setStartAfter(node);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    editDirty = true;
+  });
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (onEnter) onEnter();
+    } else if (e.key === 'Backspace' && onBackspaceEmpty && el.textContent === '') {
+      e.preventDefault();
+      onBackspaceEmpty();
+    }
+  });
+}
+
+function makeEditRow(kind, html) {
+  const li = document.createElement('li');
+  li.className = 'edit-row';
+  const field = document.createElement('div');
+  field.className = 'edit-field';
+  field.dataset.kind = kind;
+  field.contentEditable = 'true';
+  field.innerHTML = html;
+  const remove = document.createElement('button');
+  remove.type = 'button';
+  remove.className = 'edit-remove';
+  remove.textContent = '×';
+  remove.title = 'Remove';
+  remove.setAttribute('aria-label', 'Remove');
+  li.append(field, remove);
+
+  remove.addEventListener('click', () => { li.remove(); editDirty = true; });
+  wireEditable(field, {
+    onEnter: () => {
+      const next = makeEditRow(kind, '');
+      li.after(next);
+      next.querySelector('.edit-field').focus();
+      editDirty = true;
+    },
+    onBackspaceEmpty: () => {
+      const prev = li.previousElementSibling;
+      li.remove();
+      editDirty = true;
+      if (prev) focusEnd(prev.querySelector('.edit-field'));
+    },
+  });
+  return li;
+}
+
+function addEditRow(listId, kind) {
+  const row = makeEditRow(kind, '');
+  document.getElementById(listId).append(row);
+  row.querySelector('.edit-field').focus();
+  editDirty = true;
+}
+
+function ensureTagOptions() {
+  if (document.getElementById('tag-options')) return;
+  const list = document.createElement('datalist');
+  list.id = 'tag-options';
+  Array.from(ALL_TAGS).sort().forEach((t) => {
+    const option = document.createElement('option');
+    option.value = t.replace(/\b\w/g, (c) => c.toUpperCase());
+    list.append(option);
+  });
+  document.body.append(list);
+}
+
+function addPendingTag(input) {
+  const value = input.value.trim();
+  input.value = '';
+  if (value && !editTags.some((t) => t.toLowerCase() === value.toLowerCase())) {
+    editTags.push(value);
+    editDirty = true;
+  }
+}
+
+function renderTagEditor(refocus = false) {
+  const wrap = document.getElementById('tags');
+  wrap.innerHTML = '';
+  editTags.forEach((tag, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'tag-chip tag-chip-edit';
+    chip.append(document.createTextNode(tag));
+    const x = document.createElement('button');
+    x.type = 'button';
+    x.textContent = '×';
+    x.title = `Remove ${tag}`;
+    x.setAttribute('aria-label', `Remove tag ${tag}`);
+    x.addEventListener('click', () => { editTags.splice(i, 1); editDirty = true; renderTagEditor(); });
+    chip.append(x);
+    wrap.append(chip);
+  });
+
+  const input = document.createElement('input');
+  input.className = 'tag-add-input';
+  input.setAttribute('list', 'tag-options');
+  input.placeholder = 'Add tag…';
+  input.maxLength = 60;
+  input.setAttribute('aria-label', 'Add a tag');
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); addPendingTag(input); renderTagEditor(true); }
+  });
+  // Fires when a datalist suggestion is picked (and on blur, where an empty
+  // box is a no-op) -- no refocus here so it never fights a click elsewhere.
+  input.addEventListener('change', () => { if (input.value.trim()) { addPendingTag(input); renderTagEditor(); } });
+  wrap.append(input);
+  if (refocus) input.focus();
+}
+
+function toggleMeasure() {
+  const sel = window.getSelection();
+  if (!sel || !sel.rangeCount) { setEditStatus('Click into a step and select the text to highlight first.'); return; }
+  const range = sel.getRangeAt(0);
+  const anchor = range.commonAncestorContainer.nodeType === Node.ELEMENT_NODE
+    ? range.commonAncestorContainer
+    : range.commonAncestorContainer.parentElement;
+  const field = anchor && anchor.closest('.edit-field[data-kind="step"]');
+  if (!field) { setEditStatus('Click into a step and select the text to highlight first.'); return; }
+
+  const existing = anchor.closest('.measure');
+  if (existing && field.contains(existing)) {
+    unwrapEl(existing);
+  } else if (!range.collapsed) {
+    const strong = document.createElement('strong');
+    strong.className = 'measure';
+    strong.append(range.extractContents());
+    strong.querySelectorAll('strong, b').forEach(unwrapEl);
+    range.insertNode(strong);
+    sel.removeAllRanges();
+    const after = document.createRange();
+    after.selectNodeContents(strong);
+    sel.addRange(after);
+  } else {
+    setEditStatus('Select the quantity first (e.g. "2 cups"), then click.');
+    return;
+  }
+  field.normalize();
+  editDirty = true;
+  setEditStatus('');
+}
+
+function enterEditMode() {
+  if (isEditing || IS_STATIC || !currentRecipe) return;
+  isEditing = true;
+  editDirty = false;
+  document.body.classList.add('editing');
+  currentMultiplier = 1;
+  currentSystem = 'us';
+  renderControlButtons();
+  document.getElementById('edit-btn').hidden = true;
+  document.getElementById('edit-bar').hidden = false;
+  setEditStatus('');
+
+  const titleEl = document.getElementById('title');
+  titleEl.textContent = currentRecipe.title;
+  titleEl.contentEditable = 'true';
+
+  editTags = (currentRecipe.tags || []).slice();
+  ensureTagOptions();
+  renderTagEditor();
+
+  const ingredients = document.getElementById('ingredients');
+  ingredients.innerHTML = '';
+  currentRecipe.ingredients.forEach((i) => ingredients.append(makeEditRow('ingredient', escapeHtml(i))));
+
+  const steps = (currentRecipe.instructionsRewritten && currentRecipe.instructionsRewritten.length)
+    ? currentRecipe.instructionsRewritten
+    : currentRecipe.instructionsOriginal;
+  const list = document.getElementById('instructions');
+  list.innerHTML = '';
+  steps.forEach((s) => list.append(makeEditRow('step', stepToEditorHtml(s))));
+
+  titleEl.focus();
+}
+
+function exitEditMode() {
+  isEditing = false;
+  editDirty = false;
+  document.body.classList.remove('editing');
+  document.getElementById('title').removeAttribute('contenteditable');
+  document.getElementById('edit-bar').hidden = true;
+  document.getElementById('edit-btn').hidden = false;
+  renderHeading();
+  rerender();
+}
+
+function cancelEdit() {
+  if (editDirty && !confirm('Discard your changes to this recipe?')) return;
+  exitEditMode();
+}
+
+async function saveEdit() {
+  const pending = document.querySelector('.tag-add-input');
+  if (pending) addPendingTag(pending);
+
+  const payload = {
+    title: plainText(document.getElementById('title')),
+    tags: editTags,
+    ingredients: Array.from(document.querySelectorAll('#ingredients .edit-field')).map(plainText).filter(Boolean),
+    instructions: Array.from(document.querySelectorAll('#instructions .edit-field')).map(serializeStep).filter(Boolean),
+  };
+  if (!payload.title) { setEditStatus('A recipe needs a title.', true); return; }
+  if (!payload.ingredients.length || !payload.instructions.length) {
+    setEditStatus('Keep at least one ingredient and one step.', true);
+    return;
+  }
+
+  const saveBtn = document.getElementById('save-edit-btn');
+  saveBtn.disabled = true;
+  setEditStatus('Saving…');
+  try {
+    const { recipe, droppedTags } = await fetchJson(`${API_BASE}/${encodeURIComponent(currentRecipe.id)}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    lastSaveAt = Date.now();
+    currentRecipe = recipe;
+    exitEditMode();
+    const warn = document.getElementById('rewrite-warning');
+    if (droppedTags && droppedTags.length) {
+      warn.hidden = false;
+      warn.textContent = `Saved. These tags weren't kept, since tags are limited to meal types, ingredients, and cuisines: ${droppedTags.join(', ')}.`;
+    } else {
+      warn.hidden = true;
+    }
+  } catch (err) {
+    setEditStatus(`Could not save: ${err.message}`, true);
+  } finally {
+    saveBtn.disabled = false;
+  }
+}
+
+function initEditor() {
+  const editBtn = document.getElementById('edit-btn');
+  if (IS_STATIC) return;
+  editBtn.hidden = false;
+  editBtn.addEventListener('click', enterEditMode);
+  document.getElementById('save-edit-btn').addEventListener('click', saveEdit);
+  document.getElementById('cancel-edit-btn').addEventListener('click', cancelEdit);
+  const measureBtn = document.getElementById('measure-btn');
+  // Keeps the text selection (and focus) in the step while the button is pressed.
+  measureBtn.addEventListener('mousedown', (e) => e.preventDefault());
+  measureBtn.addEventListener('click', toggleMeasure);
+  document.getElementById('add-ingredient-btn').addEventListener('click', () => addEditRow('ingredients', 'ingredient'));
+  document.getElementById('add-step-btn').addEventListener('click', () => addEditRow('instructions', 'step'));
+  wireEditable(document.getElementById('title'), { onEnter: () => document.getElementById('title').blur() });
+}
+
 async function loadRecipe() {
   const id = getRecipeId();
   const container = document.getElementById('recipe');
@@ -118,11 +465,8 @@ async function loadRecipe() {
   try {
     const recipe = await fetchJson(`${API_BASE}/${encodeURIComponent(id)}`);
     currentRecipe = recipe;
-    document.title = `${recipe.title} — Recipe Book`;
-    document.getElementById('title').textContent = recipe.title;
-
-    document.getElementById('tags').innerHTML = (recipe.tags || [])
-      .map((t) => `<span class="tag-chip">${escapeHtml(t)}</span>`).join('');
+    renderHeading();
+    initEditor();
 
     const source = safeUrl(recipe.sourceUrl);
     if (source) {
