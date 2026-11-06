@@ -663,6 +663,117 @@ main {
 }
 .btn-danger:hover { background: var(--danger); color: #fff; }
 
+
+/* --- WYSIWYG recipe editor (recipe.html, live app only) ------------------ */
+
+.edit-btn {
+  margin-top: 0.6rem;
+  background: transparent;
+  color: var(--accent-dark);
+  border: 1px solid var(--accent);
+}
+.edit-btn:hover { background: var(--accent); color: #fff; }
+.edit-btn[hidden] { display: none; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent-dark); }
+
+.edit-bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: var(--card);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1.2rem;
+}
+.edit-bar[hidden] { display: none; }
+.edit-bar-main { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.edit-status { margin: 0; font-size: 0.85rem; color: var(--ink-soft); min-height: 1.2em; }
+.edit-status.error { color: var(--danger); }
+
+.edit-only { display: none; }
+body.editing .edit-add.edit-only { display: inline-block; }
+body.editing .edit-hint.edit-only { display: block; }
+body.editing .control-row,
+body.editing #keep-btn,
+body.editing #delete-btn { display: none; }
+
+#title[contenteditable],
+.edit-field {
+  outline: 1px dashed var(--line);
+  outline-offset: 2px;
+  border-radius: 6px;
+  min-height: 1.4em;
+}
+#title[contenteditable]:focus,
+.edit-field:focus {
+  outline: 2px solid var(--accent);
+  background: var(--card);
+}
+
+.edit-row { position: relative; padding-right: 1.9rem; }
+.edit-remove {
+  position: absolute;
+  right: 0;
+  top: 0.1rem;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.15rem 0.4rem;
+  border-radius: 50%;
+}
+.edit-remove:hover { background: var(--danger); color: #fff; }
+
+.edit-add {
+  border: 1px dashed var(--accent);
+  background: transparent;
+  color: var(--accent-dark);
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 0.2rem 0 1rem;
+}
+.edit-add:hover { background: var(--accent); color: #fff; }
+.edit-hint { color: var(--ink-soft); font-size: 0.85rem; margin: 0; }
+
+.tag-chip-edit { display: inline-flex; align-items: center; gap: 0.2rem; padding-right: 0.25rem; }
+.tag-chip-edit button {
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+  padding: 0 0.2rem;
+  border-radius: 50%;
+}
+.tag-chip-edit button:hover { background: var(--danger); color: #fff; }
+.tag-add-input {
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
+  font-size: 0.78rem;
+  background: var(--card);
+  color: var(--ink);
+  min-width: 9rem;
+}
+.tag-add-input:focus { outline: 2px solid var(--accent); }
+
 .error { color: var(--danger); }
 
 @media (prefers-color-scheme: dark) {
